@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'common/app_routes.dart';
 import 'common/bindings/bindings.dart';
+import 'common/styles/app_themes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
       smartManagement: SmartManagement.keepFactory,
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
+      theme: AppThemes.lightTheme,
       initialRoute: SplashScreen.routeName,
       getPages: AppRoutes.routes,
       useInheritedMediaQuery: true,
