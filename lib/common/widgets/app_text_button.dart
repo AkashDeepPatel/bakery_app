@@ -24,7 +24,7 @@ class AppTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: buttonWidth,
-      height: 60,
+      height: 52,
       child: isOutlineButton
           ? OutlinedButton(
               style: ButtonStyle(
@@ -58,22 +58,18 @@ class AppTextButton extends StatelessWidget {
                   onTap!();
                 }
               },
-              child:
-                  // onLoading
-                  //     ? const Loading()
-                  //     :
-                  Center(
+              child: Center(
                 child: Text(
                   text,
                   textAlign: TextAlign.center,
                   style: textColor == null
                       ? Theme.of(context)
                           .textTheme
-                          .titleLarge!
-                          .copyWith(color: AppThemes.black)
+                          .titleMedium!
+                          .copyWith(color: AppThemes.white)
                       : Theme.of(context)
                           .textTheme
-                          .titleLarge!
+                          .titleMedium!
                           .copyWith(color: textColor),
                 ),
               ),

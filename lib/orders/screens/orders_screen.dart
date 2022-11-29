@@ -1,11 +1,7 @@
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
-import 'package:bakery_app/common/widgets/app_text_field.dart';
-import 'package:bakery_app/dashboard/screens/schedule_order.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
@@ -15,7 +11,6 @@ class OrdersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RxInt _animatedHeight = 0.obs;
     return CommonBaseClass(
       showAppBar: true,
       showlocation: true,
@@ -27,7 +22,6 @@ class OrdersScreen extends StatelessWidget {
           text: "Tracking Map",
           color: AppThemes.black,
           onTap: () {
-            // Get.to(() => ScheduleOrderScreen());
           },
         ),
       ),
@@ -41,7 +35,7 @@ class OrdersScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
-          VSpace(8),
+          const VSpace(8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
@@ -56,9 +50,8 @@ class OrdersScreen extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HSpace(24),
+              const HSpace(24),
               Column(
-                // mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SvgPicture.asset(CommonAssets.tickIcon),
                   Container(
@@ -81,26 +74,26 @@ class OrdersScreen extends StatelessWidget {
                   SvgPicture.asset(CommonAssets.untickedIcon),
                 ],
               ),
-              HSpace(16),
+              const HSpace(16),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  VSpace(7),
+                  const VSpace(7),
                   Text(
                     "Order Placed",
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
-                  VSpace(115),
+                  const VSpace(115),
                   Text(
                     "Order Preparing",
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
-                  VSpace(57.5),
+                  const VSpace(57.5),
                   Text(
                     "On the Way",
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
-                  VSpace(50),
+                  const VSpace(50),
                   Text(
                     "Delivered!",
                     style: Theme.of(context).textTheme.labelMedium,

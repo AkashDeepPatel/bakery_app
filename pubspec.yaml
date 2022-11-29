@@ -21,6 +21,15 @@ dependencies:
   flutter_svg: ^1.1.4
   carousel_slider: ^4.1.1
   bottom_sheet_bar: ^2.3.1
+  firebase_auth: ^3.3.20
+  firebase_core:
+  firebase_storage:
+  cloud_firestore:
+  geolocator: ^9.0.2
+  geocoding: ^2.0.5
+  dio: ^4.0.6
+  dio_logger: ^4.0.8+8
+
 
 
 
@@ -38,6 +47,7 @@ flutter:
    - assets/common/icons/
    - assets/home/icons/
    - assets/walkthrough/
+   - assets/common/
 
   fonts:
    - family: WorkSans

@@ -3,7 +3,9 @@ import 'package:bakery_app/walkthrough/screens/walkthrough_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../common/utils/common_assets.dart';
+
+import '../authentication/screens/auth_gate.dart';
+import '../common/styles/app_themes.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = "/splashScreen";
@@ -18,12 +20,18 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      Get.toNamed(WalkThroughScreens.routeName);
+      Get.offNamed(AuthGate.routeName);
+      // Get.toNamed(WalkThroughScreens.routeName);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: SvgPicture.asset(CommonAssets.logo)));
+    return Scaffold(
+        backgroundColor: AppThemes.white,
+        // body: Center(child: SvgPicture.asset(CommonAssets.logo)));
+        body: Center(
+          child: Image.asset("assets/common/logo-no-background.png"),
+        ));
   }
 }

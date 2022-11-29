@@ -9,7 +9,8 @@ class AppTextField extends StatelessWidget {
       this.textInputType,
       this.suffixIcon,
       this.prefixIcon,
-      this.hintText})
+      this.hintText,
+      this.controller})
       : super(key: key);
 
   String? title;
@@ -17,19 +18,27 @@ class AppTextField extends StatelessWidget {
   Widget? suffixIcon;
   Widget? prefixIcon;
   String? hintText;
+  TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title ?? ""),
+        title != null
+            ? Text(
+                title!,
+                style: Theme.of(context).textTheme.labelMedium,
+              )
+            : SizedBox(),
         title != null ? const VSpace(8) : const SizedBox(),
         SizedBox(
-          height: 50,
+          height: 48,
           child: TextField(
             keyboardType: textInputType ?? TextInputType.text,
+            controller: controller,
             decoration: InputDecoration(
                 hintText: hintText ?? "",
+                contentPadding: EdgeInsets.symmetric(horizontal: 12.0),
                 suffixIcon: suffixIcon,
                 prefixIcon: prefixIcon),
           ),

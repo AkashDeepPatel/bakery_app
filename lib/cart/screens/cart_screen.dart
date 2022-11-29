@@ -1,21 +1,20 @@
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
 import 'package:bakery_app/common/widgets/app_text_field.dart';
-import 'package:bakery_app/dashboard/screens/schedule_order.dart';
+import 'package:bakery_app/orders/screens/schedule_order.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
+import '../controllers/cart_controller.dart';
 
 class CartScreen extends StatelessWidget {
-  const CartScreen({Key? key}) : super(key: key);
-
+  CartScreen({Key? key}) : super(key: key);
+  final CartController _cartController = Get.find();
   @override
   Widget build(BuildContext context) {
-    RxInt _animatedHeight = 0.obs;
     return CommonBaseClass(
       showAppBar: true,
       showlocation: true,
@@ -30,9 +29,9 @@ class CartScreen extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  _animatedHeight.value != 0
-                      ? _animatedHeight.value = 0
-                      : _animatedHeight.value = 200;
+                  _cartController.animatedHeight.value != 0
+                      ? _cartController.animatedHeight.value = 0
+                      : _cartController.animatedHeight.value = 200;
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(top: 16.0, bottom: 24),
@@ -41,6 +40,7 @@ class CartScreen extends StatelessWidget {
               ),
               AnimatedContainer(
                 duration: const Duration(milliseconds: 120),
+                height: _cartController.animatedHeight.value.toDouble(),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: ListView(
@@ -50,7 +50,7 @@ class CartScreen extends StatelessWidget {
                         "Price Details(3 items)",
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
-                      VSpace(8),
+                      const VSpace(8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -64,7 +64,7 @@ class CartScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      VSpace(8),
+                      const VSpace(8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -78,7 +78,7 @@ class CartScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      VSpace(8),
+                      const VSpace(8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -92,7 +92,7 @@ class CartScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      VSpace(8),
+                      const VSpace(8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -106,9 +106,9 @@ class CartScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      VSpace(8),
-                      Divider(),
-                      VSpace(8),
+                      const VSpace(8),
+                      const Divider(),
+                      const VSpace(8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -131,16 +131,15 @@ class CartScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                height: _animatedHeight.value.toDouble(),
               ),
               AppTextButton(
                 text: "Checkout",
+                textColor: AppThemes.white,
                 color: AppThemes.black,
                 onTap: () {
-                  Get.to(() => ScheduleOrderScreen());
+                  Get.to(() => const ScheduleOrderScreen());
                 },
               ),
-              const VSpace(8),
             ],
           ),
         ),
@@ -151,6 +150,7 @@ class CartScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
+                VSpace(20),
                 AppTextField(
                   hintText: "Apply Coupon Code",
                   suffixIcon: Padding(
@@ -160,6 +160,7 @@ class CartScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                VSpace(10),
                 AppTextField(
                   hintText: "Want to schedule your pickup / delivery ?",
                   suffixIcon: Padding(

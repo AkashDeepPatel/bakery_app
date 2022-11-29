@@ -27,7 +27,7 @@ class AppThemes {
 
   //constants color range for light theme
   //main color
-  static const Color _lightPrimaryColor = primary;
+  static const Color _lightPrimaryColor = black;
 
   //Background Colors
   static const Color _lightBackgroundColor = background;
@@ -44,12 +44,12 @@ class AppThemes {
     headlineLarge: TextStyle(
       fontSize: 32.0,
       color: _lightTextColor,
-      fontWeight: FontWeight.w900,
+      fontWeight: FontWeight.normal,
     ),
     headlineMedium: TextStyle(
       fontSize: 28.0,
       color: _lightTextColor,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.bold,
     ),
     headlineSmall: TextStyle(
       fontSize: 24.0,
@@ -59,7 +59,7 @@ class AppThemes {
     titleLarge: TextStyle(
       fontSize: 22.0,
       color: _lightTextColor,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.normal,
     ),
     titleMedium: TextStyle(
       fontSize: 16.0,
@@ -123,7 +123,7 @@ class AppThemes {
     primaryColor: _lightPrimaryColor,
     backgroundColor: _lightBackgroundSecondaryColor,
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: _lightPrimaryColor,
+      backgroundColor: black,
     ),
     cardTheme: CardTheme(
         margin: EdgeInsets.zero,
@@ -176,7 +176,7 @@ class AppThemes {
     textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
       animationDuration: const Duration(milliseconds: 2000),
-      backgroundColor: MaterialStateProperty.all(primary),
+      backgroundColor: MaterialStateProperty.all(_lightPrimaryColor),
       textStyle: MaterialStateProperty.all(_lightTextTheme.titleLarge),
       shape: MaterialStateProperty.all(
         RoundedRectangleBorder(

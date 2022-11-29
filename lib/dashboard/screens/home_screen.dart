@@ -1,3 +1,4 @@
+import 'package:bakery_app/common/utils/firebase_storage_service.dart';
 import 'package:bakery_app/dashboard/controllers/dashboard_controller.dart';
 import 'package:bakery_app/dashboard/screens/list_view_screen.dart';
 import 'package:bakery_app/dashboard/screens/product_detail_screen.dart';
@@ -40,6 +41,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           const VSpace(24),
+          // Image.network(FirebaseStorageService().getImage("common/logo.svg")),
           CarouselSlider(
             items: _dashboardController.carouselSliderItems,
             options: CarouselOptions(

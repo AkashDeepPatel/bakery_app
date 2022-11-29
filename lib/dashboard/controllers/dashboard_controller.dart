@@ -1,6 +1,5 @@
 import 'package:bakery_app/common/controllers/base_controller.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../bindings/dashboard_bindings.dart';
@@ -12,6 +11,7 @@ class DashboardController extends BaseController {
   @override
   void onInit() {
     super.onInit();
+    getUserLocation();
   }
 
   changeBottomNavigation(int index) async {

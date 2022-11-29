@@ -1,14 +1,10 @@
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
+import 'package:bakery_app/orders/screens/orders_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
-import '../../common/utils/common_assets.dart';
-import '../../common/widgets/app_text_field.dart';
-import 'orders_screen.dart';
 
 class OrderSummaryScreen extends StatelessWidget {
   const OrderSummaryScreen({Key? key}) : super(key: key);
@@ -37,7 +33,7 @@ class OrderSummaryScreen extends StatelessWidget {
                 text: "Checkout",
                 color: AppThemes.black,
                 onTap: () {
-                  Get.to(() => OrdersScreen());
+                  Get.to(() => const OrdersScreen());
                 },
               ),
             ),
@@ -57,7 +53,7 @@ class OrderSummaryScreen extends StatelessWidget {
               "Price Details(3 items)",
               style: Theme.of(context).textTheme.labelLarge,
             ),
-            VSpace(36),
+            const VSpace(36),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -71,7 +67,7 @@ class OrderSummaryScreen extends StatelessWidget {
                 ),
               ],
             ),
-            VSpace(16),
+            const VSpace(16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -85,7 +81,7 @@ class OrderSummaryScreen extends StatelessWidget {
                 ),
               ],
             ),
-            VSpace(16),
+            const VSpace(16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -99,7 +95,7 @@ class OrderSummaryScreen extends StatelessWidget {
                 ),
               ],
             ),
-            VSpace(16),
+            const VSpace(16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -113,9 +109,9 @@ class OrderSummaryScreen extends StatelessWidget {
                 ),
               ],
             ),
-            VSpace(24),
-            Divider(),
-            VSpace(16),
+            const VSpace(24),
+            const Divider(),
+            const VSpace(16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -138,35 +134,6 @@ class OrderSummaryScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class AppDropdownList extends StatelessWidget {
-  AppDropdownList({Key? key, required this.title}) : super(key: key);
-  String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Container(
-          height: 56,
-          decoration:
-              BoxDecoration(border: Border.all(color: AppThemes.subtleDark)),
-          // color: AppThemes.primarySubtle3,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  title,
-                ),
-                SvgPicture.asset(CommonAssets.downArrowIcon)
-              ],
-            ),
-          )),
     );
   }
 }

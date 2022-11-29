@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
-import '../../common/widgets/app_text_field.dart';
 import 'order_summary_screen.dart';
 
 class PaymentMethodScreen extends StatelessWidget {
@@ -25,7 +24,7 @@ class PaymentMethodScreen extends StatelessWidget {
           text: "Continue",
           color: AppThemes.black,
           onTap: () {
-            Get.to(() => OrderSummaryScreen());
+            Get.to(() => const OrderSummaryScreen());
           },
         ),
       ),
@@ -41,11 +40,11 @@ class PaymentMethodScreen extends StatelessWidget {
             AppDropdownList(
               title: "Credit/ Debit Card",
             ),
-            VSpace(28),
+            const VSpace(28),
             AppDropdownList(
               title: "UPI/ Net Banking",
             ),
-            VSpace(28),
+            const VSpace(28),
             AppDropdownList(
               title: "Cash",
             ),
@@ -66,8 +65,10 @@ class AppDropdownList extends StatelessWidget {
       onTap: () {},
       child: Container(
           height: 56,
-          decoration:
-              BoxDecoration(border: Border.all(color: AppThemes.subtleDark)),
+          decoration: BoxDecoration(
+            border: Border.all(color: AppThemes.subtleLight, width: 2.0),
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+          ),
           // color: AppThemes.primarySubtle3,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),

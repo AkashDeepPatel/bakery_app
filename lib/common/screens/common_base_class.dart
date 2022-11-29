@@ -7,21 +7,25 @@ import '../widgets/app_bar_widget.dart';
 import '../widgets/app_text_button.dart';
 
 class CommonBaseClass extends StatelessWidget {
-  CommonBaseClass({
-    Key? key,
-    this.child,
-    this.pageTitle = "",
-    this.showAppBar,
-    this.bottomWidget,
-    this.showBottomWidget = false,
-    this.showBackIcon,
-    this.showSearchBar,
-    this.isOrdersScreen,
-    this.isProfileScreen,
-    this.showlocation,
+  CommonBaseClass(
+      {Key? key,
+      this.child,
+      this.pageTitle = "",
+      this.showAppBar,
+      this.bottomWidget,
+      this.showBottomWidget = false,
+      this.showBackIcon,
+      this.showSearchBar,
+      this.isOrdersScreen,
+      this.isProfileScreen,
+      this.showlocation,
+      this.bottomWidgetHPadding = 16.0,
+      this.bottomWidgetBottomPadding = 48.0,
+      this.bottomWidgetTopPadding = 0.0
 
-    // this.padding = 16.0
-  }) : super(key: key);
+      // this.padding = 16.0
+      })
+      : super(key: key);
   final Widget? child;
   final Widget? bottomWidget;
   // double padding;
@@ -34,6 +38,9 @@ class CommonBaseClass extends StatelessWidget {
   bool? isOrdersScreen;
   bool? isProfileScreen;
   bool? showlocation;
+  double bottomWidgetHPadding;
+  double bottomWidgetBottomPadding;
+  double bottomWidgetTopPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +84,11 @@ class CommonBaseClass extends StatelessWidget {
       ),
       bottomNavigationBar: showBottomWidget
           ? Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0.0, 0, 0.0),
+              padding: EdgeInsets.fromLTRB(
+                  bottomWidgetHPadding,
+                  bottomWidgetTopPadding,
+                  bottomWidgetHPadding,
+                  bottomWidgetBottomPadding),
               child: bottomWidget,
             )
           : null,

@@ -11,7 +11,6 @@ import '../../common/styles/app_themes.dart';
 
 class WalkThroughScreens extends StatelessWidget {
   WalkThroughScreens({Key? key}) : super(key: key);
-  static const String routeName = "/walkthrough";
   final WalkThroughController _walkThroughController = Get.find();
 
   @override
@@ -25,7 +24,7 @@ class WalkThroughScreens extends StatelessWidget {
                   children: [
                     Container(
                       height: MediaQuery.of(context).size.height / 2,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: AppThemes.walkthroughBlue,
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(190.0),
@@ -39,11 +38,10 @@ class WalkThroughScreens extends StatelessWidget {
                     Align(
                       alignment: Alignment.topRight,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 60),
+                        padding: const EdgeInsets.symmetric(vertical: 60),
                         child: InkWell(
                           onTap: () {
-                            Get.offAllNamed(WelcomeScreen.routeName);
+                            Get.offAll(() => const WelcomeScreen());
                           },
                           child: Text(
                             "Skip",
@@ -54,7 +52,7 @@ class WalkThroughScreens extends StatelessWidget {
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 Center(
                   child: Text(
                     _walkThroughController
@@ -65,7 +63,7 @@ class WalkThroughScreens extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                VSpace(20),
+                const VSpace(20),
                 Center(
                   child: Text(
                     _walkThroughController
@@ -76,24 +74,24 @@ class WalkThroughScreens extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                VSpace(20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    for (int i = 0; i < 3; i++)
-                      Padding(
-                        padding: const EdgeInsets.all(3.0),
-                        child: CircleAvatar(
-                          radius: 5,
-                          backgroundColor:
-                              _walkThroughController.walkthroughIndex.value == i
-                                  ? AppThemes.black
-                                  : AppThemes.subtleDark,
-                        ),
-                      ),
-                  ],
-                ),
-                Spacer(),
+                // const VSpace(20),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     for (int i = 0; i < 3; i++)
+                //       Padding(
+                //         padding: const EdgeInsets.all(3.0),
+                //         child: CircleAvatar(
+                //           radius: 5,
+                //           backgroundColor:
+                //               _walkThroughController.walkthroughIndex.value == i
+                //                   ? AppThemes.black
+                //                   : AppThemes.subtleDark,
+                //         ),
+                //       ),
+                //   ],
+                // ),
+                const Spacer(),
                 Padding(
                   padding: const EdgeInsets.all(50.0),
                   child: FloatingActionButton(
@@ -101,7 +99,7 @@ class WalkThroughScreens extends StatelessWidget {
                       _walkThroughController.walkthroughIndex <
                               _walkThroughController.walkthroughItems.length - 1
                           ? _walkThroughController.walkthroughIndex++
-                          : Get.offAllNamed(WelcomeScreen.routeName);
+                          : Get.offAll(() => const WelcomeScreen());
                     },
                     child: const Icon(
                       Icons.arrow_forward,

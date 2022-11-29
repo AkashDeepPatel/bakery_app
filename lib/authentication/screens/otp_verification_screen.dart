@@ -7,87 +7,67 @@ import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/widgets/app_text_button.dart';
 import '../../common/widgets/app_text_field.dart';
 import '../../dashboard/screens/dashboard_screen.dart';
+import '../controllers/authentication_controller.dart';
 import 'login_screen.dart';
 
 class OTPVerificationScreen extends StatelessWidget {
-  const OTPVerificationScreen({Key? key}) : super(key: key);
-  static const String routeName = "/otpVerification";
+  OTPVerificationScreen({Key? key}) : super(key: key);
+  static const String routeName = "/auth/otpVerification";
+  final AuthenticationController _authenticationController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return CommonBaseClass(
+      showBottomWidget: true,
+      bottomWidget: AppTextButton(
+        text: "Continue",
+        onTap: () {
+          _authenticationController.submitOTP();
+          Get.toNamed(DashboardScreen.routeName);
+        },
+      ),
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(
-              "Bakery App",
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
+            // Text(
+            //   "Bakery App",
+            //   style: Theme.of(context).textTheme.headlineSmall,
+            // ),
             Column(
               children: [
                 Text(
-                  "An Otp has been sent to the number +91-456782344",
+                  "An Otp has been sent to the number ${_authenticationController.phoneNumberCtr.value.text}",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                const VSpace(15),
+                const VSpace(80),
                 AppTextField(
-                  title: "OTP",
+                  title: "Enter OTP",
+                  controller: _authenticationController.otpCtr,
                 ),
                 const VSpace(15),
                 RichText(
                   text: TextSpan(
                       text: "Didn't receive OTP? ",
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelMedium!
+                          .copyWith(color: AppThemes.subtleLight),
                       children: [
                         TextSpan(
                             text: "Resend Again",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(color: AppThemes.primary))
+                            style: Theme.of(context).textTheme.labelMedium)
                       ]),
                 ),
                 RichText(
                   text: TextSpan(
                       text: "Get OTP via Call",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium!
-                          .copyWith(color: AppThemes.primary)),
+                      style: Theme.of(context).textTheme.labelMedium),
                 ),
               ],
             ),
-            Column(
-              children: [
-                AppTextButton(
-                  text: "Continue",
-                  onTap: () {
-                    Get.toNamed(DashboardScreen.routeName);
-                  },
-                ),
-                const VSpace(24),
-                RichText(
-                  text: TextSpan(
-                      text: "Already a member? ",
-                      style: Theme.of(context).textTheme.titleMedium,
-                      children: [
-                        TextSpan(
-                            text: "Log In",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(color: AppThemes.primary),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Get.toNamed(LoginScreen.routeName);
-                              })
-                      ]),
-                ),
-              ],
-            )
           ],
         ),
       ),

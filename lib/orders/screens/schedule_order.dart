@@ -1,10 +1,9 @@
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
-import 'package:bakery_app/dashboard/screens/payment_method_screen.dart';
+import 'package:bakery_app/orders/screens/payment_method_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
@@ -25,7 +24,7 @@ class ScheduleOrderScreen extends StatelessWidget {
           text: "Continue",
           color: AppThemes.black,
           onTap: () {
-            Get.to(() => PaymentMethodScreen());
+            Get.to(() => const PaymentMethodScreen());
           },
         ),
       ),
@@ -88,7 +87,7 @@ class ScheduleOrderScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                HSpace(20),
+                const HSpace(20),
                 Expanded(
                   child: InkWell(
                     onTap: () {},
@@ -105,7 +104,7 @@ class ScheduleOrderScreen extends StatelessWidget {
                 ),
               ],
             ),
-            VSpace(32),
+            const VSpace(32),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -134,7 +133,7 @@ class ScheduleOrderScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                HSpace(20),
+                const HSpace(20),
                 Expanded(
                   child: InkWell(
                     onTap: () {},
