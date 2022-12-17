@@ -32,7 +32,6 @@ class AuthenticationController extends BaseController {
     void verificationFailed(FirebaseAuthException error) {
       change(null, status: RxStatus.success());
       // SnackBarMessageWidget.show(error.message.toString());
-      debugPrint("hell");
     }
 
     void codeSent(String verificationId, int? code) {

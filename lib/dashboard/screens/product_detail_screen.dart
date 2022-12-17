@@ -3,17 +3,22 @@ import 'package:bakery_app/common/widgets/app_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import '../../cart/controllers/cart_controller.dart';
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
 import '../../common/widgets/app_card.dart';
 import '../../orders/screens/payment_method_screen.dart';
+import '../controllers/home_controller.dart';
 
-class ProductDetailScreen extends StatelessWidget {
-  const ProductDetailScreen({Key? key}) : super(key: key);
+class ProductDetailScreen extends GetView<HomeController> {
+  ProductDetailScreen({Key? key}) : super(key: key);
   @override
+  int index = Get.arguments[0];
+  RxBool isFav = false.obs;
+  CartController cartController = Get.find();
   Widget build(BuildContext context) {
-    RxString selectedItem = "hello".obs;
+    RxString selectedItem = "Small".obs;
     return CommonBaseClass(
       showAppBar: true,
       showBottomWidget: true,
@@ -25,13 +30,33 @@ class ProductDetailScreen extends StatelessWidget {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 16.0, right: 32),
-                child: SvgPicture.asset(CommonAssets.favouritesIcon),
-              ),
-              const Flexible(
+                  padding: const EdgeInsets.only(left: 16.0, right: 32),
+                  child: Obx(
+                    () => InkWell(
+                      onTap: () {
+                        isFav(!isFav.value);
+                      },
+                      child: SvgPicture.asset(
+                        isFav.value == false
+                            ? CommonAssets.favouritesIcon
+                            : CommonAssets.favouritesFilledIcon,
+                        // color: isFav.value == false ? AppThemes.background : null,
+                      ),
+                    ),
+                  )),
+              Flexible(
                   child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: AppTextButton(text: "Add to Cart"),
+                child: AppTextButton(
+                  text: "Add to Cart",
+                  onTap: () {
+                    debugPrint("added");
+                    cartController.cartItemList
+                        .add(controller.popularProductList[index]);
+                    Get.snackbar("Product Added to Cart", "",
+                        backgroundColor: AppThemes.black);
+                  },
+                ),
               )),
             ],
           ),
@@ -51,7 +76,7 @@ class ProductDetailScreen extends StatelessWidget {
                     borderRadius: const BorderRadius.vertical(
                         bottom: Radius.circular(20)),
                     child: Image.asset(
-                      CommonAssets.bread,
+                      controller.popularProductList[index].imgUrl,
                       fit: BoxFit.fitWidth,
                       width: double.infinity,
                       height: 220,
@@ -95,9 +120,10 @@ class ProductDetailScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Wheat Bread",
+                          Text(controller.popularProductList[index].title,
                               style: Theme.of(context).textTheme.headlineSmall),
-                          Text("\$400.00",
+                          Text(
+                              "\$${controller.popularProductList[index].price}",
                               style: Theme.of(context).textTheme.headlineSmall)
                         ],
                       ),
@@ -109,7 +135,7 @@ class ProductDetailScreen extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.all(4.0),
                                 child: Text(
-                                  "4.2",
+                                  "${controller.popularProductList[index].rating}",
                                   style: Theme.of(context).textTheme.bodySmall,
                                 ),
                               ),
@@ -131,30 +157,32 @@ class ProductDetailScreen extends StatelessWidget {
                       Text("Choose Size",
                           style: Theme.of(context).textTheme.headlineSmall),
                       const VSpace(16),
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 2.0, color: AppThemes.subtleLight),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(4.0))),
-                        child: DropdownButtonHideUnderline(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: DropdownButton<String>(
-                              icon: SvgPicture.asset(
-                                CommonAssets.downArrowIcon,
+                      Obx(
+                        () => Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 2.0, color: AppThemes.subtleLight),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(4.0))),
+                          child: DropdownButtonHideUnderline(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: DropdownButton<String>(
+                                icon: SvgPicture.asset(
+                                  CommonAssets.downArrowIcon,
+                                ),
+                                isExpanded: true,
+                                itemHeight: 50,
+                                items: controller.popularProductList[index].size
+                                    .map((e) => DropdownMenuItem<String>(
+                                        value: e, child: Text(e)))
+                                    .toList(),
+                                value: selectedItem.value,
+                                onChanged: (w) {
+                                  selectedItem(w);
+                                },
                               ),
-                              isExpanded: true,
-                              itemHeight: 50,
-                              items: ["hello", "hi", "bye"]
-                                  .map((e) => DropdownMenuItem<String>(
-                                      value: e, child: Text(e)))
-                                  .toList(),
-                              value: selectedItem.value,
-                              onChanged: (w) {
-                                // controller.setSelectedCountryCode(w!);
-                              },
                             ),
                           ),
                         ),
@@ -210,8 +238,8 @@ class ProductDetailScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Text("Ratings",
-                          style: Theme.of(context).textTheme.headlineSmall),
+                      // Text("Ratings",
+                      //     style: Theme.of(context).textTheme.headlineSmall),
                     ],
                   ),
                 )

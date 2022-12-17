@@ -1,3 +1,4 @@
+import 'package:bakery_app/dashboard/controllers/home_controller.dart';
 import 'package:get/get.dart';
 import '../../cart/controllers/cart_controller.dart';
 import '../../menu/controllers/menu_controller.dart';
@@ -9,6 +10,7 @@ class DashboardBindings extends Bindings {
   @override
   Future<void> dependencies() async {
     Get.lazyPut(() => DashboardController(), fenix: true);
+    Get.lazyPut(() => HomeController(), fenix: true);
     Get.lazyPut(() => OrdersController(), fenix: true);
     Get.lazyPut(() => MenuController(), fenix: true);
     Get.lazyPut(() => CartController(), fenix: true);

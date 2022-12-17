@@ -19,8 +19,8 @@ class CommonBaseClass extends StatelessWidget {
       this.isOrdersScreen,
       this.isProfileScreen,
       this.showlocation,
-      this.bottomWidgetHPadding = 16.0,
-      this.bottomWidgetBottomPadding = 48.0,
+      this.bottomWidgetHPadding = 0.0,
+      this.bottomWidgetBottomPadding = 0.0,
       this.bottomWidgetTopPadding = 0.0
 
       // this.padding = 16.0

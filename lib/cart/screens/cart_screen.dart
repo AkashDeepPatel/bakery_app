@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
 import 'package:bakery_app/common/widgets/app_text_field.dart';
@@ -10,7 +12,7 @@ import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
 import '../controllers/cart_controller.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends GetView<CartController> {
   CartScreen({Key? key}) : super(key: key);
   final CartController _cartController = Get.find();
   @override
@@ -47,7 +49,7 @@ class CartScreen extends StatelessWidget {
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Price Details(3 items)",
+                        "Price Details(${controller.cartItemList.length} items)",
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                       const VSpace(8),
@@ -59,7 +61,7 @@ class CartScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           Text(
-                            "\$ 500",
+                            "\$ ${controller.getTotalMRP()}",
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                         ],
@@ -73,7 +75,7 @@ class CartScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           Text(
-                            "\$ 29",
+                            "- \$ ${controller.getDiscountOnMRP()}",
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                         ],
@@ -87,25 +89,25 @@ class CartScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           Text(
-                            "\$ 30",
+                            "+ \$ ${controller.getDeliveryCharges()}",
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                         ],
                       ),
                       const VSpace(8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Coupoun Discount",
-                            style: Theme.of(context).textTheme.labelLarge,
-                          ),
-                          Text(
-                            "\$ 31",
-                            style: Theme.of(context).textTheme.labelLarge,
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       "Coupoun Discount",
+                      //       style: Theme.of(context).textTheme.labelLarge,
+                      //     ),
+                      //     Text(
+                      //       "\$ 31",
+                      //       style: Theme.of(context).textTheme.labelLarge,
+                      //     ),
+                      //   ],
+                      // ),
                       const VSpace(8),
                       const Divider(),
                       const VSpace(8),
@@ -120,11 +122,13 @@ class CartScreen extends StatelessWidget {
                                 .copyWith(fontWeight: FontWeight.w700),
                           ),
                           Text(
-                            "\$ 500",
+                            "\$ ${controller.getGrandTotal()}",
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall!
-                                .copyWith(fontWeight: FontWeight.w700),
+                                .copyWith(
+                                  fontWeight: FontWeight.w700,
+                                ),
                           ),
                         ],
                       ),
@@ -144,13 +148,14 @@ class CartScreen extends StatelessWidget {
           ),
         ),
       ),
-      child: ListView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                VSpace(20),
+                const VSpace(20),
                 AppTextField(
                   hintText: "Apply Coupon Code",
                   suffixIcon: Padding(
@@ -160,7 +165,7 @@ class CartScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                VSpace(10),
+                const VSpace(10),
                 AppTextField(
                   hintText: "Want to schedule your pickup / delivery ?",
                   suffixIcon: Padding(
@@ -182,9 +187,22 @@ class CartScreen extends StatelessWidget {
             ),
           ),
           const VSpace(16),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: CartItemTile(),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: controller.cartItemList.isNotEmpty
+                  ? ListView(
+                      children: [
+                        for (int i = 0; i < controller.cartItemList.length; i++)
+                          CartItemTile(
+                            title: controller.cartItemList[i].title,
+                            imgUrl: controller.cartItemList[i].imgUrl,
+                            price: controller.cartItemList[i].price,
+                          )
+                      ],
+                    )
+                  : Text("No Products in Cart"),
+            ),
           ),
         ],
       ),
@@ -193,9 +211,15 @@ class CartScreen extends StatelessWidget {
 }
 
 class CartItemTile extends StatelessWidget {
-  const CartItemTile({
+  CartItemTile({
     Key? key,
+    required this.title,
+    required this.price,
+    required this.imgUrl,
   }) : super(key: key);
+  String title;
+  String imgUrl;
+  double price;
 
   @override
   Widget build(BuildContext context) {
@@ -213,7 +237,8 @@ class CartItemTile extends StatelessWidget {
                   Positioned(
                       child: Align(
                           alignment: Alignment.center,
-                          child: Image.asset(CommonAssets.bread))),
+                          child: Image.asset(imgUrl,
+                              height: 150, width: 200, fit: BoxFit.fitWidth))),
                   Positioned(
                     bottom: 0,
                     left: 30,
@@ -247,7 +272,7 @@ class CartItemTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Dukes - Waffy Wafers - pineapp",
+                    title,
                     textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
@@ -260,12 +285,16 @@ class CartItemTile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "\$ 400.00",
+                            "\$ $price",
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           Text(
-                            "\$ 450.00",
-                            style: Theme.of(context).textTheme.bodySmall,
+                            "\$ ${(price * 1.17).toDouble().round()}",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .copyWith(
+                                    decoration: TextDecoration.lineThrough),
                           ),
                         ],
                       ),

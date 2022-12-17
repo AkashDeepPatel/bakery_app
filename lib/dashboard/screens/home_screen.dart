@@ -10,9 +10,10 @@ import '../../common/screens/common_base_class.dart';
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
+import '../controllers/home_controller.dart';
 import '../utils/dashboard_assets.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends GetView<HomeController> {
   HomeScreen({Key? key}) : super(key: key);
   final DashboardController _dashboardController = Get.find();
 
@@ -28,15 +29,11 @@ class HomeScreen extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: const [
-                CategoriesIcon(),
-                CategoriesIcon(),
-                CategoriesIcon(),
-                CategoriesIcon(),
-                CategoriesIcon(),
-                CategoriesIcon(),
-                CategoriesIcon(),
-                CategoriesIcon(),
+              children: [
+                for (int i = 0; i < controller.productCategoryList.length; i++)
+                  CategoriesIcon(
+                      title: controller.productCategoryList[i].title,
+                      imgUrl: controller.productCategoryList[i].imgUrl),
               ],
             ),
           ),
@@ -77,10 +74,17 @@ class HomeScreen extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      for (int i = 0; i < 5; i++)
-                        const Padding(
+                      for (int i = 0; i < controller.forYouProducts.length; i++)
+                        Padding(
                           padding: EdgeInsets.only(right: 16.0),
-                          child: DashboardItemTile(),
+                          child: DashboardItemTile(
+                            index: i,
+                            title: controller.forYouProducts[i].title,
+                            imgUrl: controller.forYouProducts[i].imgUrl,
+                            price: controller.forYouProducts[i].price,
+                            rating: controller.forYouProducts[i].rating,
+                            isFav: controller.forYouProducts[i].isFav.obs,
+                          ),
                         ),
                     ],
                   ),
@@ -119,10 +123,19 @@ class HomeScreen extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      for (int i = 0; i < 5; i++)
-                        const Padding(
+                      for (int i = 0;
+                          i < controller.popularProductList.length;
+                          i++)
+                        Padding(
                           padding: EdgeInsets.only(right: 16.0),
-                          child: DashboardItemTile(),
+                          child: DashboardItemTile(
+                            index: i,
+                            title: controller.popularProductList[i].title,
+                            imgUrl: controller.popularProductList[i].imgUrl,
+                            price: controller.popularProductList[i].price,
+                            rating: controller.popularProductList[i].rating,
+                            isFav: controller.popularProductList[i].isFav.obs,
+                          ),
                         ),
                     ],
                   ),
@@ -137,15 +150,27 @@ class HomeScreen extends StatelessWidget {
 }
 
 class DashboardItemTile extends StatelessWidget {
-  const DashboardItemTile({
+  DashboardItemTile({
     Key? key,
+    required this.index,
+    required this.title,
+    required this.price,
+    required this.rating,
+    required this.isFav,
+    required this.imgUrl,
   }) : super(key: key);
+  int index;
+  String title;
+  String imgUrl;
+  double price;
+  double rating;
+  RxBool isFav;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => const ProductDetailScreen());
+        Get.to(() => ProductDetailScreen(), arguments: [index]);
       },
       child: Container(
         decoration: const BoxDecoration(
@@ -158,7 +183,12 @@ class DashboardItemTile extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Image.asset(DashboardAssets.forYou),
+                Image.asset(
+                  imgUrl,
+                  height: 150,
+                  width: 150,
+                  fit: BoxFit.fill,
+                ),
                 Positioned(
                   left: 8,
                   bottom: 8,
@@ -170,7 +200,7 @@ class DashboardItemTile extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8.0, vertical: 4.0),
                       child: Text(
-                        "300.00",
+                        price.toString(),
                         style: Theme.of(context)
                             .textTheme
                             .labelSmall!
@@ -182,16 +212,28 @@ class DashboardItemTile extends StatelessWidget {
                 Positioned(
                   top: 8,
                   right: 8,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        color: AppThemes.black,
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                    child: Padding(
-                        padding: const EdgeInsets.all(7.0),
-                        child: SvgPicture.asset(
-                          CommonAssets.favouritesIcon,
-                          color: AppThemes.background,
-                        )),
+                  child: Obx(
+                    () => InkWell(
+                      onTap: () {
+                        isFav(!isFav.value);
+                      },
+                      child: Container(
+                        decoration: const BoxDecoration(
+                            color: AppThemes.black,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0))),
+                        child: Padding(
+                            padding: const EdgeInsets.all(7.0),
+                            child: SvgPicture.asset(
+                              isFav.value == false
+                                  ? CommonAssets.favouritesIcon
+                                  : CommonAssets.favouritesFilledIcon,
+                              color: isFav.value == false
+                                  ? AppThemes.background
+                                  : null,
+                            )),
+                      ),
+                    ),
                   ),
                 )
               ],
@@ -200,7 +242,7 @@ class DashboardItemTile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(
-                "Sinker Fuse Chocolate Cake",
+                title,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ),
@@ -211,7 +253,7 @@ class DashboardItemTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Text(
-                    "4.2",
+                    rating.toString(),
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
@@ -231,10 +273,13 @@ class DashboardItemTile extends StatelessWidget {
 }
 
 class CategoriesIcon extends StatelessWidget {
-  const CategoriesIcon({
+  CategoriesIcon({
     Key? key,
+    required this.title,
+    required this.imgUrl,
   }) : super(key: key);
-
+  String title;
+  String imgUrl;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -247,15 +292,15 @@ class CategoriesIcon extends StatelessWidget {
               radius: 25,
               child: ClipOval(
                 child: Image.asset(
-                  DashboardAssets.forYou,
-                  fit: BoxFit.cover,
+                  imgUrl,
+                  fit: BoxFit.fill,
                   height: 72,
                 ),
               ),
             ),
             const VSpace(8),
             Text(
-              "Cake",
+              title,
               style: Theme.of(context).textTheme.labelSmall,
             )
           ],

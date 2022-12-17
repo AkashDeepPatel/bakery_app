@@ -29,7 +29,7 @@ dependencies:
   geocoding: ^2.0.5
   dio: ^4.0.6
   dio_logger: ^4.0.8+8
-
+  url_launcher: ^6.1.7
 
 
 
@@ -46,6 +46,7 @@ flutter:
    - assets/dashboard/icons/
    - assets/common/icons/
    - assets/home/icons/
+   - assets/home/
    - assets/walkthrough/
    - assets/common/
 

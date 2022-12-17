@@ -1,5 +1,6 @@
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/profile/screens/edit_profile.dart';
+import 'package:bakery_app/profile/screens/your_address_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,7 +36,9 @@ class ProfileScreen extends StatelessWidget {
                 ProfileItemTile(
                   icon: CommonAssets.locationPin2Icon,
                   title: "Your Address",
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => YourAddressScreen());
+                  },
                 ),
                 // const VSpace(16),
                 // ProfileItemTile(
