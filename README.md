@@ -1,4 +1,4 @@
-# bakery_app
+# bakery_application
 
 A new Flutter project.
 
