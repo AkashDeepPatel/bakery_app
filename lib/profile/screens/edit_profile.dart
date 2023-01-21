@@ -52,6 +52,7 @@ class EditProfile extends StatelessWidget {
                       AppTextField(
                         title: "Edit Phone Number",
                         controller: controller.phoneNo.value,
+                        readOnly: true,
                       ),
                     ],
                   ),
@@ -61,6 +62,7 @@ class EditProfile extends StatelessWidget {
                   padding: EdgeInsets.only(left: 16.0),
                   child: Text("Choose what you want to see "),
                 ),
+                // ProfileController.getIcon('logo.svg', "name"),
                 Wrap(
                   children: [
                     AppCard(child: const Text("Breads")),

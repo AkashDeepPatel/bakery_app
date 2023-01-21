@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
-import 'package:bakery_app/common/widgets/app_text_field.dart';
 import 'package:bakery_app/orders/screens/schedule_order.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -150,34 +147,35 @@ class CartScreen extends GetView<CartController> {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: [
-                const VSpace(20),
-                AppTextField(
-                  hintText: "Apply Coupon Code",
-                  suffixIcon: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset(
-                      CommonAssets.discount,
-                    ),
-                  ),
-                ),
-                const VSpace(10),
-                AppTextField(
-                  hintText: "Want to schedule your pickup / delivery ?",
-                  suffixIcon: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset(
-                      CommonAssets.rightArrowIcon,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //   child: Column(
+          //     children: [
+          //       const VSpace(20),
+          //       AppTextField(
+          //         hintText: "Apply Coupon Code",
+          //         suffixIcon: Padding(
+          //           padding: const EdgeInsets.all(8.0),
+          //           child: SvgPicture.asset(
+          //             CommonAssets.discount,
+          //           ),
+          //         ),
+          //       ),
+          //       const VSpace(10),
+          //       AppTextField(
+          //         hintText: "Want to schedule your pickup / delivery ?",
+          //         suffixIcon: Padding(
+          //           padding: const EdgeInsets.all(8.0),
+          //           child: SvgPicture.asset(
+          //             CommonAssets.rightArrowIcon,
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           const VSpace(24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -189,19 +187,19 @@ class CartScreen extends GetView<CartController> {
           const VSpace(16),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: controller.cartItemList.isNotEmpty
                   ? ListView(
                       children: [
                         for (int i = 0; i < controller.cartItemList.length; i++)
                           CartItemTile(
-                            title: controller.cartItemList[i].title,
-                            imgUrl: controller.cartItemList[i].imgUrl,
-                            price: controller.cartItemList[i].price,
-                          )
+                            title: controller.cartItemList[i]['title'],
+                            imgUrl: 'controller.cartItemList[i].imgUrl',
+                            price: controller.cartItemList[i]['price'],
+                          ),
                       ],
                     )
-                  : Text("No Products in Cart"),
+                  : const Center(child: Text("No Products in Cart")),
             ),
           ),
         ],

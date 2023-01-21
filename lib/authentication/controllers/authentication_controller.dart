@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import '../../common/styles/app_themes.dart';
+import '../../common/widgets/app_dialog.dart';
 import '../screens/auth_gate.dart';
 import '../screens/otp_verification_screen.dart';
 
@@ -25,35 +27,52 @@ class AuthenticationController extends BaseController {
     // change(null, status: RxStatus.loadingMore());
     String phoneNumber = phoneNumberCtr.text;
 
-    void verificationCompleted(AuthCredential phoneAuthCredential) {
-      debugPrint(phoneAuthCredential.toString());
-    }
+   if(phoneNumber.isNotEmpty && phoneNumber.length>12){
+     void verificationCompleted(AuthCredential phoneAuthCredential) {
+       debugPrint(phoneAuthCredential.toString());
+     }
 
-    void verificationFailed(FirebaseAuthException error) {
-      change(null, status: RxStatus.success());
-      // SnackBarMessageWidget.show(error.message.toString());
-    }
+     void verificationFailed(FirebaseAuthException error) {
+       change(null, status: RxStatus.success());
+       // SnackBarMessageWidget.show(error.message.toString());
+     }
 
-    void codeSent(String verificationId, int? code) {
-      updateVerificationId(verificationId);
-      change(null, status: RxStatus.success());
-      Get.toNamed(OTPVerificationScreen.routeName);
-    }
+     void codeSent(String verificationId, int? code) {
+       updateVerificationId(verificationId);
+       change(null, status: RxStatus.success());
+       Get.toNamed(OTPVerificationScreen.routeName);
+     }
 
-    void codeAutoRetrievalTimeout(String verificationId) {
-      updateVerificationId(verificationId);
-      change(null, status: RxStatus.success());
-    }
+     void codeAutoRetrievalTimeout(String verificationId) {
+       updateVerificationId(verificationId);
+       change(null, status: RxStatus.success());
+     }
 
-    FirebaseAuth auth = FirebaseAuth.instance;
-    auth.verifyPhoneNumber(
-      phoneNumber: phoneNumber,
-      timeout: const Duration(milliseconds: 10000),
-      verificationCompleted: verificationCompleted,
-      verificationFailed: verificationFailed,
-      codeSent: codeSent,
-      codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
-    );
+     FirebaseAuth auth = FirebaseAuth.instance;
+     auth.verifyPhoneNumber(
+       phoneNumber: phoneNumber,
+       timeout: const Duration(milliseconds: 10000),
+       verificationCompleted: verificationCompleted,
+       verificationFailed: verificationFailed,
+       codeSent: codeSent,
+       codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+     );
+     Get.dialog(AppDialog(
+       message:
+       "You will a receive OTP on your given phone number.",
+       buttonTitle: "Okay",
+       onButtonTap: () {
+         Get.back();
+         Get.toNamed(OTPVerificationScreen.routeName);
+       },
+     )
+     );
+   }
+   else{
+     Get.snackbar("Please Enter a Valid Phone Number", "",
+         backgroundColor: AppThemes.black);
+
+   }
   }
 
   submitOTP() async {
@@ -69,15 +88,15 @@ class AuthenticationController extends BaseController {
           (await auth.signInWithCredential(credential));
 
       if (userCredential.additionalUserInfo!.isNewUser) {
-        FirebaseFirestore.instance
-            .collection('users')
-            .doc(auth.currentUser!.uid)
-            .set({
+        var user = FirebaseAuth.instance.currentUser;
+        FirebaseFirestore.instance.collection('users').doc(user!.uid).set({
           "uid": auth.currentUser?.uid,
           "phone": phoneNumberCtr.text,
           "fullName": nameCtr.text,
           "email": emailCtr.text,
         });
+        // user!.updateEmail(emailCtr.text);
+        // user!.updateDisplayName(nameCtr.text);
       }
       // FirebaseFirestore.instance.collection('users').add({
       //   "uid": auth.currentUser?.uid,
@@ -97,7 +116,7 @@ class AuthenticationController extends BaseController {
       // } else {
       Get.offAllNamed(AuthGate.routeName);
       // }
-      resetData();
+      // resetData();
       return user;
     } on FirebaseAuthException catch (e) {
       // SnackBarMessageWidget.show(e.message.toString());

@@ -25,7 +25,6 @@ class AddressController extends BaseController {
           .get();
       userAddresses.value = documentSnapshot.get('addresses');
     }
-    debugPrint("--->>>$userAddresses}");
   }
 
   //adding new user address
@@ -55,6 +54,7 @@ class AddressController extends BaseController {
           .collection('users')
           .doc(user.uid)
           .set({"addresses": userAddresses}, SetOptions(merge: true));
+      Get.back();
     }
   }
 }

@@ -5,6 +5,7 @@ import '../../menu/controllers/menu_controller.dart';
 import '../../orders/controllers/orders_controller.dart';
 import '../../profile/controllers/profile_controller.dart';
 import '../controllers/dashboard_controller.dart';
+import '../controllers/wishlist_controller.dart';
 
 class DashboardBindings extends Bindings {
   @override
@@ -15,5 +16,6 @@ class DashboardBindings extends Bindings {
     Get.lazyPut(() => MenuController(), fenix: true);
     Get.lazyPut(() => CartController(), fenix: true);
     Get.lazyPut(() => ProfileController(), fenix: true);
+    Get.lazyPut(() => WishlistController(), fenix: true);
   }
 }

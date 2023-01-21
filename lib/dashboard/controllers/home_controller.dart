@@ -1,230 +1,91 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../common/controllers/base_controller.dart';
-import '../../models/product_model.dart';
+import '../../common/models/product_model.dart';
 
 class HomeController extends BaseController {
-  List<ProductCategory> productCategoryList = [
-    // ProductCategory(title: "Cake", imgUrl: "assets/home/cake.jpg"),
-    // ProductCategory(title: "Cookies", imgUrl: "assets/home/cookies.jpg"),
-    // ProductCategory(title: "Breads", imgUrl: "assets/home/bread.jpg"),
-    // ProductCategory(title: "Deserts", imgUrl: "assets/home/dessert.jpg"),
-    // ProductCategory(title: "Pizza", imgUrl: "assets/home/pizza.jpg"),
-    ProductCategory(title: "Cookies", imgUrl: "assets/home/cookies0.png"),
-    ProductCategory(title: "Dessert", imgUrl: "assets/home/dessert0.png"),
-    ProductCategory(title: "Muffins", imgUrl: "assets/home/muffins0.png"),
-    ProductCategory(title: "Pastries", imgUrl: "assets/home/pastries0.png"),
-    ProductCategory(
-        title: "Soft Drinks", imgUrl: "assets/home/softdrinks0.png"),
-  ];
-  List<Product> forYouProducts = [
-    Product(
-        // productCategory: 'Cake',
-        title: "Almond Malai Kulfi",
-        imgUrl: "assets/home/almondMalaiKulfi.jpeg",
-        price: 600.25,
-        rating: 4.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF"),
-    Product(
-        // productCategory: 'Cake',
-        title: "Baked Flourless Cake",
-        imgUrl: "assets/home/bakedFlourlessCake.jpeg",
-        price: 500.25,
-        rating: 4.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF"),
-    Product(
-        // productCategory: 'Cake',
-        title: "Cheese Pizza",
-        imgUrl: "assets/home/cheesePizza.jpeg",
-        price: 190.25,
-        rating: 2.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF")
-  ];
+  @override
+  void onInit() {
+    super.onInit();
+    getHomeCategories();
+    getForYouProducts();
+    getPopularProducts();
+  }
 
-  List<Product> popularProductList = [
-    Product(
-        // productCategory: 'Cake',
-        title: "Chocolate Cake",
-        imgUrl: "assets/home/cake.jpg",
-        price: 546.25,
-        rating: 4.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF"),
-    Product(
-        // productCategory: 'Cake',
-        title: "Brown Breads",
-        imgUrl: "assets/home/brownBread.jpeg",
-        price: 456.25,
-        rating: 4.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF"),
-    Product(
-        // productCategory: 'Cake',
-        title: "Shortbread Cookies",
-        imgUrl: "assets/home/shortBreadCookies.jpeg",
-        price: 423.25,
-        rating: 2.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF"),
-    // Product(
-    //     // productCategory: 'Cake',
-    //     title: "Almond Malai Kulfi",
-    //     imgUrl: "assets/home/almonfMalaiKulfi.jpeg",
-    //     price: 600.25,
-    //     rating: 4.3,
-    //     isFav: false,
-    //     size: ["Small", "Medium", "Large"],
-    //     about: "It is about the product",
-    //     ingredients: "ingredients",
-    //     nutritionalFact: "NF"),
-    Product(
-        // productCategory: 'Cake',
-        title: "Baked Flourless Cake",
-        imgUrl: "assets/home/bakedFlourlessCake.jpeg",
-        price: 500.25,
-        rating: 4.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF"),
-    Product(
-        // productCategory: 'Cake',
-        title: "Cheese Pizza",
-        imgUrl: "assets/home/cheesePizza.jpeg",
-        price: 190.25,
-        rating: 2.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF")
-  ];
+  RxList<HomeProductCategoryModel> homeCategories =
+      <HomeProductCategoryModel>[].obs;
+  getHomeCategories() async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('categories')
+          .doc('homeCategories')
+          .collection('homeCategories')
+          .get();
+      for (var item in querySnapshot.docs) {
+        homeCategories.add(HomeProductCategoryModel(
+          id: item.get('id'),
+          title: item.get('title'),
+          imgUrl: item.get('img_url'),
+        ));
+      }
+    } catch (e) {
+      debugPrint("$e");
+    }
+  }
 
-  List<Product> cakeList = [
-    Product(
-        // productCategory: 'Cake',
-        title: "Chocolate Cake",
-        imgUrl: "assets/home/cake.jpg",
-        price: 546.25,
-        rating: 4.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF"),
-    Product(
-        // productCategory: 'Cake',
-        title: "Sponge Cake",
-        imgUrl: "assets/home/cake.jpg",
-        price: 456.25,
-        rating: 4.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF"),
-    Product(
-        // productCategory: 'Cake',
-        title: "Genoise Cake",
-        imgUrl: "assets/home/cake.jpg",
-        price: 423.25,
-        rating: 2.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF"),
-    Product(
-        // productCategory: 'Cake',
-        title: "Buiscuit Cake",
-        imgUrl: "assets/home/cake.jpg",
-        price: 600.25,
-        rating: 4.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF"),
-    Product(
-        // productCategory: 'Cake',
-        title: "Baked Flourless Cake",
-        imgUrl: "assets/home/cake.jpg",
-        price: 500.25,
-        rating: 4.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF"),
-    Product(
-        // productCategory: 'Cake',
-        title: "Unbaked Flourless Cake",
-        imgUrl: "assets/home/cake.jpg",
-        price: 190.25,
-        rating: 2.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF")
-  ];
-  List<Product> breadList = [
-    Product(
-        // productCategory: 'Cake',
-        title: "Chocolate Cake",
-        imgUrl: "assets/home/cake.jpg",
-        price: 546.25,
-        rating: 4.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF")
-  ];
-  List<Product> cookiesList = [
-    Product(
-        // productCategory: 'Cake',
-        title: "Chocolate Cake",
-        imgUrl: "assets/home/cake.jpg",
-        price: 546.25,
-        rating: 4.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF")
-  ];
-  List<Product> dessertsList = [
-    Product(
-        // productCategory: 'Cake',
-        title: "Chocolate Cake",
-        imgUrl: "assets/home/cake.jpg",
-        price: 546.25,
-        rating: 4.3,
-        isFav: false,
-        size: ["Small", "Medium", "Large"],
-        about: "It is about the product",
-        ingredients: "ingredients",
-        nutritionalFact: "NF")
-  ];
+  RxList<Product> forYouProducts = <Product>[].obs;
+  getForYouProducts() async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('products')
+          .doc('forYouProducts')
+          .collection('forYouProducts')
+          .get();
+      for (var item in querySnapshot.docs) {
+        forYouProducts.add(Product(
+          id: item.get('id'),
+          title: item.get('title'),
+          imgUrl: item.get('img_url'),
+          about: item.get('about'),
+          price: item.get('price'),
+          rating: item.get('rating'),
+          ingredients: item.get('ingredients'),
+          nutritionalFacts: item.get('nutritionalFact'),
+          size: item.get('size'),
+        ));
+      }
+      debugPrint("got for you products");
+    } catch (e) {
+      debugPrint("->error$e");
+    }
+  }
+
+  RxList<Product> popularProductList = <Product>[].obs;
+  getPopularProducts() async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('products')
+          .doc('popularProducts')
+          .collection('popularProducts')
+          .get();
+      for (var item in querySnapshot.docs) {
+        debugPrint("--->>>${item.get('title')}");
+        popularProductList.add(Product(
+          id: item.get('id'),
+          title: item.get('title'),
+          imgUrl: item.get('img_url'),
+          about: item.get('about'),
+          price: item.get('price'),
+          rating: item.get('rating'),
+          ingredients: item.get('ingredients'),
+          nutritionalFacts: item.get('nutritionalFact'),
+          size: item.get('size'),
+        ));
+      }
+      debugPrint("got for you products");
+    } catch (e) {
+      debugPrint("->error$e");
+    }
+  }
 }

@@ -7,6 +7,6 @@ class DashboardRoutes {
   DashboardRoutes._();
   static final routes = [
     GetPage(name: '/', page: () => DashboardScreen()),
-    GetPage(name: '/menu', page: () => ListViewScreen()),
+    // GetPage(name: '/menu', page: () => ListViewScreen()),
   ];
 }

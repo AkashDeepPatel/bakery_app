@@ -7,13 +7,14 @@ import '../../common/screens/common_base_class.dart';
 import 'add_address_screen.dart';
 
 class YourAddressScreen extends StatelessWidget {
-  YourAddressScreen({Key? key}) : super(key: key);
+  YourAddressScreen({Key? key, this.showAppBar}) : super(key: key);
   final AddressController controller = Get.put(AddressController());
+  bool? showAppBar;
   @override
   Widget build(BuildContext context) {
     int selectedRadio = 0;
     return CommonBaseClass(
-        showAppBar: true,
+        showAppBar: showAppBar ?? true,
         showBottomWidget: true,
         bottomWidget: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -25,25 +26,28 @@ class YourAddressScreen extends StatelessWidget {
           ),
         ),
         child: Obx(
-          () => ListView.builder(
-              itemCount: controller.userAddresses.length,
-              itemBuilder: (context, index) {
-                return RadioListTile(
-                    value: index,
-                    groupValue: selectedRadio,
-                    isThreeLine: true,
-                    title: Text("${controller.userAddresses[index]['name']}"),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                            "${controller.userAddresses[index]['flatNo']}, ${controller.userAddresses[index]['landmark']}, ${controller.userAddresses[index]['area']}, ${controller.userAddresses[index]['city']}, ${controller.userAddresses[index]['pincode']}"),
-                        Text(
-                            "Phone no: ${controller.userAddresses[index]['mobile']}")
-                      ],
-                    ),
-                    onChanged: (value) {});
-              }),
+          () => controller.userAddresses.isNotEmpty
+              ? ListView.builder(
+                  itemCount: controller.userAddresses.length,
+                  itemBuilder: (context, index) {
+                    return RadioListTile(
+                        value: index,
+                        groupValue: selectedRadio,
+                        isThreeLine: true,
+                        title:
+                            Text("${controller.userAddresses[index]['name']}"),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                "${controller.userAddresses[index]['flatNo']}, ${controller.userAddresses[index]['landmark']}, ${controller.userAddresses[index]['area']}, ${controller.userAddresses[index]['city']}, ${controller.userAddresses[index]['pincode']}"),
+                            Text(
+                                "Phone no: ${controller.userAddresses[index]['mobile']}")
+                          ],
+                        ),
+                        onChanged: (value) {});
+                  })
+              : Center(child: Text("No Saved Address to show.")),
         ));
   }
 }

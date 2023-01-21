@@ -1,13 +1,21 @@
 import 'package:bakery_app/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geocoding_platform_interface/src/models/placemark.dart';
 import 'package:get/get.dart';
+import '../../dashboard/screens/wishlist_screen.dart';
+import '../../profile/controllers/address_controller.dart';
+import '../../profile/screens/your_address_screen.dart';
+import '../controllers/base_controller.dart';
 import '../styles/app_themes.dart';
 import '../utils/arch_utils/widgets/spacing_widgets.dart';
 import '../utils/common_assets.dart';
+import 'app_bottom_sheet.dart';
 import 'app_text_field.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
+  BaseController baseController = Get.put(BaseController());
+  AddressController addressController = Get.put(AddressController());
   ProfileController controller = Get.find();
 
   AppBarWidget({
@@ -42,35 +50,47 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             Row(
               children: [
                 if (showlocation == true)
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: AppThemes.primary,
-                        radius: 17,
-                        child: SvgPicture.asset(CommonAssets.locationPinIcon),
-                      ),
-                      const HSpace(12),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  Obx(() => Row(
                         children: [
-                          Text(
-                            "Bhilai, Chhattisgarh",
-                            style: Theme.of(context).textTheme.bodySmall,
+                          CircleAvatar(
+                            backgroundColor: AppThemes.primary,
+                            radius: 17,
+                            child:
+                                SvgPicture.asset(CommonAssets.locationPinIcon),
                           ),
-                          Row(
+                          const HSpace(12),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "Select Location",
-                                style: Theme.of(context).textTheme.labelLarge,
-                              ),
-                              const HSpace(5),
-                              SvgPicture.asset(CommonAssets.downArrowIcon)
+                              baseController.placemark.isNotEmpty
+                                  ? Text(
+                                      "${baseController.placemark[0].subLocality}, ${baseController.placemark[0].locality}, ${baseController.placemark[0].postalCode}",
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                    )
+                                  : Text("Loading"),
+                              InkWell(
+                                onTap: () {
+                                  Get.bottomSheet(const AppBottomSheet());
+                                },
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Select Location",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    const HSpace(5),
+                                    SvgPicture.asset(
+                                        CommonAssets.downArrowIcon),
+                                  ],
+                                ),
+                              )
                             ],
                           )
                         ],
-                      )
-                    ],
-                  )
+                      ))
                 else
                   InkWell(
                       onTap: () {
@@ -93,7 +113,9 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     child: SvgPicture.asset(CommonAssets.notificationIcon)),
                 const HSpace(15),
                 InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => WishlistScreen());
+                    },
                     child: SvgPicture.asset(CommonAssets.favouritesIcon)),
               ],
             ),

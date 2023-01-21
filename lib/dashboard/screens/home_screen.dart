@@ -1,4 +1,4 @@
-import 'package:bakery_app/common/utils/firebase_storage_service.dart';
+import 'package:bakery_app/common/controllers/base_controller.dart';
 import 'package:bakery_app/dashboard/controllers/dashboard_controller.dart';
 import 'package:bakery_app/dashboard/screens/list_view_screen.dart';
 import 'package:bakery_app/dashboard/screens/product_detail_screen.dart';
@@ -6,16 +6,18 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import '../../common/models/product_model.dart';
 import '../../common/screens/common_base_class.dart';
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
 import '../controllers/home_controller.dart';
-import '../utils/dashboard_assets.dart';
+import '../controllers/wishlist_controller.dart';
 
 class HomeScreen extends GetView<HomeController> {
   HomeScreen({Key? key}) : super(key: key);
   final DashboardController _dashboardController = Get.find();
+  final WishlistController _wlCtr = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +28,17 @@ class HomeScreen extends GetView<HomeController> {
       child: ListView(
         children: [
           const VSpace(20),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                for (int i = 0; i < controller.productCategoryList.length; i++)
-                  CategoriesIcon(
-                      title: controller.productCategoryList[i].title,
-                      imgUrl: controller.productCategoryList[i].imgUrl),
-              ],
+          Obx(
+            () => SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  for (int i = 0; i < controller.homeCategories.length; i++)
+                    CategoriesIcon(
+                        title: controller.homeCategories[i].title,
+                        imgUrl: controller.homeCategories[i].imgUrl),
+                ],
+              ),
             ),
           ),
           const VSpace(24),
@@ -70,23 +74,22 @@ class HomeScreen extends GetView<HomeController> {
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      for (int i = 0; i < controller.forYouProducts.length; i++)
-                        Padding(
-                          padding: EdgeInsets.only(right: 16.0),
-                          child: DashboardItemTile(
-                            index: i,
-                            title: controller.forYouProducts[i].title,
-                            imgUrl: controller.forYouProducts[i].imgUrl,
-                            price: controller.forYouProducts[i].price,
-                            rating: controller.forYouProducts[i].rating,
-                            isFav: controller.forYouProducts[i].isFav.obs,
+                Obx(
+                  () => SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        for (int i = 0;
+                            i < controller.forYouProducts.length;
+                            i++)
+                          Padding(
+                            padding: const EdgeInsets.only(right: 16.0),
+                            child: DashboardItemTile(
+                              model: controller.forYouProducts[i],
+                            ),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
@@ -108,7 +111,11 @@ class HomeScreen extends GetView<HomeController> {
                         padding: const EdgeInsets.only(right: 16.0),
                         child: InkWell(
                           onTap: () {
-                            Get.to(() => const ListViewScreen());
+                            Get.to(
+                              () => ListViewScreen(
+                                listModel: controller.popularProductList,
+                              ),
+                            );
                           },
                           child: Text(
                             "View all",
@@ -119,27 +126,23 @@ class HomeScreen extends GetView<HomeController> {
                     ],
                   ),
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      for (int i = 0;
-                          i < controller.popularProductList.length;
-                          i++)
-                        Padding(
-                          padding: EdgeInsets.only(right: 16.0),
-                          child: DashboardItemTile(
-                            index: i,
-                            title: controller.popularProductList[i].title,
-                            imgUrl: controller.popularProductList[i].imgUrl,
-                            price: controller.popularProductList[i].price,
-                            rating: controller.popularProductList[i].rating,
-                            isFav: controller.popularProductList[i].isFav.obs,
+                Obx(
+                  () => SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        for (int i = 0;
+                            i < controller.popularProductList.length;
+                            i++)
+                          Padding(
+                            padding: const EdgeInsets.only(right: 16.0),
+                            child: DashboardItemTile(
+                                model: controller.popularProductList[i]),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
+                )
               ],
             ),
           )
@@ -152,25 +155,17 @@ class HomeScreen extends GetView<HomeController> {
 class DashboardItemTile extends StatelessWidget {
   DashboardItemTile({
     Key? key,
-    required this.index,
-    required this.title,
-    required this.price,
-    required this.rating,
-    required this.isFav,
-    required this.imgUrl,
+    required this.model,
   }) : super(key: key);
-  int index;
-  String title;
-  String imgUrl;
-  double price;
-  double rating;
-  RxBool isFav;
+  Product model;
+  final WishlistController _wishlistController = Get.find();
 
+  // RxBool isFav = _wishlistController.isFav;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => ProductDetailScreen(), arguments: [index]);
+        Get.to(() => ProductDetailScreen(model: model));
       },
       child: Container(
         decoration: const BoxDecoration(
@@ -183,12 +178,7 @@ class DashboardItemTile extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Image.asset(
-                  imgUrl,
-                  height: 150,
-                  width: 150,
-                  fit: BoxFit.fill,
-                ),
+                BaseController.getIcon(model.imgUrl, 'name'),
                 Positioned(
                   left: 8,
                   bottom: 8,
@@ -200,7 +190,7 @@ class DashboardItemTile extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8.0, vertical: 4.0),
                       child: Text(
-                        price.toString(),
+                        model.price.toString(),
                         style: Theme.of(context)
                             .textTheme
                             .labelSmall!
@@ -215,7 +205,11 @@ class DashboardItemTile extends StatelessWidget {
                   child: Obx(
                     () => InkWell(
                       onTap: () {
-                        isFav(!isFav.value);
+                        // _wishlistController
+                        //     .isFav(!_wishlistController.isFav.value);
+                        // !_wishlistController.checkIfLikedOrNot("${model.id}")
+                        //     ? _wishlistController.addToWishlist(model)
+                        //     : _wishlistController.deleteFromWishlist(model);
                       },
                       child: Container(
                         decoration: const BoxDecoration(
@@ -225,10 +219,10 @@ class DashboardItemTile extends StatelessWidget {
                         child: Padding(
                             padding: const EdgeInsets.all(7.0),
                             child: SvgPicture.asset(
-                              isFav.value == false
+                              _wishlistController.isFav.value == false
                                   ? CommonAssets.favouritesIcon
                                   : CommonAssets.favouritesFilledIcon,
-                              color: isFav.value == false
+                              color: _wishlistController.isFav.value == false
                                   ? AppThemes.background
                                   : null,
                             )),
@@ -242,7 +236,7 @@ class DashboardItemTile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(
-                title,
+                model.title,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ),
@@ -253,7 +247,7 @@ class DashboardItemTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Text(
-                    rating.toString(),
+                    model.rating.toString(),
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
@@ -290,13 +284,7 @@ class CategoriesIcon extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 25,
-              child: ClipOval(
-                child: Image.asset(
-                  imgUrl,
-                  fit: BoxFit.fill,
-                  height: 72,
-                ),
-              ),
+              child: ClipOval(child: BaseController.getIcon(imgUrl, 'name')),
             ),
             const VSpace(8),
             Text(

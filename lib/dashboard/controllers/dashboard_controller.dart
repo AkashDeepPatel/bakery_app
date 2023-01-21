@@ -49,17 +49,6 @@ class DashboardController extends BaseController {
     }
   }
 
-  List itemsCategory = [
-    "All",
-    "Cakes",
-    "Cookies",
-    "Biscuits",
-    "All",
-    "Cakes",
-    "Cookies",
-    "Biscuits",
-  ];
-
   RxInt currentSliderIndex = 0.obs;
   List<Image> carouselSliderItems = [
     Image.asset(

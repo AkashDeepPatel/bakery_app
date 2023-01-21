@@ -1,5 +1,4 @@
 import 'package:bakery_app/common/utils/common_assets.dart';
-import 'package:bakery_app/walkthrough/screens/walkthrough_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -21,7 +20,6 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       Get.offNamed(AuthGate.routeName);
-      // Get.toNamed(WalkThroughScreens.routeName);
     });
   }
 
@@ -29,9 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppThemes.white,
-        // body: Center(child: SvgPicture.asset(CommonAssets.logo)));
-        body: Center(
-          child: Image.asset("assets/common/logo-no-background.png"),
-        ));
+        body: Center(child: SvgPicture.asset(CommonAssets.logo)));
+    // body: Center(
+    //   child: Image.asset("assets/common/logo-no-background.png"),
+    // ));
   }
 }

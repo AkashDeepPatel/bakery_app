@@ -1,9 +1,11 @@
+import 'package:bakery_app/common/controllers/base_controller.dart';
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../cart/controllers/cart_controller.dart';
+import '../../common/models/product_model.dart';
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
@@ -12,11 +14,13 @@ import '../../orders/screens/payment_method_screen.dart';
 import '../controllers/home_controller.dart';
 
 class ProductDetailScreen extends GetView<HomeController> {
-  ProductDetailScreen({Key? key}) : super(key: key);
+  ProductDetailScreen({Key? key, required this.model}) : super(key: key);
   @override
-  int index = Get.arguments[0];
   RxBool isFav = false.obs;
   CartController cartController = Get.find();
+
+  Product model;
+
   Widget build(BuildContext context) {
     RxString selectedItem = "Small".obs;
     return CommonBaseClass(
@@ -51,8 +55,9 @@ class ProductDetailScreen extends GetView<HomeController> {
                   text: "Add to Cart",
                   onTap: () {
                     debugPrint("added");
-                    cartController.cartItemList
-                        .add(controller.popularProductList[index]);
+                    // cartController.cartItemList
+                    //     .add(controller.popularProductList[index]);
+                    cartController.addItemInCart();
                     Get.snackbar("Product Added to Cart", "",
                         backgroundColor: AppThemes.black);
                   },
@@ -75,12 +80,8 @@ class ProductDetailScreen extends GetView<HomeController> {
                   child: ClipRRect(
                     borderRadius: const BorderRadius.vertical(
                         bottom: Radius.circular(20)),
-                    child: Image.asset(
-                      controller.popularProductList[index].imgUrl,
-                      fit: BoxFit.fitWidth,
-                      width: double.infinity,
-                      height: 220,
-                    ),
+                    child: BaseController.getIcon(model.imgUrl, "name",
+                        height: 220, width: double.infinity),
                   ),
                 )),
                 Positioned(
@@ -120,10 +121,9 @@ class ProductDetailScreen extends GetView<HomeController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(controller.popularProductList[index].title,
+                          Text(model.title,
                               style: Theme.of(context).textTheme.headlineSmall),
-                          Text(
-                              "\$${controller.popularProductList[index].price}",
+                          Text("\$${model.price}",
                               style: Theme.of(context).textTheme.headlineSmall)
                         ],
                       ),
@@ -135,7 +135,7 @@ class ProductDetailScreen extends GetView<HomeController> {
                               Padding(
                                 padding: const EdgeInsets.all(4.0),
                                 child: Text(
-                                  "${controller.popularProductList[index].rating}",
+                                  "${model.rating}",
                                   style: Theme.of(context).textTheme.bodySmall,
                                 ),
                               ),
@@ -157,36 +157,37 @@ class ProductDetailScreen extends GetView<HomeController> {
                       Text("Choose Size",
                           style: Theme.of(context).textTheme.headlineSmall),
                       const VSpace(16),
-                      Obx(
-                        () => Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 2.0, color: AppThemes.subtleLight),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(4.0))),
-                          child: DropdownButtonHideUnderline(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: DropdownButton<String>(
-                                icon: SvgPicture.asset(
-                                  CommonAssets.downArrowIcon,
-                                ),
-                                isExpanded: true,
-                                itemHeight: 50,
-                                items: controller.popularProductList[index].size
-                                    .map((e) => DropdownMenuItem<String>(
-                                        value: e, child: Text(e)))
-                                    .toList(),
-                                value: selectedItem.value,
-                                onChanged: (w) {
-                                  selectedItem(w);
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Obx(
+                      //   () => Container(
+                      //     decoration: BoxDecoration(
+                      //         border: Border.all(
+                      //             width: 2.0, color: AppThemes.subtleLight),
+                      //         borderRadius:
+                      //             const BorderRadius.all(Radius.circular(4.0))),
+                      //     child: DropdownButtonHideUnderline(
+                      //       child: Padding(
+                      //         padding:
+                      //             const EdgeInsets.symmetric(horizontal: 16.0),
+                      //         child: DropdownButton<String>(
+                      //           icon: SvgPicture.asset(
+                      //             CommonAssets.downArrowIcon,
+                      //           ),
+                      //           isExpanded: true,
+                      //           itemHeight: 50,
+                      //           items: controller.popularProductList[index]
+                      //                   ['size']
+                      //               .map((e) => DropdownMenuItem<String>(
+                      //                   value: e, child: Text(e)))
+                      //               .toList(),
+                      //           value: selectedItem.value,
+                      //           onChanged: (w) {
+                      //             selectedItem(w);
+                      //           },
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       const VSpace(28),
                       Text("Description",
                           style: Theme.of(context).textTheme.headlineSmall),

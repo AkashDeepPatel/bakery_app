@@ -20,7 +20,7 @@ class CommonBaseClass extends StatelessWidget {
       this.isProfileScreen,
       this.showlocation,
       this.bottomWidgetHPadding = 0.0,
-      this.bottomWidgetBottomPadding = 0.0,
+      this.bottomWidgetBottomPadding = 16.0,
       this.bottomWidgetTopPadding = 0.0
 
       // this.padding = 16.0

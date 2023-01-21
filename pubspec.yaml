@@ -30,6 +30,8 @@ dependencies:
   dio: ^4.0.6
   dio_logger: ^4.0.8+8
   url_launcher: ^6.1.7
+  cached_network_image: ^3.2.1
+
 
 
 
