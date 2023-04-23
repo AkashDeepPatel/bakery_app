@@ -122,6 +122,11 @@ class AppThemes {
     scaffoldBackgroundColor: _lightBackgroundColor,
     primaryColor: _lightPrimaryColor,
     backgroundColor: _lightBackgroundSecondaryColor,
+    dropdownMenuTheme: DropdownMenuThemeData(
+      menuStyle: MenuStyle(
+        padding: MaterialStatePropertyAll(EdgeInsets.zero),
+      )
+    ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: black,
     ),

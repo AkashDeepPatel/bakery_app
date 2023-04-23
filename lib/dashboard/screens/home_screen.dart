@@ -40,7 +40,7 @@ class HomeScreen extends GetView<HomeController> {
           //     ),
           //   ),
           // ),
-          const VSpace(24),
+          // const VSpace(24),
           // Image.network(FirebaseStorageService().getImage("common/logo.svg")),
           CarouselSlider(
             items: _dashboardController.carouselSliderItems,
@@ -151,17 +151,18 @@ class HomeScreen extends GetView<HomeController> {
   }
 }
 
-class DashboardItemTile extends StatelessWidget {
+class DashboardItemTile extends GetView<WishlistController> {
   DashboardItemTile({
     Key? key,
     required this.model,
   }) : super(key: key);
   Product model;
-  final WishlistController _wishlistController = Get.find();
-
-  // RxBool isFav = _wishlistController.isFav;
+  // RxBool isFav = controller.isFav;
   @override
   Widget build(BuildContext context) {
+    // controller.checkIfLikedOrNot(model.id.toString());
+    // debugPrint("<>${controller.wishlistList[0].toString()}");
+    // // debugPrint("<>${controller.wishlistList.contains(model)}");
     return InkWell(
       onTap: () {
         Get.to(() => ProductDetailScreen(model: model));
@@ -198,37 +199,36 @@ class DashboardItemTile extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 8,
-                  right: 8,
-                  child: Obx(
-                    () => InkWell(
-                      onTap: () {
-                        // _wishlistController
-                        //     .isFav(!_wishlistController.isFav.value);
-                        // !_wishlistController.checkIfLikedOrNot("${model.id}")
-                        //     ? _wishlistController.addToWishlist(model)
-                        //     : _wishlistController.deleteFromWishlist(model);
-                      },
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            color: AppThemes.black,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0))),
-                        child: Padding(
-                            padding: const EdgeInsets.all(7.0),
-                            child: SvgPicture.asset(
-                              _wishlistController.isFav.value == false
-                                  ? CommonAssets.favouritesIcon
-                                  : CommonAssets.favouritesFilledIcon,
-                              color: _wishlistController.isFav.value == false
-                                  ? AppThemes.background
-                                  : null,
-                            )),
-                      ),
-                    ),
-                  ),
-                )
+                // Positioned(
+                //   top: 8,
+                //   right: 8,
+                //   child: controller.obx((state) => Obx(()=>InkWell(
+                //     onTap: () {
+                //       controller.addToWishlist(model);
+                //       // controller
+                //       //     .isFav(!controller.isFav.value);
+                //       // !controller.checkIfLikedOrNot("${model.id}")
+                //       //     ? controller.addToWishlist(model)
+                //       //     : controller.deleteFromWishlist(model);
+                //     },
+                //     child: Container(
+                //         decoration: const BoxDecoration(
+                //             color: AppThemes.black,
+                //             borderRadius:
+                //             BorderRadius.all(Radius.circular(8.0))),
+                //         child: Padding(
+                //             padding: const EdgeInsets.all(7.0),
+                //             child: SvgPicture.asset(
+                //               // !controller.wishlistList.contains(model)
+                //               controller.isFav.value
+                //                   ?CommonAssets.favouritesFilledIcon: CommonAssets.favouritesIcon,
+                //               // color: controller.isFav.value == false
+                //               //     ? Colors.transparent
+                //               //     : null,
+                //             ))
+                //     ),
+                //   )),onLoading: Text("Loading"), onEmpty: Text("error")),
+                // )
               ],
             ),
             const VSpace(8),

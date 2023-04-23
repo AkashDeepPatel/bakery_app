@@ -5,6 +5,7 @@ import '../../menu/controllers/menu_controller.dart';
 import '../../orders/controllers/orders_controller.dart';
 import '../../profile/controllers/profile_controller.dart';
 import '../controllers/dashboard_controller.dart';
+import '../controllers/product_details_controller.dart';
 import '../controllers/wishlist_controller.dart';
 
 class DashboardBindings extends Bindings {
@@ -12,6 +13,7 @@ class DashboardBindings extends Bindings {
   Future<void> dependencies() async {
     Get.lazyPut(() => DashboardController(), fenix: true);
     Get.lazyPut(() => HomeController(), fenix: true);
+    Get.lazyPut(() => ProductDetailsController(), fenix: true);
     Get.lazyPut(() => OrdersController(), fenix: true);
     Get.lazyPut(() => ItemMenuController(), fenix: true);
     Get.lazyPut(() => CartController(), fenix: true);
