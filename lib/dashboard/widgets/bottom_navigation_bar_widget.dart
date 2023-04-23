@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
 
+import '../../common/localization/localization.g.dart';
 import '../../common/styles/app_themes.dart';
 import '../controllers/dashboard_controller.dart';
 import '../utils/dashboard_assets.dart';
@@ -35,7 +37,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
               },
               items: <BottomNavigationBarItem>[
                 bottomNavItem(DashboardAssets.unselectedHomeIcon,
-                    DashboardAssets.selectedHomeIcon, "Home", context),
+                    DashboardAssets.selectedHomeIcon, Localization.buttonHome.tr, context),
                 bottomNavItem(DashboardAssets.unselectedOrdersIcon,
                     DashboardAssets.selectedOrdersIcon, "Orders", context),
                 bottomNavItem(DashboardAssets.unselectedCategoryIcon,

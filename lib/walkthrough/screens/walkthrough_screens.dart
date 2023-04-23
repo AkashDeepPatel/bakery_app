@@ -7,7 +7,6 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../common/screens/common_base_class.dart';
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
-import '../../common/styles/app_themes.dart';
 
 class WalkThroughScreens extends StatelessWidget {
   WalkThroughScreens({Key? key}) : super(key: key);

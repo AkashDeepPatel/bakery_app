@@ -26,15 +26,7 @@ class LoginScreen extends StatelessWidget {
             text: "Continue to Get OTP",
             onTap: () {
               _authenticationController.firebasePhoneSignIn();
-              Get.dialog(AppDialog(
-                message:
-                    "You will receive 4 digit code on your given phone number.",
-                buttonTitle: "Okay",
-                onButtonTap: () {
-                  Get.back();
-                  Get.toNamed(OTPVerificationScreen.routeName);
-                },
-              ));
+
             },
           ),
           VSpace(24),
@@ -73,6 +65,8 @@ class LoginScreen extends StatelessWidget {
                 AppTextField(
                   title: "Phone Number",
                   controller: _authenticationController.phoneNumberCtr,
+                  textInputType: TextInputType.phone,
+
                 ),
                 VSpace(15),
               ],

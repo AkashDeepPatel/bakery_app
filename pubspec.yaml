@@ -6,7 +6,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.18.0-165.1.beta <3.0.0'
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -29,15 +29,19 @@ dependencies:
   geocoding: ^2.0.5
   dio: ^4.0.6
   dio_logger: ^4.0.8+8
-
-
+  url_launcher: ^6.1.7
+  firebase_core_platform_interface: 4.5.1
+  csv: 5.0.1
+  flutter_sheet_localization:
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^1.10.0
+  flutter_sheet_localization_generator:
 
-  flutter_lints: ^2.0.0
+
 
 flutter:
   uses-material-design: true
@@ -46,6 +50,7 @@ flutter:
    - assets/dashboard/icons/
    - assets/common/icons/
    - assets/home/icons/
+   - assets/home/
    - assets/walkthrough/
    - assets/common/
 

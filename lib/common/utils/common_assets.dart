@@ -4,6 +4,8 @@ class CommonAssets {
   static String logo = "assets/common/icons/logo.svg";
   static const String notificationIcon = "assets/common/icons/notification.svg";
   static const String favouritesIcon = "assets/common/icons/heart.svg";
+  static const String favouritesFilledIcon =
+      "assets/common/icons/heart_filled.svg";
   static const String locationPinIcon = "assets/common/icons/location_pin.svg";
   static const String locationPin2Icon =
       "assets/common/icons/location_pin2.svg";

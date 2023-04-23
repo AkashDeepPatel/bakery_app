@@ -7,7 +7,7 @@ import '../widgets/menu_tile_item.dart';
 
 class MenuScreen extends StatelessWidget {
   MenuScreen({Key? key}) : super(key: key);
-  final MenuController _menuController = Get.find();
+  final ItemMenuController _menuController = Get.find();
   @override
   Widget build(BuildContext context) {
     return CommonBaseClass(
@@ -21,11 +21,10 @@ class MenuScreen extends StatelessWidget {
                 child: Container(
                     color: AppThemes.normal,
                     child: ListView.builder(
-                        itemCount: _menuController.menuItemsMap.length,
+                        itemCount: _menuController.menuItems.length,
                         itemBuilder: (context, index) {
                           return MenuItemTile(
-                            title: _menuController.menuItemsMap.keys
-                                .toList()[index],
+                            title: _menuController.menuItems[index],
                             textColor:
                                 _menuController.selectedMenuItem.value == index
                                     ? AppThemes.black
@@ -36,18 +35,18 @@ class MenuScreen extends StatelessWidget {
                           );
                         })),
               ),
-              Expanded(
-                child: ListView.builder(
-                    itemCount: _menuController.menuItemsMap.values
-                        .toList()[_menuController.selectedMenuItem.value]
-                        .length,
-                    itemBuilder: (context, index) {
-                      return MenuItemTile(
-                          title: _menuController.menuItemsMap.values.toList()[
-                              _menuController.selectedMenuItem.value][index],
-                          textColor: AppThemes.black);
-                    }),
-              ),
+              // Expanded(
+              //   child: ListView.builder(
+              //       itemCount: _menuController.menuItemsMap.values
+              //           .toList()[_menuController.selectedMenuItem.value]
+              //           .length,
+              //       itemBuilder: (context, index) {
+              //         return MenuItemTile(
+              //             title: _menuController.menuItemsMap.values.toList()[
+              //                 _menuController.selectedMenuItem.value][index],
+              //             textColor: AppThemes.black);
+              //       }),
+              // ),
             ],
           ),
         ));

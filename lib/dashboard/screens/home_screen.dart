@@ -1,4 +1,4 @@
-import 'package:bakery_app/common/utils/firebase_storage_service.dart';
+import 'package:bakery_app/common/controllers/base_controller.dart';
 import 'package:bakery_app/dashboard/controllers/dashboard_controller.dart';
 import 'package:bakery_app/dashboard/screens/list_view_screen.dart';
 import 'package:bakery_app/dashboard/screens/product_detail_screen.dart';
@@ -6,13 +6,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import '../../common/models/product_model.dart';
 import '../../common/screens/common_base_class.dart';
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
-import '../utils/dashboard_assets.dart';
+import '../controllers/home_controller.dart';
+import '../controllers/wishlist_controller.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends GetView<HomeController> {
   HomeScreen({Key? key}) : super(key: key);
   final DashboardController _dashboardController = Get.find();
 
@@ -24,22 +26,20 @@ class HomeScreen extends StatelessWidget {
       showSearchBar: true,
       child: ListView(
         children: [
-          const VSpace(20),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: const [
-                CategoriesIcon(),
-                CategoriesIcon(),
-                CategoriesIcon(),
-                CategoriesIcon(),
-                CategoriesIcon(),
-                CategoriesIcon(),
-                CategoriesIcon(),
-                CategoriesIcon(),
-              ],
-            ),
-          ),
+          const VSpace(20), 
+          // Obx(
+          //   () => SingleChildScrollView(
+          //     scrollDirection: Axis.horizontal,
+          //     child: Row(
+          //       children: [
+          //         for (int i = 0; i < controller.homeCategories.length; i++)
+          //           CategoriesIcon(
+          //               title: controller.homeCategories[i].title,
+          //               imgUrl: controller.homeCategories[i].imgUrl),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           const VSpace(24),
           // Image.network(FirebaseStorageService().getImage("common/logo.svg")),
           CarouselSlider(
@@ -73,16 +73,22 @@ class HomeScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      for (int i = 0; i < 5; i++)
-                        const Padding(
-                          padding: EdgeInsets.only(right: 16.0),
-                          child: DashboardItemTile(),
-                        ),
-                    ],
+                Obx(
+                  () => SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        for (int i = 0;
+                            i < controller.forYouProducts.length;
+                            i++)
+                          Padding(
+                            padding: const EdgeInsets.only(right: 16.0),
+                            child: DashboardItemTile(
+                              model: controller.forYouProducts[i],
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
@@ -104,7 +110,11 @@ class HomeScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 16.0),
                         child: InkWell(
                           onTap: () {
-                            Get.to(() => const ListViewScreen());
+                            Get.to(
+                              () => ListViewScreen(
+                                listModel: controller.popularProductList,
+                              ),
+                            );
                           },
                           child: Text(
                             "View all",
@@ -115,18 +125,23 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      for (int i = 0; i < 5; i++)
-                        const Padding(
-                          padding: EdgeInsets.only(right: 16.0),
-                          child: DashboardItemTile(),
-                        ),
-                    ],
+                Obx(
+                  () => SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        for (int i = 0;
+                            i < controller.popularProductList.length;
+                            i++)
+                          Padding(
+                            padding: const EdgeInsets.only(right: 16.0),
+                            child: DashboardItemTile(
+                                model: controller.popularProductList[i]),
+                          ),
+                      ],
+                    ),
                   ),
-                ),
+                )
               ],
             ),
           )
@@ -137,15 +152,19 @@ class HomeScreen extends StatelessWidget {
 }
 
 class DashboardItemTile extends StatelessWidget {
-  const DashboardItemTile({
+  DashboardItemTile({
     Key? key,
+    required this.model,
   }) : super(key: key);
+  Product model;
+  final WishlistController _wishlistController = Get.find();
 
+  // RxBool isFav = _wishlistController.isFav;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => const ProductDetailScreen());
+        Get.to(() => ProductDetailScreen(model: model));
       },
       child: Container(
         decoration: const BoxDecoration(
@@ -158,7 +177,7 @@ class DashboardItemTile extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Image.asset(DashboardAssets.forYou),
+                BaseController.getIcon(model.imgUrl, 'name'),
                 Positioned(
                   left: 8,
                   bottom: 8,
@@ -170,7 +189,7 @@ class DashboardItemTile extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8.0, vertical: 4.0),
                       child: Text(
-                        "300.00",
+                        model.price.toString(),
                         style: Theme.of(context)
                             .textTheme
                             .labelSmall!
@@ -182,16 +201,32 @@ class DashboardItemTile extends StatelessWidget {
                 Positioned(
                   top: 8,
                   right: 8,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        color: AppThemes.black,
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                    child: Padding(
-                        padding: const EdgeInsets.all(7.0),
-                        child: SvgPicture.asset(
-                          CommonAssets.favouritesIcon,
-                          color: AppThemes.background,
-                        )),
+                  child: Obx(
+                    () => InkWell(
+                      onTap: () {
+                        // _wishlistController
+                        //     .isFav(!_wishlistController.isFav.value);
+                        // !_wishlistController.checkIfLikedOrNot("${model.id}")
+                        //     ? _wishlistController.addToWishlist(model)
+                        //     : _wishlistController.deleteFromWishlist(model);
+                      },
+                      child: Container(
+                        decoration: const BoxDecoration(
+                            color: AppThemes.black,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0))),
+                        child: Padding(
+                            padding: const EdgeInsets.all(7.0),
+                            child: SvgPicture.asset(
+                              _wishlistController.isFav.value == false
+                                  ? CommonAssets.favouritesIcon
+                                  : CommonAssets.favouritesFilledIcon,
+                              color: _wishlistController.isFav.value == false
+                                  ? AppThemes.background
+                                  : null,
+                            )),
+                      ),
+                    ),
                   ),
                 )
               ],
@@ -200,7 +235,7 @@ class DashboardItemTile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(
-                "Sinker Fuse Chocolate Cake",
+                model.title,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ),
@@ -211,7 +246,7 @@ class DashboardItemTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Text(
-                    "4.2",
+                    model.rating.toString(),
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
@@ -231,10 +266,13 @@ class DashboardItemTile extends StatelessWidget {
 }
 
 class CategoriesIcon extends StatelessWidget {
-  const CategoriesIcon({
+  CategoriesIcon({
     Key? key,
+    required this.title,
+    required this.imgUrl,
   }) : super(key: key);
-
+  String title;
+  String imgUrl;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -245,17 +283,11 @@ class CategoriesIcon extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 25,
-              child: ClipOval(
-                child: Image.asset(
-                  DashboardAssets.forYou,
-                  fit: BoxFit.cover,
-                  height: 72,
-                ),
-              ),
+              child: ClipOval(child: BaseController.getIcon(imgUrl, 'name')),
             ),
             const VSpace(8),
             Text(
-              "Cake",
+              title,
               style: Theme.of(context).textTheme.labelSmall,
             )
           ],

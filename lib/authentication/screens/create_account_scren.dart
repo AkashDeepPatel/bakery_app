@@ -1,8 +1,6 @@
 import 'package:bakery_app/authentication/controllers/authentication_controller.dart';
 import 'package:bakery_app/authentication/screens/login_screen.dart';
 import 'package:bakery_app/common/screens/common_base_class.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,15 +26,7 @@ class CreateAccountScreen extends StatelessWidget {
             text: "Continue to Get OTP",
             onTap: () {
               _authenticationController.firebasePhoneSignIn();
-              Get.dialog(AppDialog(
-                message:
-                    "You will receive 4 digit code on your given phone number.",
-                buttonTitle: "Okay",
-                onButtonTap: () {
-                  Get.back();
-                  Get.toNamed(OTPVerificationScreen.routeName);
-                },
-              ));
+
             },
           ),
           const VSpace(24),
@@ -83,6 +73,7 @@ class CreateAccountScreen extends StatelessWidget {
                   title: "Phone Number",
                   hintText: "+911234657890",
                   controller: _authenticationController.phoneNumberCtr,
+                  textInputType: TextInputType.phone,
                 ),
                 const VSpace(20),
                 AppTextField(
