@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../common/styles/app_themes.dart';
-import '../../common/widgets/app_dialog.dart';
+import '../countdown_base.dart';
 import '../screens/auth_gate.dart';
 import '../screens/otp_verification_screen.dart';
 
@@ -19,60 +19,124 @@ class AuthenticationController extends BaseController {
 
   final RxString _verificationId = "".obs;
 
+  final selectedCountryCode = "+91".obs;
+  RxList<String> countryCodeList = ["+91", "+1", "+61"].obs;
+
+  void setSelectedCountryCode(String value) {
+    selectedCountryCode.value = value;
+    debugPrint(selectedCountryCode.value);
+  }
+
   updateVerificationId(String id) {
     _verificationId.value = id;
   }
 
-  firebasePhoneSignIn() {
+  firebasePhoneSignIn({bool login = true}) {
     // change(null, status: RxStatus.loadingMore());
-    String phoneNumber = phoneNumberCtr.text;
+    String phoneNumber = selectedCountryCode + phoneNumberCtr.text;
 
-   if(phoneNumber.isNotEmpty && phoneNumber.length>12){
-     void verificationCompleted(AuthCredential phoneAuthCredential) {
-       debugPrint(phoneAuthCredential.toString());
-     }
+    if(!login){
+      if (nameCtr.value.text.isNotEmpty &&
+          phoneNumberCtr.value.text.isNotEmpty &&
+          emailCtr.value.text.isNotEmpty) {
+        if (phoneNumber.isNotEmpty && phoneNumber.length > 9) {
+          void verificationCompleted(AuthCredential phoneAuthCredential) {
+            debugPrint(phoneAuthCredential.toString());
+          }
 
-     void verificationFailed(FirebaseAuthException error) {
-       change(null, status: RxStatus.success());
-       // SnackBarMessageWidget.show(error.message.toString());
-     }
+          void verificationFailed(FirebaseAuthException error) {
+            change(null, status: RxStatus.success());
+            // SnackBarMessageWidget.show(error.message.toString());
+          }
 
-     void codeSent(String verificationId, int? code) {
-       updateVerificationId(verificationId);
-       change(null, status: RxStatus.success());
-       Get.toNamed(OTPVerificationScreen.routeName);
-     }
+          void codeSent(String verificationId, int? code) {
+            updateVerificationId(verificationId);
+            change(null, status: RxStatus.success());
+            Get.toNamed(OTPVerificationScreen.routeName);
+          }
 
-     void codeAutoRetrievalTimeout(String verificationId) {
-       updateVerificationId(verificationId);
-       change(null, status: RxStatus.success());
-     }
+          void codeAutoRetrievalTimeout(String verificationId) {
+            updateVerificationId(verificationId);
+            change(null, status: RxStatus.success());
+          }
 
-     FirebaseAuth auth = FirebaseAuth.instance;
-     auth.verifyPhoneNumber(
-       phoneNumber: phoneNumber,
-       timeout: const Duration(milliseconds: 10000),
-       verificationCompleted: verificationCompleted,
-       verificationFailed: verificationFailed,
-       codeSent: codeSent,
-       codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
-     );
-     Get.dialog(AppDialog(
-       message:
-       "You will a receive OTP on your given phone number.",
-       buttonTitle: "Okay",
-       onButtonTap: () {
-         Get.back();
-         Get.toNamed(OTPVerificationScreen.routeName);
-       },
-     )
-     );
-   }
-   else{
-     Get.snackbar("Please Enter a Valid Phone Number", "",
-         backgroundColor: AppThemes.black);
+          FirebaseAuth auth = FirebaseAuth.instance;
+          auth.verifyPhoneNumber(
+            phoneNumber: phoneNumber,
+            timeout: const Duration(milliseconds: 10000),
+            verificationCompleted: verificationCompleted,
+            verificationFailed: verificationFailed,
+            codeSent: codeSent,
+            codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+          );
+          Get.toNamed(OTPVerificationScreen.routeName);
+          // Get.dialog(AppDialog(
+          //   message:
+          //   "You will a receive OTP on your given phone number.",
+          //   buttonTitle: "Okay",
+          //   onButtonTap: () {
+          //     Get.back();
+          //     Get.toNamed(OTPVerificationScreen.routeName);
+          //   },
+          // )
+          // );
+        } else {
+          Get.snackbar("Please Enter a Valid Phone Number", "",
+              backgroundColor: AppThemes.black);
+        }
+      } else {
+        Get.snackbar("Please enter all the fields", "",
+            backgroundColor: AppThemes.black);
+      }
+    }else{
+      {
+        if (phoneNumber.isNotEmpty && phoneNumber.length > 9) {
+          void verificationCompleted(AuthCredential phoneAuthCredential) {
+            debugPrint(phoneAuthCredential.toString());
+          }
 
-   }
+          void verificationFailed(FirebaseAuthException error) {
+            change(null, status: RxStatus.success());
+            // SnackBarMessageWidget.show(error.message.toString());
+          }
+
+          void codeSent(String verificationId, int? code) {
+            updateVerificationId(verificationId);
+            change(null, status: RxStatus.success());
+            Get.toNamed(OTPVerificationScreen.routeName);
+          }
+
+          void codeAutoRetrievalTimeout(String verificationId) {
+            updateVerificationId(verificationId);
+            change(null, status: RxStatus.success());
+          }
+
+          FirebaseAuth auth = FirebaseAuth.instance;
+          auth.verifyPhoneNumber(
+            phoneNumber: phoneNumber,
+            timeout: const Duration(milliseconds: 10000),
+            verificationCompleted: verificationCompleted,
+            verificationFailed: verificationFailed,
+            codeSent: codeSent,
+            codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+          );
+          Get.toNamed(OTPVerificationScreen.routeName);
+          // Get.dialog(AppDialog(
+          //   message:
+          //   "You will a receive OTP on your given phone number.",
+          //   buttonTitle: "Okay",
+          //   onButtonTap: () {
+          //     Get.back();
+          //     Get.toNamed(OTPVerificationScreen.routeName);
+          //   },
+          // )
+          // );
+        } else {
+          Get.snackbar("Please Enter a Valid Phone Number", "",
+              backgroundColor: AppThemes.black);
+        }
+      }
+    }
   }
 
   submitOTP() async {
@@ -139,5 +203,37 @@ class AuthenticationController extends BaseController {
   void onInit() {
     super.onInit();
     change(null, status: RxStatus.success());
+  }
+
+  RxString otpWaitTimeLabel = "00:00".obs;
+  CountDown? otpTimer;
+  RxBool isShowTimer = true.obs;
+
+  void startTimer() {
+    otpTimer = CountDown(const Duration(minutes: 1));
+    var sub = otpTimer!.stream.listen(null);
+    sub.onData((Duration d) {
+      int sec = d.inSeconds % 60;
+      otpWaitTimeLabel(
+          "${d.inMinutes.toString().padLeft(2, '0')}:${sec.toString().padLeft(2, '0')}");
+    });
+
+    sub.onDone(() {
+      isShowTimer(false);
+      sub.cancel();
+    });
+  }
+
+  void closeTimer() {
+    if (otpTimer != null) {
+      otpTimer!.onCancel();
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    closeTimer();
+    otpCtr.dispose();
   }
 }

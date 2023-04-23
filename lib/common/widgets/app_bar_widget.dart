@@ -2,7 +2,6 @@ import 'package:bakery_app/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../dashboard/screens/wishlist_screen.dart';
 import '../../profile/controllers/address_controller.dart';
 import '../controllers/base_controller.dart';
 import '../styles/app_themes.dart';
@@ -38,8 +37,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     return Card(
       elevation: 5.0,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.horizontal(
-            left: Radius.circular(16.0), right: Radius.circular(16.0)),
+        // borderRadius: BorderRadius.horizontal(
+        //     left: Radius.circular(16.0), right: Radius.circular(16.0)),
       ),
       child: Padding(
         padding:
@@ -64,7 +63,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                             children: [
                               baseController.placemark.isNotEmpty
                                   ? Text(
-                                      "${baseController.placemark[0].subLocality}, ${baseController.placemark[0].locality}, ${baseController.placemark[0].postalCode}",
+                                      "${baseController.placemark[0].locality}, ${baseController.placemark[0].postalCode}",
                                       style:
                                           Theme.of(context).textTheme.bodySmall,
                                     )
@@ -107,12 +106,12 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 showActionButtons!?
                 Row(
                   children: [
-                    InkWell(
-                        onTap: () {
-                          Get.to(() => WishlistScreen());
-                        },
-                        child: SvgPicture.asset(CommonAssets.favouritesIcon)),
-                    const HSpace(15),
+                    // InkWell(
+                    //     onTap: () {
+                    //       Get.to(() => WishlistScreen());
+                    //     },
+                    //     child: SvgPicture.asset(CommonAssets.favouritesIcon)),
+                    // const HSpace(15),
                     InkWell(
                         onTap: () {},
                         child: SvgPicture.asset(CommonAssets.notificationIcon)),
@@ -121,7 +120,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 ):SizedBox(),
               ],
             ),
-            const VSpace(10),
+            showSearchBar==true?const VSpace(10):SizedBox(),
             if (showSearchBar == true)
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

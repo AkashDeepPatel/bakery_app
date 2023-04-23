@@ -7,10 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
-import '../../common/widgets/app_dialog.dart';
 import '../../common/widgets/app_text_button.dart';
 import '../../common/widgets/app_text_field.dart';
-import 'otp_verification_screen.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen({Key? key}) : super(key: key);
@@ -27,7 +25,7 @@ class CreateAccountScreen extends StatelessWidget {
             // text: "Continue to Get OTP",
             text: Localization.createAccountOTP.tr,
             onTap: () {
-              _authenticationController.firebasePhoneSignIn();
+              _authenticationController.firebasePhoneSignIn(login: false);
 
             },
           ),
@@ -76,13 +74,41 @@ class CreateAccountScreen extends StatelessWidget {
                   controller: _authenticationController.nameCtr,
                 ),
                 const VSpace(20),
-                AppTextField(
-                  // title: "Phone Number",
-                  title: Localization.createAccountPhoneNum.tr,
-                  // hintText: "+911234657890",
-                  hintText: Localization.createAccountPhoneNumHint.tr,
-                  controller: _authenticationController.phoneNumberCtr,
-                  textInputType: TextInputType.phone,
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                        Text("Country Code", style: Theme.of(context).textTheme.labelMedium),
+                          VSpace(8),
+DropdownButtonFormField<String>(
+                            items: _authenticationController.countryCodeList
+                                .map(
+                                    (e) => DropdownMenuItem<String>(value: e, child: Text(e)))
+                                .toList(),
+                            value: _authenticationController.selectedCountryCode.value,
+                            onChanged: (w) {_authenticationController.setSelectedCountryCode(w!);
+                            },
+  decoration: InputDecoration(
+    contentPadding: EdgeInsets.symmetric(horizontal: 8)
+  ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    HSpace(16),
+                    Expanded(
+                      flex: 5,
+                      child: AppTextField(
+                        title: "Phone Number",
+                        hintText: "+911234657890",
+                        controller: _authenticationController.phoneNumberCtr,
+                        textInputType: TextInputType.phone,
+                      ),
+                    ),
+                  ],
                 ),
                 const VSpace(20),
                 AppTextField(

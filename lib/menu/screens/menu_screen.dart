@@ -35,18 +35,18 @@ class MenuScreen extends StatelessWidget {
                           );
                         })),
               ),
-              // Expanded(
-              //   child: ListView.builder(
-              //       itemCount: _menuController.menuItemsMap.values
-              //           .toList()[_menuController.selectedMenuItem.value]
-              //           .length,
-              //       itemBuilder: (context, index) {
-              //         return MenuItemTile(
-              //             title: _menuController.menuItemsMap.values.toList()[
-              //                 _menuController.selectedMenuItem.value][index],
-              //             textColor: AppThemes.black);
-              //       }),
-              // ),
+              Expanded(
+                child: ListView.builder(
+                    itemCount: _menuController.menuItemsMap.values
+                        .toList()[_menuController.selectedMenuItem.value]
+                        .length,
+                    itemBuilder: (context, index) {
+                      return MenuItemTile(
+                          title: _menuController.menuItemsMap.values.toList()[
+                              _menuController.selectedMenuItem.value][index],
+                          textColor: AppThemes.black);
+                    }),
+              ),
             ],
           ),
         ));
