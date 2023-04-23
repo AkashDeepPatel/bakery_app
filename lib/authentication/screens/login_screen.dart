@@ -1,14 +1,11 @@
 import 'package:bakery_app/common/screens/common_base_class.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
-import '../../common/widgets/app_dialog.dart';
 import '../../common/widgets/app_text_button.dart';
 import '../../common/widgets/app_text_field.dart';
 import '../controllers/authentication_controller.dart';
-import 'otp_verification_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -25,7 +22,7 @@ class LoginScreen extends StatelessWidget {
           AppTextButton(
             text: "Continue to Get OTP",
             onTap: () {
-              _authenticationController.firebasePhoneSignIn();
+              _authenticationController.firebasePhoneSignIn(login: true);
 
             },
           ),
@@ -60,7 +57,22 @@ class LoginScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text("Country Code", style: Theme.of(context).textTheme.labelMedium),
+                VSpace(8),
+                DropdownButtonFormField<String>(
+                  items: _authenticationController.countryCodeList
+                      .map(
+                          (e) => DropdownMenuItem<String>(value: e, child: Text(e)))
+                      .toList(),
+                  value: _authenticationController.selectedCountryCode.value,
+                  onChanged: (w) {_authenticationController.setSelectedCountryCode(w!);
+                  },
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 8)
+                  ),
+                ),
                 VSpace(15),
                 AppTextField(
                   title: "Phone Number",

@@ -33,6 +33,10 @@ dependencies:
   firebase_core_platform_interface: 4.5.1
   csv: 5.0.1
   flutter_sheet_localization:
+  pin_input_text_field: ^4.5.0
+  otp_autofill: ^2.1.0
+
+
 
 
 dev_dependencies:
