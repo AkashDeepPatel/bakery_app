@@ -1,3 +1,4 @@
+import 'package:bakery_app/common/localization/localization.g.dart';
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,8 @@ class LoginScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           AppTextButton(
-            text: "Continue to Get OTP",
+            // text: "Continue to Get OTP",
+            text: Localization.createAccountOTP.tr,
             onTap: () {
               _authenticationController.firebasePhoneSignIn();
 
@@ -32,11 +34,14 @@ class LoginScreen extends StatelessWidget {
           VSpace(24),
           RichText(
             text: TextSpan(
-                text: "Don't have Account? ",
+                // text: "Don't have Account? ",
+                text: Localization.loginAccount.tr,
                 style: Theme.of(context).textTheme.titleMedium,
                 children: [
                   TextSpan(
-                      text: "Sign Up",
+                      // text: "Sign Up",
+                      text: Localization.loginSignUp.tr,
+                      // text: Localization,
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium!
@@ -55,7 +60,8 @@ class LoginScreen extends StatelessWidget {
             //   style: Theme.of(context).textTheme.headlineSmall,
             // ),
             Text(
-              "Welcome Back!",
+              // "Welcome Back!",
+              Localization.loginTitle.tr,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
@@ -63,7 +69,8 @@ class LoginScreen extends StatelessWidget {
               children: [
                 VSpace(15),
                 AppTextField(
-                  title: "Phone Number",
+                  // title: "Phone Number",
+                  title: Localization.createAccountPhoneNum.tr,
                   controller: _authenticationController.phoneNumberCtr,
                   textInputType: TextInputType.phone,
 
