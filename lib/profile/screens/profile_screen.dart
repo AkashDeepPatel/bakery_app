@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../common/controllers/theme_controller.dart';
+import '../../common/localization/localization.g.dart';
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
@@ -34,7 +35,8 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 ProfileItemTile(
                   icon: CommonAssets.settingsIcon,
-                  title: "Profile Settings",
+                  // title: "Profile Settings",
+                  title: Localization.profileSetting.tr,
                   onTap: () {
                     Get.to(() => EditProfile());
                   },
@@ -42,7 +44,8 @@ class ProfileScreen extends StatelessWidget {
                 const VSpace(16),
                 ProfileItemTile(
                   icon: CommonAssets.locationPin2Icon,
-                  title: "Your Address",
+                  // title: "Your Address",
+                  title: Localization.profileAddress.tr,
                   onTap: () {
                     Get.to(() => YourAddressScreen());
                   },
@@ -54,15 +57,21 @@ class ProfileScreen extends StatelessWidget {
                 const VSpace(16),
                 ProfileItemTile(
                   icon: CommonAssets.paymentOptionsIcon,
-                  title: "Payment Methods",
+                  // title: "Payment Methods",
+                  title: Localization.profilePayment.tr,
                   onTap: () {},
                 ),
                 const VSpace(16),
-                ProfileItemTile(icon: CommonAssets.exploreIcon, title: "Languages", onTap: (){
+                ProfileItemTile(icon: CommonAssets.exploreIcon,
+                    // title: "Languages",
+                    title: Localization.profileLanguage.tr,
+                    onTap: (){
                   Get.to(()=>LanguageScreen());
                 }),
                 const VSpace(16),
-                Obx(()=>ProfileItemTile(icon: CommonAssets.exploreIcon, title: "Change Theme",
+                Obx(()=>ProfileItemTile(icon: CommonAssets.exploreIcon,
+                  // title: "Change Theme",
+                  title: Localization.profileTheme.tr,
                   onTap: (){
                     null;
                   },
@@ -81,7 +90,8 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 ProfileItemTile(
                   icon: CommonAssets.rating,
-                  title: "Rate Us",
+                  // title: "Rate Us",
+                  title: Localization.profileRate.tr,
                   onTap: () {
                     Get.showSnackbar(const GetSnackBar(
                       message: "Coming Soon",
@@ -94,7 +104,8 @@ class ProfileScreen extends StatelessWidget {
                 const VSpace(16),
                 ProfileItemTile(
                   icon: CommonAssets.feedbackIcon,
-                  title: "Send Feedback",
+                  // title: "Send Feedback",
+                  title: Localization.profileFeedback.tr,
                   onTap: () {
                     Get.dialog(SendFeedbackDialogWidget());
                   },
@@ -135,7 +146,8 @@ class ProfileScreen extends StatelessWidget {
                 // const VSpace(16),
                 ProfileItemTile(
                   icon: CommonAssets.customerSupportIcon,
-                  title: "Customer Support",
+                  // title: "Customer Support",
+                  title: Localization.profileCustomerSupport.tr,
                   onTap: () {
                     Get.to(() => ChatScreen());
                     // Get.showSnackbar(const GetSnackBar(
@@ -152,18 +164,21 @@ class ProfileScreen extends StatelessWidget {
           AppCard(
             child: ProfileItemTile(
               icon: CommonAssets.logoutIcon,
-              title: "Log Out",
+              // title: "Log Out",
+              title: Localization.profileLogOut.tr,
               onTap: () {
                 Get.dialog(AlertDialog(
                   actionsPadding: EdgeInsets.all(16),
                   title:
-                      Center(child: Text("Are you sure you want to logout?")),
+                      // Center(child: Text("Are you sure you want to logout?")),
+                      Center(child: Text(Localization.profileAYSYWTL.tr)),
                   actions: [
                     Row(
                       children: [
                         Expanded(
                             child: AppTextButton(
-                          text: "Cancel",
+                          // text: "Cancel",
+                          text: Localization.profileCancle.tr,
                           onTap: () {
                             Get.back();
                           },
@@ -171,7 +186,8 @@ class ProfileScreen extends StatelessWidget {
                         HSpace(16),
                         Expanded(
                             child: AppTextButton(
-                          text: "Logout",
+                          // text: "Logout",
+                          text: Localization.profileLogOut.tr,
                           color: Colors.red,
                           onTap: () {
                             FirebaseAuth.instance.signOut();
