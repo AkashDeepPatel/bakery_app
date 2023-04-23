@@ -3,6 +3,7 @@ import '../../authentication/controllers/authentication_controller.dart';
 import '../../dashboard/controllers/language_controller.dart';
 import '../../dashboard/controllers/user_preferences_controller.dart';
 import '../../walkthrough/controllers/walkthrough_controller.dart';
+import '../controllers/theme_controller.dart';
 
 class AppBindings extends Bindings {
   @override
@@ -11,5 +12,6 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => AuthenticationController(), fenix: true);
     Get.lazyPut(() => LanguageController(), fenix: true);
     Get.lazyPut(() => UserPreferencesController(), fenix: true);
+    Get.lazyPut(() => ThemeController(), fenix: true);
   }
 }

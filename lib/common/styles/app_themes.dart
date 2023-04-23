@@ -36,8 +36,8 @@ class AppThemes {
 
   //Text Colors
   static const Color _lightTextColor = Colors.black;
+  static const Color _darkTextColor = Colors.white;
   static const Color _lightTextSecondaryColor = subtleDark;
-  static const Color _lightIconColor = normal;
 
   //text theme for light theme
   static const TextTheme _lightTextTheme = TextTheme(
@@ -229,5 +229,209 @@ class AppThemes {
       fillColor: _lightBackgroundSecondaryColor,
       //focusColor: _lightBorderActiveColor,
     ),
+  );
+
+
+
+  //constants color range for dark theme
+  static const Color _darkPrimaryColor = primary;
+
+  //Background Colors
+  static const Color _darkBackgroundColor = black;
+  static const Color _darkBackgroundAppBarColor = _darkPrimaryColor;
+  static const Color _darkBackgroundSecondaryColor =
+  Color.fromRGBO(0, 0, 0, .4);
+  // static const Color _darkBackgroundAlertColor = blackPearl;
+  static const Color _darkBackgroundActionTextColor = white;
+
+  // static const Color _darkBackgroundErrorColor =
+  //     Color.fromRGBO(255, 97, 136, 1);
+  // static const Color _darkBackgroundSuccessColor =
+  //     Color.fromRGBO(186, 215, 97, 1);
+
+  //Text Colors
+  // static const Color _darkTextColor = Colors.white;
+  // static const Color _darkTextSecondaryColor = whiteLilac;
+
+  //Border Color
+  //static const Color _darkBorderColor = nevada;
+
+  //Icon Color
+  static const Color _darkIconColor = black;
+
+  //static const Color _darkInputFillColor = _darkBackgroundSecondaryColor;
+  static const Color _darkBorderActiveColor = _darkPrimaryColor;
+  // static const Color _darkBorderErrorColor = brinkPink;
+
+  static const TextTheme _darkTextTheme = TextTheme(
+    displayLarge: TextStyle(
+        fontSize: 24.0, color: _darkTextColor, fontWeight: FontWeight.w800),
+    displayMedium: TextStyle(
+        fontSize: 22.0, color: _darkTextColor, fontWeight: FontWeight.w500),
+    displaySmall: TextStyle(
+        fontSize: 20.0,
+        // color: _lightBackgroundSuccessColor,
+        fontWeight: FontWeight.w500),
+
+    headlineLarge: TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: 18,
+      color: _lightTextColor,
+    ),
+
+    headlineMedium: TextStyle(
+        fontSize: 18.0, color: _darkTextColor, fontWeight: FontWeight.w500),
+    headlineSmall: TextStyle(
+      fontSize: 14.0,
+      color: _darkTextColor,
+    ),
+    bodyLarge: TextStyle(fontSize: 14.0, color: _darkTextColor),
+    bodyMedium: TextStyle(
+        fontSize: 12.0,
+        color: _darkTextColor,
+        fontWeight: FontWeight.normal),
+    labelLarge: TextStyle(
+        fontSize: 16.0,
+        color: _darkBackgroundColor,
+        fontWeight: FontWeight.w500),
+    titleLarge: TextStyle(fontSize: 16.0, color: _darkTextColor),
+    titleMedium: TextStyle(
+        fontSize: 16.0, color: _darkTextColor, fontWeight: FontWeight.normal),
+    titleSmall: TextStyle(
+        fontSize: 14.0, color: _darkTextColor, fontWeight: FontWeight.normal),
+    bodySmall: TextStyle(fontSize: 12.0, color: _darkBackgroundAppBarColor),
+    labelMedium: TextStyle(
+        fontSize: 14.0,
+        color: _darkPrimaryColor,
+        fontWeight: FontWeight.normal),
+  );
+
+  static final ThemeData darkTheme = ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    //prefix icon color form input on focus
+    fontFamily: font,
+    scaffoldBackgroundColor: _darkBackgroundColor,
+    // secondaryHeaderColor: darkBlueShade2,
+    indicatorColor: _darkTextColor,
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: _darkPrimaryColor,
+    ),
+    cardTheme: CardTheme(
+        margin: EdgeInsets.zero,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+    appBarTheme: AppBarTheme(
+      color: _darkBackgroundAppBarColor,
+      iconTheme: const IconThemeData(color: _darkTextColor),
+      // toolbarTextStyle: _darkTextTheme.bodyMedium,
+      // titleTextStyle: _darkTextTheme.titleLarge,
+    ),
+    snackBarTheme: const SnackBarThemeData(
+        contentTextStyle: TextStyle(color: Colors.white),
+        // backgroundColor: _darkBackgroundAlertColor,
+        actionTextColor: _darkBackgroundActionTextColor),
+    iconTheme: const IconThemeData(
+      color: _darkIconColor, //_darkIconColor,
+    ),
+    popupMenuTheme: const PopupMenuThemeData(color: _darkBackgroundAppBarColor),
+    textTheme: _darkTextTheme,
+    buttonTheme: ButtonThemeData(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        buttonColor: _darkPrimaryColor,
+        textTheme: ButtonTextTheme.primary),
+    unselectedWidgetColor: _darkPrimaryColor,
+    inputDecorationTheme: const InputDecorationTheme(
+        prefixStyle: const TextStyle(color: _darkIconColor),
+        isDense: true,
+        contentPadding: EdgeInsets.all(16),
+        //labelStyle: TextStyle(color: nevada),
+        border: OutlineInputBorder(
+            borderSide: const BorderSide(
+                color: _darkBackgroundSecondaryColor, width: 1.0),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(8.0),
+            )),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: const BorderSide(color: _darkBorderActiveColor),
+          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+        ),
+        // errorBorder: const OutlineInputBorder(
+        //   borderSide: BorderSide(color: _darkBorderErrorColor),
+        //   borderRadius: BorderRadius.all(const Radius.circular(8.0)),
+        // ),
+        // hoverColor: transparent,
+        // focusedErrorBorder: const OutlineInputBorder(
+        //   borderSide: BorderSide(color: _darkBorderErrorColor),
+        //   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+        // ),
+        fillColor: Colors.white38,
+        filled: true
+      //focusColor: _darkBorderActiveColor,
+    ),
+    colorScheme: const ColorScheme.dark(
+      primary: _darkTextColor,
+      // secondary: _darkSecondaryColor,
+    ),
+    primaryColor: _darkPrimaryColor,
+    listTileTheme: const ListTileThemeData(),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      selectedIconTheme: const IconThemeData(
+        color: _darkPrimaryColor,
+      ),
+      unselectedIconTheme: const IconThemeData(
+        // color: _darkTextSecondaryColor,
+      ),
+      type: BottomNavigationBarType.fixed,
+      selectedLabelStyle: _darkTextTheme.bodySmall,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      // unselectedItemColor: _darkTextSecondaryColor,
+      selectedItemColor: _darkPrimaryColor,
+    ),
+    drawerTheme: const DrawerThemeData(
+      backgroundColor: _darkBackgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(24), bottomRight: Radius.circular(24)),
+      ),
+    ),
+    dividerTheme: const DividerThemeData(
+        color: _darkBackgroundSecondaryColor, thickness: 2),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          animationDuration: const Duration(milliseconds: 2000),
+          backgroundColor: MaterialStateProperty.all(Colors.lightBlue),
+          textStyle: MaterialStateProperty.all(_darkTextTheme.labelLarge),
+        )),
+    textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          animationDuration: const Duration(milliseconds: 2000),
+          backgroundColor: MaterialStateProperty.all(Colors.lightBlue),
+          textStyle: MaterialStateProperty.all(_darkTextTheme.labelLarge),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14.0),
+            ),
+          ),
+        )),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+            animationDuration: const Duration(milliseconds: 2000),
+            backgroundColor: MaterialStateProperty.all(_darkBackgroundColor),
+            textStyle: MaterialStateProperty.all(_darkTextTheme.labelLarge),
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14.0),
+              ),
+            ),
+            side: MaterialStateProperty.all(
+                const BorderSide(color: _darkPrimaryColor, width: 1)))),
   );
 }
