@@ -66,7 +66,7 @@ class CommonBaseClass extends StatelessWidget {
             _usableHeight = sizingInformation.localWidgetSize.height;
           }
           return Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(top: 16.0),
             child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,

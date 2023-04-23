@@ -2,7 +2,6 @@ import 'package:bakery_app/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../dashboard/screens/language_screen.dart';
 import '../../dashboard/screens/wishlist_screen.dart';
 import '../../profile/controllers/address_controller.dart';
 import '../controllers/base_controller.dart';
@@ -110,19 +109,14 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                   children: [
                     InkWell(
                         onTap: () {
-                          Get.to(()=>LanguageScreen());
+                          Get.to(() => WishlistScreen());
                         },
-                        child: SvgPicture.asset(CommonAssets.exploreIcon)),
+                        child: SvgPicture.asset(CommonAssets.favouritesIcon)),
                     const HSpace(15),
                     InkWell(
                         onTap: () {},
                         child: SvgPicture.asset(CommonAssets.notificationIcon)),
-                    const HSpace(15),
-                    InkWell(
-                        onTap: () {
-                          Get.to(() => WishlistScreen());
-                        },
-                        child: SvgPicture.asset(CommonAssets.favouritesIcon)),
+
                   ],
                 ):SizedBox(),
               ],
