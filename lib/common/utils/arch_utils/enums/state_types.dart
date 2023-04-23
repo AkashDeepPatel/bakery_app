@@ -1,0 +1,1 @@
+enum StateType { idle, busy }
