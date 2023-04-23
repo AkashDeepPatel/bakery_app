@@ -1,15 +1,18 @@
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
+import 'package:bakery_app/dashboard/screens/language_screen.dart';
 import 'package:bakery_app/profile/screens/edit_profile.dart';
 import 'package:bakery_app/profile/screens/your_address_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../common/controllers/theme_controller.dart';
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
 import '../../common/widgets/app_card.dart';
 import '../../dashboard/controllers/products.dart';
+import '../../dashboard/controllers/user_preferences_controller.dart';
 import '../../welcome_screen/screens/welcome_screen.dart';
 import '../widgets/profile_tile_item.dart';
 import '../widgets/send_feedback_dialog_widget.dart';
@@ -54,6 +57,22 @@ class ProfileScreen extends StatelessWidget {
                   title: "Payment Methods",
                   onTap: () {},
                 ),
+                const VSpace(16),
+                ProfileItemTile(icon: CommonAssets.exploreIcon, title: "Languages", onTap: (){
+                  Get.to(()=>LanguageScreen());
+                }),
+                const VSpace(16),
+                Obx(()=>ProfileItemTile(icon: CommonAssets.exploreIcon, title: "Change Theme",
+                  onTap: (){
+                    null;
+                  },
+                  showSwitch: true,
+                  switchValue: Get.find<ThemeController>().blackTheme.value,
+                  switchAction: (val) {
+                    Get.find<ThemeController>().updateTheme(val);
+                    Get.find<UserPreferencesController>().selectTheme();
+                  },
+                )),
               ],
             ),
           ),
@@ -80,14 +99,14 @@ class ProfileScreen extends StatelessWidget {
                     Get.dialog(SendFeedbackDialogWidget());
                   },
                 ),
-                const VSpace(16),
-                ProfileItemTile(
-                  icon: CommonAssets.feedbackIcon,
-                  title: "ADD FOR YOU PRODUCTS",
-                  onTap: () {
-                    ctr.addForYourProductsToFirebase();
-                  },
-                ),
+                // const VSpace(16),
+                // ProfileItemTile(
+                //   icon: CommonAssets.feedbackIcon,
+                //   title: "ADD FOR YOU PRODUCTS",
+                //   onTap: () {
+                //     ctr.addForYourProductsToFirebase();
+                //   },
+                // ),
                 const VSpace(16),
                 // ProfileItemTile(
                 //   icon: CommonAssets.feedbackIcon,
