@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'common/app_routes.dart';
 import 'common/bindings/bindings.dart';
+import 'common/localization/localization.g.dart';
 import 'common/styles/app_themes.dart';
 
 void main() async {
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      translations: Localization(),
+      locale: const Locale('en', 'US'),
       smartManagement: SmartManagement.keepFactory,
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,

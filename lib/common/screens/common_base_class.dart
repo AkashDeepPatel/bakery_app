@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../styles/app_themes.dart';
 import '../utils/arch_utils/utils/size_config.dart';
 import '../widgets/app_bar_widget.dart';
-import '../widgets/app_text_button.dart';
 
 class CommonBaseClass extends StatelessWidget {
   CommonBaseClass(
@@ -21,7 +20,8 @@ class CommonBaseClass extends StatelessWidget {
       this.showlocation,
       this.bottomWidgetHPadding = 0.0,
       this.bottomWidgetBottomPadding = 16.0,
-      this.bottomWidgetTopPadding = 0.0
+      this.bottomWidgetTopPadding = 0.0,
+      this.showActionButtons = true,
 
       // this.padding = 16.0
       })
@@ -41,6 +41,7 @@ class CommonBaseClass extends StatelessWidget {
   double bottomWidgetHPadding;
   double bottomWidgetBottomPadding;
   double bottomWidgetTopPadding;
+  bool showActionButtons;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +57,7 @@ class CommonBaseClass extends StatelessWidget {
               pageTitle: pageTitle,
               isOrdersScreen: isOrdersScreen,
               isProfileScreen: isProfileScreen,
+          showActionButtons: showActionButtons,
             )
           : null,
       body: ResponsiveBuilder(
@@ -63,23 +65,26 @@ class CommonBaseClass extends StatelessWidget {
           if (_usableHeight < sizingInformation.localWidgetSize.height) {
             _usableHeight = sizingInformation.localWidgetSize.height;
           }
-          return SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              child: SizedBox(
-                  height: _usableHeight,
-                  child: Column(children: [
-                    Expanded(
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Positioned.fill(
-                            child: child ?? getWidget(),
-                          ),
-                        ],
-                      ),
-                    )
-                  ])));
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                child: SizedBox(
+                    height: _usableHeight,
+                    child: Column(children: [
+                      Expanded(
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Positioned.fill(
+                              child: child ?? getWidget(),
+                            ),
+                          ],
+                        ),
+                      )
+                    ]))),
+          );
         },
       ),
       bottomNavigationBar: showBottomWidget

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -92,10 +91,11 @@ class BaseController extends GetxController with StateMixin {
             }
             return ClipRRect(
               borderRadius: BorderRadius.circular(14),
-              child: CachedNetworkImage(
+              child: Image.network(
+                snapshot.data.toString(),
                 fit: BoxFit.cover,
                 height: height,
-                width: width, imageUrl: snapshot.data.toString(),
+                width: width,
                 //color: AppColors.colorTextBlack,
               ),
             );

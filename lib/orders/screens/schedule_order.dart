@@ -129,7 +129,7 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                                 style: Theme.of(context).textTheme.labelMedium,
                               ),
                               Text(
-                                "${DateFormat('dd-MMM-yy').format(controller.deliveryDateTime.value)}",
+                                DateFormat('dd-MMM-yy').format(controller.deliveryDateTime.value),
                                 style: Theme.of(context).textTheme.labelMedium,
                               ),
                             ],

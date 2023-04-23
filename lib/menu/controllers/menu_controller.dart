@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MenuController extends BaseController {
+class ItemMenuController extends BaseController {
   @override
   void onInit() {
     super.onInit();

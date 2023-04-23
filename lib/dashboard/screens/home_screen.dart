@@ -17,7 +17,6 @@ import '../controllers/wishlist_controller.dart';
 class HomeScreen extends GetView<HomeController> {
   HomeScreen({Key? key}) : super(key: key);
   final DashboardController _dashboardController = Get.find();
-  final WishlistController _wlCtr = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -27,20 +26,20 @@ class HomeScreen extends GetView<HomeController> {
       showSearchBar: true,
       child: ListView(
         children: [
-          const VSpace(20),
-          Obx(
-            () => SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  for (int i = 0; i < controller.homeCategories.length; i++)
-                    CategoriesIcon(
-                        title: controller.homeCategories[i].title,
-                        imgUrl: controller.homeCategories[i].imgUrl),
-                ],
-              ),
-            ),
-          ),
+          const VSpace(20), 
+          // Obx(
+          //   () => SingleChildScrollView(
+          //     scrollDirection: Axis.horizontal,
+          //     child: Row(
+          //       children: [
+          //         for (int i = 0; i < controller.homeCategories.length; i++)
+          //           CategoriesIcon(
+          //               title: controller.homeCategories[i].title,
+          //               imgUrl: controller.homeCategories[i].imgUrl),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           const VSpace(24),
           // Image.network(FirebaseStorageService().getImage("common/logo.svg")),
           CarouselSlider(

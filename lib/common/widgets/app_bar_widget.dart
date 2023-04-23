@@ -1,11 +1,10 @@
 import 'package:bakery_app/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:geocoding_platform_interface/src/models/placemark.dart';
 import 'package:get/get.dart';
+import '../../dashboard/screens/language_screen.dart';
 import '../../dashboard/screens/wishlist_screen.dart';
 import '../../profile/controllers/address_controller.dart';
-import '../../profile/screens/your_address_screen.dart';
 import '../controllers/base_controller.dart';
 import '../styles/app_themes.dart';
 import '../utils/arch_utils/widgets/spacing_widgets.dart';
@@ -26,6 +25,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     this.isOrdersScreen,
     this.isProfileScreen,
     this.showlocation,
+    this.showActionButtons,
   }) : super(key: key);
   bool? showBackIcon;
   String? pageTitle;
@@ -33,6 +33,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   bool? isOrdersScreen;
   bool? isProfileScreen;
   bool? showlocation;
+  bool? showActionButtons;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -104,19 +105,26 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 const Spacer(),
-                InkWell(
-                    onTap: () {},
-                    child: SvgPicture.asset(CommonAssets.exploreIcon)),
-                const HSpace(15),
-                InkWell(
-                    onTap: () {},
-                    child: SvgPicture.asset(CommonAssets.notificationIcon)),
-                const HSpace(15),
-                InkWell(
-                    onTap: () {
-                      Get.to(() => WishlistScreen());
-                    },
-                    child: SvgPicture.asset(CommonAssets.favouritesIcon)),
+                showActionButtons!?
+                Row(
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          Get.to(()=>LanguageScreen());
+                        },
+                        child: SvgPicture.asset(CommonAssets.exploreIcon)),
+                    const HSpace(15),
+                    InkWell(
+                        onTap: () {},
+                        child: SvgPicture.asset(CommonAssets.notificationIcon)),
+                    const HSpace(15),
+                    InkWell(
+                        onTap: () {
+                          Get.to(() => WishlistScreen());
+                        },
+                        child: SvgPicture.asset(CommonAssets.favouritesIcon)),
+                  ],
+                ):SizedBox(),
               ],
             ),
             const VSpace(10),

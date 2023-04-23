@@ -2,13 +2,12 @@ import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../common/styles/app_themes.dart';
-import '../../dashboard/controllers/home_controller.dart';
 import '../controllers/menu_controller.dart';
 import '../widgets/menu_tile_item.dart';
 
 class MenuScreen extends StatelessWidget {
   MenuScreen({Key? key}) : super(key: key);
-  final MenuController _menuController = Get.find();
+  final ItemMenuController _menuController = Get.find();
   @override
   Widget build(BuildContext context) {
     return CommonBaseClass(
