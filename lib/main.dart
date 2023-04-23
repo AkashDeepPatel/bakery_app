@@ -40,6 +40,9 @@ class MyApp extends StatelessWidget {
       getPages: AppRoutes.routes,
       useInheritedMediaQuery: true,
       builder: DevicePreview.appBuilder,
+      scrollBehavior: ScrollBehavior(
+        androidOverscrollIndicator: AndroidOverscrollIndicator.stretch
+      ),
     );
   }
 }

@@ -22,6 +22,7 @@ class CommonBaseClass extends StatelessWidget {
       this.bottomWidgetBottomPadding = 32.0,
       this.bottomWidgetTopPadding = 0.0,
       this.showActionButtons = true,
+      this.topPadding = 16.0,
 
       // this.padding = 16.0
       })
@@ -42,6 +43,7 @@ class CommonBaseClass extends StatelessWidget {
   double bottomWidgetBottomPadding;
   double bottomWidgetTopPadding;
   bool showActionButtons;
+  double topPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +68,7 @@ class CommonBaseClass extends StatelessWidget {
             _usableHeight = sizingInformation.localWidgetSize.height;
           }
           return Padding(
-            padding: const EdgeInsets.only(top: 16.0),
+            padding: EdgeInsets.only(top: topPadding),
             child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
