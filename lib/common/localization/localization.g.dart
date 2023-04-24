@@ -45,6 +45,27 @@ class Localization extends Translations {
 'login.Title': 'Welcome Back!',
 'login.SignUp': 'Sign Up',
 'login.Account': 'Don\'t have Account? ',
+'login.CountryCode': 'Country Code',
+'otpVerification.DontReceiveOTP': 'Didn\'t receive the OTP?',
+'otpVerification.ResendOTP': 'Resend OTP',
+'appBar.Loading': 'Loading',
+'appBar.SelectLocation': 'Select Location',
+'appBar.Search': 'Search',
+'appBar.CurrentOrder': 'Current Order',
+'appBar.PastOrder': 'Past Order',
+'home.ForYou': '| For you',
+'home.Popular': '| Popular',
+'home.ViewAll': 'View all',
+'yourAddress.AddAddress': 'Add Address',
+'yourAddress.NoSavedAddress': 'No Saved Address to show.',
+'addAddress.NewAddress': 'Add a new Address',
+'addAddress.FlatHouseNo': 'Flat no./ House no.',
+'addAddress.Landmark': 'Landmark',
+'addAddress.Area': 'Area/ Street/ sector',
+'addAddress.City': 'City/ Town',
+'addAddress.Pincode': 'Pincode',
+'addAddress.DefaultAddress': 'Make this my default address.',
+'addAddress.Save': 'Save',
 },
 'fr_fr': {
 'app_name': 'Boulangerie de couronne',
@@ -89,6 +110,27 @@ class Localization extends Translations {
 'login.Title': 'Content de te revoir!',
 'login.SignUp': 'S\'inscrire',
 'login.Account': 'Vous n\'avez pas de compte?',
+'login.CountryCode': 'Code postal',
+'otpVerification.DontReceiveOTP': 'Vous n\'avez pas reçu l\'OTP?',
+'otpVerification.ResendOTP': 'Repenser otp',
+'appBar.Loading': 'Chargement',
+'appBar.SelectLocation': 'Sélectionnez l\'emplacement',
+'appBar.Search': 'Recherche',
+'appBar.CurrentOrder': 'Commande actuelle',
+'appBar.PastOrder': 'Commande antérieure',
+'home.ForYou': '| Pour toi',
+'home.Popular': '| Populaire',
+'home.ViewAll': 'Voir tout',
+'yourAddress.AddAddress': 'Ajoutez l\'adresse',
+'yourAddress.NoSavedAddress': 'Aucune adresse enregistrée à montrer.',
+'addAddress.NewAddress': 'Ajouter une nouvelle adresse',
+'addAddress.FlatHouseNo': 'N ° appartement / maison no.',
+'addAddress.Landmark': 'Repère',
+'addAddress.Area': 'Zone / rue / secteur',
+'addAddress.City': 'Ville / ville',
+'addAddress.Pincode': 'Code PIN',
+'addAddress.DefaultAddress': 'Faites-en mon adresse par défaut.',
+'addAddress.Save': 'Sauvegarder',
 },
 'zh-hans_cn': {
 'app_name': '皇冠面包店',
@@ -133,6 +175,27 @@ class Localization extends Translations {
 'login.Title': '欢迎回来！',
 'login.SignUp': '报名',
 'login.Account': '没有帐户？',
+'login.CountryCode': '国家代码',
+'otpVerification.DontReceiveOTP': '没有收到OTP？',
+'otpVerification.ResendOTP': '重新发出OTP',
+'appBar.Loading': '加载',
+'appBar.SelectLocation': '选择位置',
+'appBar.Search': '搜索',
+'appBar.CurrentOrder': '当前顺序',
+'appBar.PastOrder': '过去的订单',
+'home.ForYou': '|为你',
+'home.Popular': '|受欢迎的',
+'home.ViewAll': '查看全部',
+'yourAddress.AddAddress': '添加地址',
+'yourAddress.NoSavedAddress': '没有保存的地址可以显示。',
+'addAddress.NewAddress': '增加一个新地址',
+'addAddress.FlatHouseNo': '公寓号/房屋号。',
+'addAddress.Landmark': '地标',
+'addAddress.Area': '区域/街道/部门',
+'addAddress.City': '城市/城镇',
+'addAddress.Pincode': 'PIN码',
+'addAddress.DefaultAddress': '将此作为我的默认地址。',
+'addAddress.Save': '节省',
 },
 'hi_in': {
 'app_name': 'क्राउन बेकरी',
@@ -177,6 +240,27 @@ class Localization extends Translations {
 'login.Title': 'वापसी पर स्वागत है!',
 'login.SignUp': 'साइन अप करें',
 'login.Account': 'खाता नहीं है?',
+'login.CountryCode': 'कंट्री कोड',
+'otpVerification.DontReceiveOTP': 'ओटीपी प्राप्त नहीं किया?',
+'otpVerification.ResendOTP': 'ओटीपी पुनः भेजें',
+'appBar.Loading': 'लोड हो रहा है',
+'appBar.SelectLocation': 'स्थान चुनें',
+'appBar.Search': 'खोज',
+'appBar.CurrentOrder': 'अभी का ऑर्डर',
+'appBar.PastOrder': 'अतीत का आदेश',
+'home.ForYou': '| आपके लिए',
+'home.Popular': '| लोकप्रिय',
+'home.ViewAll': 'सभी को देखें',
+'yourAddress.AddAddress': 'पता जोड़ें',
+'yourAddress.NoSavedAddress': 'दिखाने के लिए कोई सहेजा हुआ पता नहीं।',
+'addAddress.NewAddress': 'एक नया पता लिखो',
+'addAddress.FlatHouseNo': 'फ्लैट नंबर/ हाउस नं।',
+'addAddress.Landmark': 'सीमाचिह्न',
+'addAddress.Area': 'क्षेत्र/ सड़क/ क्षेत्र',
+'addAddress.City': 'शहर/ शहर',
+'addAddress.Pincode': 'पिन कोड',
+'addAddress.DefaultAddress': 'इसे मेरा डिफ़ॉल्ट पता बनाएं।',
+'addAddress.Save': 'बचाना',
 },
         };
          static const appName = 'app_name'; 
@@ -221,6 +305,27 @@ class Localization extends Translations {
  static const loginTitle = 'login.Title'; 
  static const loginSignUp = 'login.SignUp'; 
  static const loginAccount = 'login.Account'; 
+ static const loginCountryCode = 'login.CountryCode'; 
+ static const otpVerificationDontReceiveOTP = 'otpVerification.DontReceiveOTP'; 
+ static const otpVerificationResendOTP = 'otpVerification.ResendOTP'; 
+ static const appBarLoading = 'appBar.Loading'; 
+ static const appBarSelectLocation = 'appBar.SelectLocation'; 
+ static const appBarSearch = 'appBar.Search'; 
+ static const appBarCurrentOrder = 'appBar.CurrentOrder'; 
+ static const appBarPastOrder = 'appBar.PastOrder'; 
+ static const homeForYou = 'home.ForYou'; 
+ static const homePopular = 'home.Popular'; 
+ static const homeViewAll = 'home.ViewAll'; 
+ static const yourAddressAddAddress = 'yourAddress.AddAddress'; 
+ static const yourAddressNoSavedAddress = 'yourAddress.NoSavedAddress'; 
+ static const addAddressNewAddress = 'addAddress.NewAddress'; 
+ static const addAddressFlatHouseNo = 'addAddress.FlatHouseNo'; 
+ static const addAddressLandmark = 'addAddress.Landmark'; 
+ static const addAddressArea = 'addAddress.Area'; 
+ static const addAddressCity = 'addAddress.City'; 
+ static const addAddressPincode = 'addAddress.Pincode'; 
+ static const addAddressDefaultAddress = 'addAddress.DefaultAddress'; 
+ static const addAddressSave = 'addAddress.Save'; 
 
       }
       

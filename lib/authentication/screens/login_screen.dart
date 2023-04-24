@@ -65,7 +65,10 @@ class LoginScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Country Code", style: Theme.of(context).textTheme.labelMedium),
+                Text(
+                    // "Country Code",
+                    Localization.loginCountryCode.tr,
+                    style: Theme.of(context).textTheme.labelMedium),
                 VSpace(8),
                 DropdownButtonFormField<String>(
                   items: _authenticationController.countryCodeList

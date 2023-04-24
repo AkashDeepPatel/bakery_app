@@ -1,4 +1,5 @@
 import 'package:bakery_app/common/controllers/base_controller.dart';
+import 'package:bakery_app/common/localization/localization.g.dart';
 import 'package:bakery_app/dashboard/controllers/dashboard_controller.dart';
 import 'package:bakery_app/dashboard/screens/list_view_screen.dart';
 import 'package:bakery_app/dashboard/screens/product_detail_screen.dart';
@@ -69,7 +70,8 @@ class HomeScreen extends GetView<HomeController> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 24.0),
                   child: Text(
-                    "| For you",
+                    // "| For you",
+                    Localization.homeForYou.tr,
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                 ),
@@ -99,7 +101,8 @@ class HomeScreen extends GetView<HomeController> {
                       Row(
                         children: [
                           Text(
-                            "| Popular",
+                            // "| Popular",
+                            Localization.homePopular.tr,
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           const HSpace(5),
@@ -117,7 +120,8 @@ class HomeScreen extends GetView<HomeController> {
                             );
                           },
                           child: Text(
-                            "View all",
+                            // "View all",
+                            Localization.homeViewAll.tr,
                             style: Theme.of(context).textTheme.labelMedium,
                           ),
                         ),
