@@ -1,3 +1,4 @@
+import 'package:bakery_app/common/localization/localization.g.dart';
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -65,11 +66,13 @@ class OTPVerificationScreen extends StatelessWidget {
                 Obx(() => _authenticationController.isShowTimer.value == false
                     ? RichText(
                   text: TextSpan(
-                    text: "Didn't receive the OTP? ",
+                    // text: "Didn't receive the OTP? ",
+                    text: Localization.otpVerificationDontReceiveOTP.tr,
                     style: Theme.of(context).textTheme.bodyLarge,
                     children: <TextSpan>[
                       TextSpan(
-                          text: "Resend OTP",
+                          // text: "Resend OTP",
+                          text: Localization.otpVerificationResendOTP.tr,
                           style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).primaryColor),
                           recognizer: TapGestureRecognizer()..onTap = () => _authenticationController.firebasePhoneSignIn()
                       ),

@@ -179,8 +179,7 @@ class CartScreen extends GetView<CartController> {
           const VSpace(24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              "Your Cart",
+            child: Text("Your Cart",
               style: Theme.of(context).textTheme.labelLarge,
             ),
           ),

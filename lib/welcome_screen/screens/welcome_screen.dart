@@ -1,4 +1,5 @@
 import 'package:bakery_app/authentication/screens/login_screen.dart';
+import 'package:bakery_app/common/localization/localization.g.dart';
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,8 @@ class WelcomeScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           AppTextButton(
-            text: "Create Account",
+            // text: "Create Account",
+            text: Localization.welcomeCreateAccount.tr,
             color: AppThemes.primary,
             textColor: AppThemes.black,
             onTap: () {
@@ -30,7 +32,8 @@ class WelcomeScreen extends StatelessWidget {
           ),
           const VSpace(20),
           AppTextButton(
-            text: "Log In",
+            // text: "Log In",
+            text: Localization.welcomeLogIn.tr,
             onTap: () {
               Get.toNamed(LoginScreen.routeName);
             },
@@ -47,13 +50,15 @@ class WelcomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "Welcome to the Crown Bakery!",
+                    // "Welcome to the Crown Bakery!",
+                    Localization.welcomeTitle.tr,
                     style: Theme.of(context).textTheme.headlineMedium,
                     textAlign: TextAlign.center,
                   ),
                   const VSpace(15),
                   Text(
-                    "Enjoy the delicious cakes and more every day!",
+                    // "Enjoy the delicious cakes and more every day!",
+                    Localization.welcomeSubTitle.tr,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),

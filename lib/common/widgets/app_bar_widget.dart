@@ -1,3 +1,4 @@
+import 'package:bakery_app/common/localization/localization.g.dart';
 import 'package:bakery_app/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -67,7 +68,10 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                                       style:
                                           Theme.of(context).textTheme.bodySmall,
                                     )
-                                  : Text("Loading"),
+                                  : Text(
+                                  // "Loading"
+                                  Localization.appBarLoading.tr
+                              ),
                               InkWell(
                                 onTap: () {
                                   Get.bottomSheet(const AppBottomSheet());
@@ -75,7 +79,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Select Location",
+                                      // "Select Location",
+                                      Localization.appBarSelectLocation.tr,
                                       style: Theme.of(context)
                                           .textTheme
                                           .labelLarge,
@@ -127,7 +132,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   Flexible(
                     child: AppTextField(
-                      hintText: "Search",
+                      // hintText: "Search",
+                      hintText: Localization.appBarSearch.tr,
                       prefixIcon: const Icon(Icons.search),
                     ),
                   ),
@@ -152,12 +158,14 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   const VSpace(40),
                   Text(
-                    "Current Order",
+                    // "Current Order",
+                    Localization.appBarCurrentOrder.tr,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const HSpace(30),
                   Text(
-                    "Past Order",
+                    // "Past Order",
+                    Localization.appBarPastOrder.tr,
                     style: Theme.of(context).textTheme.titleMedium,
                   )
                 ],

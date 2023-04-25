@@ -1,3 +1,4 @@
+import 'package:bakery_app/common/localization/localization.g.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
 import 'package:bakery_app/profile/controllers/address_controller.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,8 @@ class YourAddressScreen extends StatelessWidget {
         bottomWidget: Padding(
           padding: const EdgeInsets.all(8.0),
           child: AppTextButton(
-            text: "Add Address",
+            // text: "Add Address",
+            text: Localization.yourAddressAddAddress.tr,
             onTap: () {
               Get.to(() => AddNewAddressScreen());
             },
@@ -47,7 +49,10 @@ class YourAddressScreen extends StatelessWidget {
                         ),
                         onChanged: (value) {});
                   })
-              : Center(child: Text("No Saved Address to show.")),
+              : Center(child: Text(
+              // "No Saved Address to show."
+              Localization.yourAddressNoSavedAddress.tr
+          )),
         ));
   }
 }
