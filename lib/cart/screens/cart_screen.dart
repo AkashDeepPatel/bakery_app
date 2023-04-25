@@ -1,3 +1,4 @@
+import 'package:bakery_app/common/localization/localization.g.dart';
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
 import 'package:bakery_app/orders/screens/schedule_order.dart';
@@ -44,9 +45,13 @@ class CartScreen extends GetView<CartController> {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: ListView(
                     // crossAxisAlignment: CrossAxisAlignment.start,
+                    //int i =5
                     children: [
                       Text(
-                        "Price Details(${controller.cartItemList.length} items)",
+
+                        // "Price Details(${controller.cartItemList.length} items)",
+                  "${Localization.cartPriceDetail.tr} ${controller.cartItemList.length} ${Localization.cartItem.tr}",
+
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                       const VSpace(8),
@@ -54,7 +59,8 @@ class CartScreen extends GetView<CartController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Total MRP",
+                            // "Total MRP",
+                            Localization.cartTotalMRP.tr,
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           Text(
@@ -68,7 +74,8 @@ class CartScreen extends GetView<CartController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Discount on MRP",
+                            // "Discount on MRP",
+                            Localization.cartDiscountOnMRP.tr,
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           Text(
@@ -82,7 +89,8 @@ class CartScreen extends GetView<CartController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Delivery Charges",
+                            // "Delivery Charges",
+                            Localization.cartDeliveryCharges.tr,
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           Text(
@@ -112,7 +120,8 @@ class CartScreen extends GetView<CartController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Grand Total",
+                            // "Grand Total",
+                            Localization.cartGrandTotal.tr,
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall!
@@ -134,7 +143,8 @@ class CartScreen extends GetView<CartController> {
                 ),
               ),
               AppTextButton(
-                text: "Checkout",
+                // text: "Checkout",
+                text: Localization.cartCheckout.tr,
                 textColor: AppThemes.white,
                 color: AppThemes.black,
                 onTap: () {
@@ -179,7 +189,9 @@ class CartScreen extends GetView<CartController> {
           const VSpace(24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text("Your Cart",
+            child: Text(
+              // "Your Cart",
+              Localization.cartYourCart.tr,
               style: Theme.of(context).textTheme.labelLarge,
             ),
           ),
@@ -198,7 +210,9 @@ class CartScreen extends GetView<CartController> {
                           ),
                       ],
                     )
-                  : const Center(child: Text("No Products in Cart")),
+                  :  Center(child: Text(
+                  // "No Products in Cart"
+                  Localization.cartNoProduct.tr)),
             ),
           ),
         ],

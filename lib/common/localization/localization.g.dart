@@ -66,6 +66,7 @@ class Localization extends Translations {
 'addAddress.Pincode': 'Pincode',
 'addAddress.DefaultAddress': 'Make this my default address.',
 'addAddress.Save': 'Save',
+'otpVerification.OTPsent': 'An Otp has been sent to the number ',
 },
 'fr_fr': {
 'app_name': 'Boulangerie de couronne',
@@ -112,7 +113,7 @@ class Localization extends Translations {
 'login.Account': 'Vous n\'avez pas de compte?',
 'login.CountryCode': 'Code postal',
 'otpVerification.DontReceiveOTP': 'Vous n\'avez pas reçu l\'OTP?',
-'otpVerification.ResendOTP': 'Repenser otp',
+'otpVerification.ResendOTP': 'Revoir OTP',
 'appBar.Loading': 'Chargement',
 'appBar.SelectLocation': 'Sélectionnez l\'emplacement',
 'appBar.Search': 'Recherche',
@@ -131,6 +132,7 @@ class Localization extends Translations {
 'addAddress.Pincode': 'Code PIN',
 'addAddress.DefaultAddress': 'Faites-en mon adresse par défaut.',
 'addAddress.Save': 'Sauvegarder',
+'otpVerification.OTPsent': 'Un OTP a été envoyé au numéro',
 },
 'zh-hans_cn': {
 'app_name': '皇冠面包店',
@@ -196,6 +198,7 @@ class Localization extends Translations {
 'addAddress.Pincode': 'PIN码',
 'addAddress.DefaultAddress': '将此作为我的默认地址。',
 'addAddress.Save': '节省',
+'otpVerification.OTPsent': 'OTP已发送到该号码',
 },
 'hi_in': {
 'app_name': 'क्राउन बेकरी',
@@ -261,6 +264,7 @@ class Localization extends Translations {
 'addAddress.Pincode': 'पिन कोड',
 'addAddress.DefaultAddress': 'इसे मेरा डिफ़ॉल्ट पता बनाएं।',
 'addAddress.Save': 'बचाना',
+'otpVerification.OTPsent': 'एक ओटीपी को नंबर पर भेजा गया है',
 },
         };
          static const appName = 'app_name'; 
@@ -326,6 +330,7 @@ class Localization extends Translations {
  static const addAddressPincode = 'addAddress.Pincode'; 
  static const addAddressDefaultAddress = 'addAddress.DefaultAddress'; 
  static const addAddressSave = 'addAddress.Save'; 
+ static const otpVerificationOTPsent = 'otpVerification.OTPsent'; 
 
       }
       
