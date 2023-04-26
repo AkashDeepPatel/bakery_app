@@ -11,6 +11,7 @@ import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
 import '../controllers/home_controller.dart';
 import '../controllers/product_details_controller.dart';
+import '../controllers/wishlist_controller.dart';
 
 class ProductDetailScreen extends GetView<HomeController> {
   ProductDetailScreen({Key? key, required this.model}) : super(key: key);
@@ -18,6 +19,7 @@ class ProductDetailScreen extends GetView<HomeController> {
   RxBool isFav = false.obs;
   CartController cartController = Get.find();
   ProductDetailsController detailCtr = Get.find();
+  WishlistController wishlistCtr = Get.find();
 
   Product model;
 
@@ -39,12 +41,13 @@ class ProductDetailScreen extends GetView<HomeController> {
                   child: Obx(
                     () => InkWell(
                       onTap: () {
-                        isFav(!isFav.value);
+                        wishlistCtr.wishlistItems.contains(model)
+                            ?wishlistCtr.removeItemFromWishlist(model)
+                            :wishlistCtr.addItemsToWishlist(model);
                       },
                       child: SvgPicture.asset(
-                        isFav.value == false
-                            ? CommonAssets.favouritesIcon
-                            : CommonAssets.favouritesFilledIcon,
+                        wishlistCtr.wishlistItems.contains(model)
+                            ?CommonAssets.favouritesFilledIcon: CommonAssets.favouritesIcon,
                         // color: isFav.value == false ? AppThemes.background : null,
                       ),
                     ),

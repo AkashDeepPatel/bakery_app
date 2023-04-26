@@ -203,36 +203,30 @@ class DashboardItemTile extends GetView<WishlistController> {
                     ),
                   ),
                 ),
-                // Positioned(
-                //   top: 8,
-                //   right: 8,
-                //   child: controller.obx((state) => Obx(()=>InkWell(
-                //     onTap: () {
-                //       controller.addToWishlist(model);
-                //       // controller
-                //       //     .isFav(!controller.isFav.value);
-                //       // !controller.checkIfLikedOrNot("${model.id}")
-                //       //     ? controller.addToWishlist(model)
-                //       //     : controller.deleteFromWishlist(model);
-                //     },
-                //     child: Container(
-                //         decoration: const BoxDecoration(
-                //             color: AppThemes.black,
-                //             borderRadius:
-                //             BorderRadius.all(Radius.circular(8.0))),
-                //         child: Padding(
-                //             padding: const EdgeInsets.all(7.0),
-                //             child: SvgPicture.asset(
-                //               // !controller.wishlistList.contains(model)
-                //               controller.isFav.value
-                //                   ?CommonAssets.favouritesFilledIcon: CommonAssets.favouritesIcon,
-                //               // color: controller.isFav.value == false
-                //               //     ? Colors.transparent
-                //               //     : null,
-                //             ))
-                //     ),
-                //   )),onLoading: Text("Loading"), onEmpty: Text("error")),
-                // )
+                Positioned(
+                  top: 8,
+                  right: 8,
+                  child:  Obx(()=>InkWell(
+                    onTap: () {
+                      controller.wishlistItems.contains(model)
+                          ?controller.removeItemFromWishlist(model)
+                          :controller.addItemsToWishlist(model);
+                    },
+                    child: Container(
+                        decoration: const BoxDecoration(
+                            color: AppThemes.black,
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(8.0))),
+                        child: Padding(
+                            padding: const EdgeInsets.all(7.0),
+                            child: SvgPicture.asset(
+                              controller.wishlistItems.contains(model)
+                                  ?CommonAssets.favouritesFilledIcon: CommonAssets.favouritesIcon,
+                              color: !controller.wishlistItems.contains(model)?AppThemes.white:null,
+                            ))
+                    ),
+                  )),
+                )
               ],
             ),
             const VSpace(8),
