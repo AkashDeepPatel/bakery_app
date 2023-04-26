@@ -13,12 +13,12 @@ class WishlistScreen extends GetView<WishlistController> {
     return CommonBaseClass(
       showAppBar: true,
       pageTitle: 'Wishlist',
-      child: ListView.builder(
-          itemCount: controller.wishlistList.length,
+      child: Obx(()=>ListView.builder(
+          itemCount: controller.getWishlistLength(),
           itemBuilder: (context, index){
-        return ListItemTileWidget(
-            model: controller.wishlistList[index]);
-      }),
+            return ListItemTileWidget(
+                model: controller.wishlistItems[index]);
+          })),
     );
   }
 }
