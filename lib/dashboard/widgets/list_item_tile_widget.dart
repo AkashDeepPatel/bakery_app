@@ -1,9 +1,7 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../cart/controllers/cart_controller.dart';
 import '../../common/controllers/base_controller.dart';
 import '../../common/models/product_model.dart';
 import '../../common/styles/app_themes.dart';
@@ -110,6 +108,11 @@ class ListItemTileWidget extends StatelessWidget {
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          const Icon(
+                            Icons.star,
+                            color: AppThemes.primary,
+                          ),
+                          const HSpace(6),
                           Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: Text(
@@ -117,17 +120,12 @@ class ListItemTileWidget extends StatelessWidget {
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ),
-                          const HSpace(6),
-                          const Icon(
-                            Icons.star,
-                            color: AppThemes.primary,
-                          ),
                         ],
                       ),
-                      Text(
-                        "${Random().nextInt(30)} left",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      )
+                      // Text(
+                      //   "${Random().nextInt(30)} left",
+                      //   style: Theme.of(context).textTheme.bodySmall,
+                      // )
                     ],
                   ),
                   const VSpace(10.0),
