@@ -44,6 +44,7 @@ class AddNewAddressScreen extends StatelessWidget {
               // title: "Phone Number",
               title: Localization.createAccountPhoneNum.tr,
               controller: controller.phoneCtr.value,
+              textInputType: TextInputType.phone,
             ),
             VSpace(8),
             AppTextField(
@@ -78,29 +79,30 @@ class AddNewAddressScreen extends StatelessWidget {
                     // title: "Pincode",
                     title: Localization.addAddressPincode.tr,
                     controller: controller.pincodeCtr.value,
+                    textInputType: TextInputType.number,
                   ),
                 )
               ],
             ),
-            VSpace(16),
-            Obx(() => InkWell(
-                  onTap: () {
-                    controller.isDefault(!controller.isDefault.value);
-                  },
-                  child: Row(
-                    children: [
-                      controller.isDefault.value
-                          ? Icon(
-                              Icons.radio_button_checked_rounded,
-                              color: AppThemes.primary,
-                            )
-                          : Icon(Icons.radio_button_unchecked_rounded),
-                      HSpace(5.0),
-                      // Text("Make this my default address.")
-                      Text(Localization.addAddressDefaultAddress.tr)
-                    ],
-                  ),
-                ))
+            // VSpace(16),
+            // Obx(() => InkWell(
+            //       onTap: () {
+            //         controller.isDefault(!controller.isDefault.value);
+            //       },
+            //       child: Row(
+            //         children: [
+            //           controller.isDefault.value
+            //               ? Icon(
+            //                   Icons.radio_button_checked_rounded,
+            //                   color: AppThemes.primary,
+            //                 )
+            //               : Icon(Icons.radio_button_unchecked_rounded),
+            //           HSpace(5.0),
+            //           // Text("Make this my default address.")
+            //           Text(Localization.addAddressDefaultAddress.tr)
+            //         ],
+            //       ),
+            //     ))
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:bakery_app/common/localization/localization.g.dart';
+import 'package:bakery_app/common/widgets/app_card.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
 import 'package:bakery_app/profile/controllers/address_controller.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class YourAddressScreen extends StatelessWidget {
     int selectedRadio = 0;
     return CommonBaseClass(
         showAppBar: showAppBar ?? true,
+        pageTitle: "Your Addresses",
         showBottomWidget: true,
         bottomWidget: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -32,22 +34,35 @@ class YourAddressScreen extends StatelessWidget {
               ? ListView.builder(
                   itemCount: controller.userAddresses.length,
                   itemBuilder: (context, index) {
-                    return RadioListTile(
-                        value: index,
-                        groupValue: selectedRadio,
-                        isThreeLine: true,
-                        title:
-                            Text("${controller.userAddresses[index]['name']}"),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                                "${controller.userAddresses[index]['flatNo']}, ${controller.userAddresses[index]['landmark']}, ${controller.userAddresses[index]['area']}, ${controller.userAddresses[index]['city']}, ${controller.userAddresses[index]['pincode']}"),
-                            Text(
-                                "Phone no: ${controller.userAddresses[index]['mobile']}")
-                          ],
-                        ),
-                        onChanged: (value) {});
+                    return AppCard(
+                      child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                          Text("${controller.userAddresses[index]['name']}"),
+                          Text(
+                              "${controller.userAddresses[index]['flatNo']}, ${controller.userAddresses[index]['landmark']}, ${controller.userAddresses[index]['area']}, ${controller.userAddresses[index]['city']}, ${controller.userAddresses[index]['pincode']}"),
+                          Text(
+                              "Phone no: ${controller.userAddresses[index]['mobile']}")
+                        ],
+                      ),
+                    );
+                      // RadioListTile(
+                      //   value: index,
+                      //   groupValue: selectedRadio,
+                      //   isThreeLine: true,
+                      //   title:
+                      //       Text("${controller.userAddresses[index]['name']}"),
+                      //   subtitle: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       Text("${controller.userAddresses[index]['name']}"),
+                      //       Text(
+                      //           "${controller.userAddresses[index]['flatNo']}, ${controller.userAddresses[index]['landmark']}, ${controller.userAddresses[index]['area']}, ${controller.userAddresses[index]['city']}, ${controller.userAddresses[index]['pincode']}"),
+                      //       Text(
+                      //           "Phone no: ${controller.userAddresses[index]['mobile']}")
+                      //     ],
+                      //   ),
+                      //   onChanged: (value) {});
                   })
               : Center(child: Text(
               // "No Saved Address to show."

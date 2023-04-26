@@ -36,6 +36,8 @@ dependencies:
   pin_input_text_field: ^4.5.0
   otp_autofill: ^2.1.0
   cached_network_image: ^3.2.3
+  image_picker: ^0.8.6
+
 
 
 

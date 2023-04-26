@@ -64,7 +64,7 @@ class BaseController extends GetxController with StateMixin {
   }
 
   static Widget getIcon(String? icon, String name,
-      {double height = 150, double width = 150}) {
+      {double height = 150, double width = 150, double radius=14}) {
     if (icon == null || icon.isEmpty) {
       return SvgPicture.asset(
         CommonAssets.squarePlaceholder,
@@ -90,7 +90,7 @@ class BaseController extends GetxController with StateMixin {
               );
             }
             return ClipRRect(
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(radius),
               child: Image.network(
                 snapshot.data.toString(),
                 fit: BoxFit.cover,
