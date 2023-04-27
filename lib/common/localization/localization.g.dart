@@ -78,6 +78,7 @@ class Localization extends Translations {
 'scheduleOrder.DeliveryType': 'Delivery Type',
 'scheduleOrder.DeliverMe': 'Deliver Me',
 'scheduleOrder.PickUp': 'I Will Pick Up',
+'languageScreen.ChooseLanguage': 'Choose Language',
 },
 'fr_fr': {
 'app_name': 'Boulangerie de couronne',
@@ -155,6 +156,7 @@ class Localization extends Translations {
 'scheduleOrder.DeliveryType': 'type de livraison',
 'scheduleOrder.DeliverMe': 'Délivre-moi',
 'scheduleOrder.PickUp': 'Je vais ramasser',
+'languageScreen.ChooseLanguage': 'Choisissez la langue',
 },
 'zh-hans_cn': {
 'app_name': '皇冠面包店',
@@ -232,6 +234,7 @@ class Localization extends Translations {
 'scheduleOrder.DeliveryType': '送货类型',
 'scheduleOrder.DeliverMe': '送我',
 'scheduleOrder.PickUp': '我会捡起',
+'languageScreen.ChooseLanguage': '选择语言',
 },
 'hi_in': {
 'app_name': 'क्राउन बेकरी',
@@ -309,6 +312,7 @@ class Localization extends Translations {
 'scheduleOrder.DeliveryType': 'वितरण के प्रकार',
 'scheduleOrder.DeliverMe': 'मुझे सौंप दो',
 'scheduleOrder.PickUp': 'मुझे उठाना होगा',
+'languageScreen.ChooseLanguage': 'भाषा चुनें',
 },
         };
          static const appName = 'app_name'; 
@@ -386,6 +390,7 @@ class Localization extends Translations {
  static const scheduleOrderDeliveryType = 'scheduleOrder.DeliveryType'; 
  static const scheduleOrderDeliverMe = 'scheduleOrder.DeliverMe'; 
  static const scheduleOrderPickUp = 'scheduleOrder.PickUp'; 
+ static const languageScreenChooseLanguage = 'languageScreen.ChooseLanguage'; 
 
       }
       
