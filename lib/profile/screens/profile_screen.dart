@@ -59,7 +59,14 @@ class ProfileScreen extends StatelessWidget {
                   icon: CommonAssets.paymentOptionsIcon,
                   // title: "Payment Methods",
                   title: Localization.profilePayment.tr,
-                  onTap: () {},
+                  onTap: () {
+                    Get.showSnackbar(const GetSnackBar(
+                      message: "Coming Soon",
+                      isDismissible: true,
+                      backgroundColor: AppThemes.black,
+                      duration: Duration(seconds: 3),
+                    ));
+                  },
                 ),
                 const VSpace(16),
                 ProfileItemTile(icon: CommonAssets.exploreIcon,

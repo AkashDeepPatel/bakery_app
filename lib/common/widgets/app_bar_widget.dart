@@ -126,32 +126,32 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 ):SizedBox(),
               ],
             ),
-            showSearchBar==true?const VSpace(10):SizedBox(),
+            // showSearchBar==true?const VSpace(10):SizedBox(),
             if (showSearchBar == true)
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Flexible(
-                    child: AppTextField(
-                      // hintText: "Search",
-                      hintText: Localization.appBarSearch.tr,
-                      prefixIcon: const Icon(Icons.search),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 4.0),
-                    child: InkWell(
-                      onTap: () {},
-                      child: Card(
-                          color: AppThemes.primary,
-                          child: Padding(
-                            padding: const EdgeInsets.all(13.0),
-                            child: SvgPicture.asset(CommonAssets.micIcon),
-                          )),
-                    ),
-                  )
-                ],
-              ),
+              // Row(
+              //   crossAxisAlignment: CrossAxisAlignment.center,
+              //   children: [
+              //     Flexible(
+              //       child: AppTextField(
+              //         // hintText: "Search",
+              //         hintText: Localization.appBarSearch.tr,
+              //         prefixIcon: const Icon(Icons.search),
+              //       ),
+              //     ),
+              //     Padding(
+              //       padding: const EdgeInsets.only(left: 4.0),
+              //       child: InkWell(
+              //         onTap: () {},
+              //         child: Card(
+              //             color: AppThemes.primary,
+              //             child: Padding(
+              //               padding: const EdgeInsets.all(13.0),
+              //               child: SvgPicture.asset(CommonAssets.micIcon),
+              //             )),
+              //       ),
+              //     )
+              //   ],
+              // ),
             const VSpace(10),
             if (isOrdersScreen == true)
               Row(
@@ -174,10 +174,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             if (isProfileScreen == true)
               Column(
                 children: [
-                  SvgPicture.asset(
-                    CommonAssets.circularPlaceholder,
-                    height: 90,
-                  ),
+                  Obx(()=>Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: BaseController.getIcon(controller.profilePicUrl.value,"name", height: 90, width: 90, radius: 64))),
                   const VSpace(4),
                   Text(
                     controller.username.value.text,
