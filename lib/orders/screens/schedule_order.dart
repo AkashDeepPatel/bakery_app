@@ -1,6 +1,7 @@
+import 'package:bakery_app/cart/controllers/cart_controller.dart';
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
-import 'package:bakery_app/orders/screens/payment_method_screen.dart';
+import 'package:bakery_app/orders/controllers/payment_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -12,7 +13,10 @@ import '../controllers/orders_controller.dart';
 import 'package:intl/intl.dart';
 
 class ScheduleOrderScreen extends GetView<OrdersController> {
-  const ScheduleOrderScreen({Key? key}) : super(key: key);
+  ScheduleOrderScreen({Key? key}) : super(key: key);
+
+  final CartController cartCtr = Get.find();
+  final PaymentController paymentCtr = Get.put(PaymentController());
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,11 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
           text: "Continue",
           color: AppThemes.black,
           onTap: () {
-            Get.to(() => const PaymentMethodScreen());
+            paymentCtr.options.addAll({
+              'amount': (cartCtr.getGrandTotal()*100).toString(),
+            });
+            paymentCtr.razorpay.open(paymentCtr.options);
+            // Get.to(() => const PaymentMethodScreen());
           },
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:bakery_app/cart/model.dart';
 import 'package:bakery_app/common/controllers/base_controller.dart';
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
@@ -16,9 +17,9 @@ import '../controllers/wishlist_controller.dart';
 class ProductDetailScreen extends GetView<HomeController> {
   ProductDetailScreen({Key? key, required this.model}) : super(key: key);
   @override
-  RxBool isFav = false.obs;
+
+  ProductDetailsController detailsCtr = Get.find();
   CartController cartController = Get.find();
-  ProductDetailsController detailCtr = Get.find();
   WishlistController wishlistCtr = Get.find();
 
   Product model;
@@ -56,12 +57,15 @@ class ProductDetailScreen extends GetView<HomeController> {
                   child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: AppTextButton(
-                  text: "Add to Cart",
+                  text: cartController.cartItemList.contains(CartProductModel(product: model))?"Add to Cart":"Product Already in Cart",
                   onTap: () {
                     debugPrint("added");
-                    cartController.cartItemList
-                        .add(model);
-                    cartController.addItemInCart();
+                    cartController.addProductToCart(
+CartProductModel(product: model, itemQty: detailsCtr.qty)
+                    );
+                    // cartController.cartItemList
+                    //     .add(model);
+                    // cartController.addItemInCart();
                     Get.snackbar("Product Added to Cart", "",
                         backgroundColor: AppThemes.black);
                   },
@@ -104,16 +108,16 @@ class ProductDetailScreen extends GetView<HomeController> {
                         children: [
                           InkWell(
                               onTap: (){
-                                detailCtr.removeQty();
+                                detailsCtr.removeQty();
                               },
                               child: const Icon(Icons.remove, color: AppThemes.black)),
                           const HSpace(10),
-                          Text(detailCtr.qty.value.toString(),
+                          Text(detailsCtr.qty.value.toString(),
                               style: Theme.of(context).textTheme.labelLarge),
                           const HSpace(10),
                           InkWell(
                             onTap: (){
-                              detailCtr.addQty();
+                              detailsCtr.addQty();
                             },
                             child: const Icon(Icons.add, color: AppThemes.black,
                             ),

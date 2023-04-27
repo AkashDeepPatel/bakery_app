@@ -1,9 +1,12 @@
+import 'package:bakery_app/cart/model.dart';
+import 'package:bakery_app/common/localization/localization.g.dart';
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
 import 'package:bakery_app/orders/screens/schedule_order.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import '../../common/controllers/base_controller.dart';
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
@@ -30,11 +33,16 @@ class CartScreen extends GetView<CartController> {
                 onTap: () {
                   _cartController.animatedHeight.value != 0
                       ? _cartController.animatedHeight.value = 0
-                      : _cartController.animatedHeight.value = 200;
+                      : _cartController.animatedHeight.value = 150;
                 },
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 16.0, bottom: 24),
-                  child: SvgPicture.asset(CommonAssets.downArrowIcon),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16.0, bottom: 24),
+                      child: SvgPicture.asset(CommonAssets.downArrowIcon),
+                    ),
+                  ],
                 ),
               ),
               AnimatedContainer(
@@ -43,10 +51,15 @@ class CartScreen extends GetView<CartController> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: ListView(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    // reverse: true,
+                    // mainAxisSize: MainAxisSize.min,
+                    // mainAxisAlignment: MainAxisAlignment.end,
+                    //int i =5
                     children: [
                       Text(
-                        "Price Details(${controller.cartItemList.length} items)",
+                        // "Price Details(${controller.cartItemList.length} items)",
+                  "${Localization.cartPriceDetail.tr} ${controller.cartItemList.length} ${Localization.cartItem.tr}",
+
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
                       const VSpace(8),
@@ -54,7 +67,8 @@ class CartScreen extends GetView<CartController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Total MRP",
+                            // "Total MRP",
+                            Localization.cartTotalMRP.tr,
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           Text(
@@ -68,7 +82,8 @@ class CartScreen extends GetView<CartController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Discount on MRP",
+                            // "Discount on MRP",
+                            Localization.cartDiscountOnMRP.tr,
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           Text(
@@ -77,20 +92,21 @@ class CartScreen extends GetView<CartController> {
                           ),
                         ],
                       ),
-                      const VSpace(8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Delivery Charges",
-                            style: Theme.of(context).textTheme.labelLarge,
-                          ),
-                          Text(
-                            "+ \$ ${controller.getDeliveryCharges()}",
-                            style: Theme.of(context).textTheme.labelLarge,
-                          ),
-                        ],
-                      ),
+                      // const VSpace(8),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       // "Delivery Charges",
+                      //       Localization.cartDeliveryCharges.tr,
+                      //       style: Theme.of(context).textTheme.labelLarge,
+                      //     ),
+                      //     Text(
+                      //       "+ \$ ${controller.getDeliveryCharges()}",
+                      //       style: Theme.of(context).textTheme.labelLarge,
+                      //     ),
+                      //   ],
+                      // ),
                       const VSpace(8),
                       // Row(
                       //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,7 +128,8 @@ class CartScreen extends GetView<CartController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Grand Total",
+                            // "Grand Total",
+                            Localization.cartGrandTotal.tr,
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall!
@@ -129,16 +146,18 @@ class CartScreen extends GetView<CartController> {
                           ),
                         ],
                       ),
+                      SizedBox(height: 15,),
                     ],
                   ),
                 ),
               ),
               AppTextButton(
-                text: "Checkout",
+                // text: "Checkout",
+                text: Localization.cartCheckout.tr,
                 textColor: AppThemes.white,
                 color: AppThemes.black,
                 onTap: () {
-                  Get.to(() => const ScheduleOrderScreen());
+                  Get.to(() => ScheduleOrderScreen());
                 },
               ),
             ],
@@ -149,37 +168,39 @@ class CartScreen extends GetView<CartController> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          //   child: Column(
-          //     children: [
-          //       const VSpace(20),
-          //       AppTextField(
-          //         hintText: "Apply Coupon Code",
-          //         suffixIcon: Padding(
-          //           padding: const EdgeInsets.all(8.0),
-          //           child: SvgPicture.asset(
-          //             CommonAssets.discount,
-          //           ),
-          //         ),
-          //       ),
-          //       const VSpace(10),
-          //       AppTextField(
-          //         hintText: "Want to schedule your pickup / delivery ?",
-          //         suffixIcon: Padding(
-          //           padding: const EdgeInsets.all(8.0),
-          //           child: SvgPicture.asset(
-          //             CommonAssets.rightArrowIcon,
-          //           ),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          const VSpace(24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text("Your Cart",
+            child: Column(
+              children: [
+                // const VSpace(20),
+                // AppTextField(
+                //   hintText: "Apply Coupon Code",
+                //   suffixIcon: Padding(
+                //     padding: const EdgeInsets.all(8.0),
+                //     child: SvgPicture.asset(
+                //       CommonAssets.discount,
+                //     ),
+                //   ),
+                // ),
+                // const VSpace(10),
+                // AppTextField(
+                //   hintText: "Want to schedule your pickup / delivery ?",
+                //   suffixIcon: Padding(
+                //     padding: const EdgeInsets.all(8.0),
+                //     child: SvgPicture.asset(
+                //       CommonAssets.rightArrowIcon,
+                //     ),
+                //   ),
+                // ),
+              ],
+            ),
+          ),
+          // const VSpace(24),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              // "Your Cart",
+              Localization.cartYourCart.tr,
               style: Theme.of(context).textTheme.labelLarge,
             ),
           ),
@@ -188,17 +209,16 @@ class CartScreen extends GetView<CartController> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: controller.cartItemList.isNotEmpty
-                  ? ListView(
-                      children: [
-                        for (int i = 0; i < controller.cartItemList.length; i++)
-                          CartItemTile(
-                            title: controller.cartItemList[i]['title'],
-                            imgUrl: 'controller.cartItemList[i].imgUrl',
-                            price: controller.cartItemList[i]['price'],
-                          ),
-                      ],
-                    )
-                  : const Center(child: Text("No Products in Cart")),
+                  ? ListView.separated(itemBuilder: (context, index){
+                    return CartItemTile(
+                      model: controller.cartItemList[index],
+                    );
+              }, separatorBuilder: (context, index){
+                    return SizedBox();
+              }, itemCount: controller.cartItemList.length)
+                  :  Center(child: Text(
+                  // "No Products in Cart"
+                  Localization.cartNoProduct.tr)),
             ),
           ),
         ],
@@ -207,101 +227,102 @@ class CartScreen extends GetView<CartController> {
   }
 }
 
-class CartItemTile extends StatelessWidget {
+class CartItemTile extends GetView<CartController> {
   CartItemTile({
     Key? key,
-    required this.title,
-    required this.price,
-    required this.imgUrl,
+   required this.model,
   }) : super(key: key);
-  String title;
-  String imgUrl;
-  double price;
+  CartProductModel model;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 16),
-        child: Row(
-          children: [
-            SizedBox(
-              width: 170,
-              height: 150,
-              child: Stack(
-                children: [
-                  Positioned(
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Image.asset(imgUrl,
-                              height: 150, width: 200, fit: BoxFit.fitWidth))),
-                  Positioned(
-                    bottom: 0,
-                    left: 30,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          color: AppThemes.primary,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20.0))),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 6.0),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.remove, color: AppThemes.black),
-                            const HSpace(10),
-                            Text("1",
-                                style: Theme.of(context).textTheme.labelLarge),
-                            const HSpace(10),
-                            const Icon(Icons.add, color: AppThemes.black),
-                          ],
-                        ),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 170,
+            height: 150,
+            child: Stack(
+              children: [
+                Positioned(
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: BaseController.getIcon(model.product.imgUrl,"name",
+                            height: 125, width: 175))),
+                Positioned(
+                  bottom: 0,
+                  left: 30,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                        color: AppThemes.primary,
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(20.0))),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 6.0),
+                      child: Row(
+                        children: [
+                          InkWell(
+                              onTap: (){
+                                model.itemQty!.value=(model.itemQty!.value-1);
+                              },
+                              child: const Icon(Icons.remove, color: AppThemes.black)),
+                          const HSpace(10),
+                          Obx(()=>Text(model.itemQty!.value.toString(),
+                              style: Theme.of(context).textTheme.labelLarge),),
+                          const HSpace(10),
+                          InkWell(
+                              onTap: (){
+                                model.itemQty!.value=(model.itemQty!.value+1);
+                              },
+                              child: const Icon(Icons.add, color: AppThemes.black)),
+                        ],
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const HSpace(16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    textAlign: TextAlign.start,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  const VSpace(40.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "\$ $price",
-                            style: Theme.of(context).textTheme.labelLarge,
-                          ),
-                          Text(
-                            "\$ ${(price * 1.17).toDouble().round()}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .copyWith(
-                                    decoration: TextDecoration.lineThrough),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
+          ),
+          const HSpace(16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  model.product.title,
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const VSpace(40.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "\$ ${model.product.price}",
+                          style: Theme.of(context).textTheme.labelLarge,
+                        ),
+                        Text(
+                          "\$ ${(model.product.price * 1.17).toDouble().round()}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(
+                                  decoration: TextDecoration.lineThrough),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

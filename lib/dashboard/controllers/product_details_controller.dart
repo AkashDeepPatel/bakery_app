@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 class ProductDetailsController extends BaseController{
 
-
   RxInt qty = 1.obs;
 
   addQty(){
@@ -14,4 +13,6 @@ class ProductDetailsController extends BaseController{
         ?null
         : qty--;
   }
+
+
 }

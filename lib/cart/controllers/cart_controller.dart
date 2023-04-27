@@ -1,6 +1,5 @@
+import 'package:bakery_app/cart/model.dart';
 import 'package:bakery_app/common/controllers/base_controller.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class CartController extends BaseController {
@@ -13,51 +12,52 @@ class CartController extends BaseController {
     animatedHeight.value = 0;
   }
 
-  RxList cartItemList = [].obs;
 
-  getUserCart() async {
-    var user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .get();
-      cartItemList.value = documentSnapshot.get('cart');
-    }
+  RxList<CartProductModel> cartItemList = <CartProductModel>[].obs;
+
+  // getUserCart() async {
+  //   var user = FirebaseAuth.instance.currentUser;
+  //   if (user != null) {
+  //     DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+  //         .collection('users')
+  //         .doc(user.uid)
+  //         .get();
+  //     cartItemList.value = documentSnapshot.get('cart');
+  //   }
+  // }
+  //
+  // addItemInCart() {
+  //   var user = FirebaseAuth.instance.currentUser;
+  //   if (user != null) {
+  //     FirebaseFirestore.instance
+  //         .collection('users')
+  //         .doc(user.uid)
+  //         .set({"cart": cartItemList}, SetOptions(merge: true));
+  //   }
+  // }
+
+  addProductToCart(CartProductModel item){
+    cartItemList.add(item);
   }
 
-  addItemInCart() {
-    var user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .set({"cart": cartItemList}, SetOptions(merge: true));
-    }
+  removeItemFromCart(CartProductModel item){
+    cartItemList.remove(item);
   }
 
   double getTotalMRP() {
     double sum = 0;
     for (int i = 0; i < cartItemList.length; i++) {
-      sum = sum + cartItemList[i]['price'];
+      sum = sum + cartItemList[i].product.price*cartItemList[i].itemQty!.value;
     }
-    return sum * 1.17;
+    return sum;
   }
 
   double getDiscountOnMRP() {
-    double sum = 0;
-    for (int i = 0; i < cartItemList.length; i++) {
-      sum = sum + cartItemList[i]['price'];
-    }
-    return sum * 0.17;
+    return getTotalMRP() * 0.17;
   }
 
   double getGrandTotal() {
-    double sum = 0;
-    for (int i = 0; i < cartItemList.length; i++) {
-      sum = sum + cartItemList[i]['price'];
-    }
-    return sum;
+    return getTotalMRP()-getDiscountOnMRP().toDouble().round();
   }
 
   double getDeliveryCharges() {

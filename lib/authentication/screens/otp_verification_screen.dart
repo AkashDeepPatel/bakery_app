@@ -41,7 +41,8 @@ class OTPVerificationScreen extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  "An Otp has been sent to the number ${_authenticationController.selectedCountryCode + _authenticationController.phoneNumberCtr.value.text}",
+                  // "An Otp has been sent to the number ${_authenticationController.selectedCountryCode + _authenticationController.phoneNumberCtr.value.text}",
+                  "${Localization.otpVerificationOTPsent.tr} ${_authenticationController.selectedCountryCode + _authenticationController.phoneNumberCtr.value.text}",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
