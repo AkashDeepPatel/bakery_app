@@ -64,15 +64,34 @@ class OTPVerificationScreen extends StatelessWidget {
                       textStyle: Theme.of(context).textTheme.headlineMedium),
                 ),
                 VSpace(80),
-                Obx(() => _authenticationController.isShowTimer.value == false
-                    ? RichText(
+                // Obx(() => _authenticationController.isShowTimer.value == false
+                //     ? RichText(
+                //   text: TextSpan(
+                //     // text: "Didn't receive the OTP? ",
+                //     text: Localization.otpVerificationDontReceiveOTP.tr,
+                //     style: Theme.of(context).textTheme.bodyLarge,
+                //     children: <TextSpan>[
+                //       TextSpan(
+                //           // text: "Resend OTP",
+                //           text: Localization.otpVerificationResendOTP.tr,
+                //           style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).primaryColor),
+                //           recognizer: TapGestureRecognizer()..onTap = () => _authenticationController.firebasePhoneSignIn()
+                //       ),
+                //     ],
+                //   ),
+                // )
+                //     : Text(
+                //   _authenticationController.otpWaitTimeLabel.value,
+                //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Theme.of(context).primaryColor),
+                // )),
+                RichText(
                   text: TextSpan(
                     // text: "Didn't receive the OTP? ",
                     text: Localization.otpVerificationDontReceiveOTP.tr,
                     style: Theme.of(context).textTheme.bodyLarge,
                     children: <TextSpan>[
                       TextSpan(
-                          // text: "Resend OTP",
+                        // text: "Resend OTP",
                           text: Localization.otpVerificationResendOTP.tr,
                           style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Theme.of(context).primaryColor),
                           recognizer: TapGestureRecognizer()..onTap = () => _authenticationController.firebasePhoneSignIn()
@@ -80,10 +99,6 @@ class OTPVerificationScreen extends StatelessWidget {
                     ],
                   ),
                 )
-                    : Text(
-                  _authenticationController.otpWaitTimeLabel.value,
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Theme.of(context).primaryColor),
-                )),
               ],
             ),
           ],
