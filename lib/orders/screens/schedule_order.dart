@@ -1,4 +1,5 @@
 import 'package:bakery_app/cart/controllers/cart_controller.dart';
+import 'package:bakery_app/common/localization/localization.g.dart';
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
 import 'package:bakery_app/orders/controllers/payment_controller.dart';
@@ -22,12 +23,14 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
   Widget build(BuildContext context) {
     return CommonBaseClass(
       showAppBar: true,
-      pageTitle: "Cart",
+      // pageTitle: "Cart",
+      pageTitle: Localization.scheduleOrderCart.tr,
       showBottomWidget: true,
       bottomWidget: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: AppTextButton(
-          text: "Continue",
+          // text: "Continue",
+          text: Localization.scheduleOrderContinue.tr,
           color: AppThemes.black,
           onTap: () {
             paymentCtr.options.addAll({
@@ -44,14 +47,19 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32.0),
-                  child: Text("| Schedule Your Order! ",
+                  child: Text(
+                      // "| Schedule Your Order! ",
+                      Localization.scheduleOrderScheduleOrder.tr,
                       style: Theme.of(context).textTheme.headlineSmall),
                 ),
-                Text("Deliver to",
+                Text(
+                    // "Deliver to",
+                    Localization.scheduleOrderDeliver.tr,
                     style: Theme.of(context).textTheme.labelLarge),
                 const VSpace(16),
                 AppTextField(
-                  hintText: "Location",
+                  // hintText: "Location",
+                  hintText: Localization.scheduleOrderLocation.tr,
                   suffixIcon: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: SvgPicture.asset(
@@ -61,7 +69,8 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                 ),
                 const VSpace(32),
                 AppTextField(
-                  hintText: "Phone Number",
+                  // hintText: "Phone Number",
+                  hintText: Localization.createAccountPhoneNum.tr,
                   suffixIcon: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: SvgPicture.asset(
@@ -73,7 +82,9 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Preferred Delivery Time",
+                    Text(
+                        // "Preferred Delivery Time",
+                        Localization.scheduleOrderDeliveryTime.tr,
                         style: Theme.of(context).textTheme.labelLarge),
                     SvgPicture.asset(
                       CommonAssets.downArrowIcon,
@@ -96,7 +107,8 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                               : AppThemes.primarySubtle3,
                           child: Center(
                               child: Text(
-                            "Now",
+                            // "Now",
+                            Localization.scheduleOrderNow.tr,
                             style: Theme.of(context).textTheme.labelMedium,
                           )),
                         ),
@@ -133,7 +145,8 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                "Choose Date and Time",
+                                // "Choose Date and Time",
+                                Localization.scheduleOrderChooseDateAndTime.tr,
                                 style: Theme.of(context).textTheme.labelMedium,
                               ),
                               Text(
@@ -151,7 +164,9 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Delivery Type",
+                    Text(
+                        // "Delivery Type",
+                        Localization.scheduleOrderDeliveryType.tr,
                         style: Theme.of(context).textTheme.labelLarge),
                     SvgPicture.asset(
                       CommonAssets.downArrowIcon,
@@ -174,7 +189,8 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                               : AppThemes.primarySubtle3,
                           child: Center(
                               child: Text(
-                            "Deliver Me",
+                            // "Deliver Me",
+                            Localization.scheduleOrderDeliverMe.tr,
                             style: Theme.of(context).textTheme.labelMedium,
                           )),
                         ),
@@ -193,7 +209,8 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                               : AppThemes.primarySubtle3,
                           child: Center(
                               child: Text(
-                            "I Will Pick Up",
+                            // "I Will Pick Up",
+                            Localization.scheduleOrderPickUp.tr,
                             style: Theme.of(context).textTheme.labelMedium,
                           )),
                         ),
