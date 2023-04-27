@@ -15,7 +15,6 @@ class CommonBaseClass extends StatelessWidget {
       this.showBottomWidget = false,
       this.showBackIcon,
       this.showSearchBar,
-      this.isOrdersScreen,
       this.isProfileScreen,
       this.showlocation,
       this.bottomWidgetHPadding = 16.0,
@@ -36,7 +35,6 @@ class CommonBaseClass extends StatelessWidget {
   bool showBottomWidget = false;
   bool? showBackIcon;
   bool? showSearchBar;
-  bool? isOrdersScreen;
   bool? isProfileScreen;
   bool? showlocation;
   double bottomWidgetHPadding;
@@ -50,14 +48,13 @@ class CommonBaseClass extends StatelessWidget {
     SizeConfig().init(context);
     return Scaffold(
       extendBodyBehindAppBar: false,
-      backgroundColor: AppThemes.white,
+      // backgroundColor: AppThemes.white,
       appBar: showAppBar == true
           ? AppBarWidget(
               showSearchBar: showSearchBar,
               showBackIcon: showBackIcon,
               showlocation: showlocation,
               pageTitle: pageTitle,
-              isOrdersScreen: isOrdersScreen,
               isProfileScreen: isProfileScreen,
           showActionButtons: showActionButtons,
             )

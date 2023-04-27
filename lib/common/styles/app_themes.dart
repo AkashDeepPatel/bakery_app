@@ -239,7 +239,7 @@ class AppThemes {
 
 
   //constants color range for dark theme
-  static const Color _darkPrimaryColor = primary;
+  static const Color _darkPrimaryColor = white;
 
   //Background Colors
   static const Color _darkBackgroundColor = black;
@@ -388,7 +388,7 @@ class AppThemes {
     listTileTheme: const ListTileThemeData(),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       selectedIconTheme: const IconThemeData(
-        color: _darkPrimaryColor,
+        color: primary,
       ),
       unselectedIconTheme: const IconThemeData(
         // color: _darkTextSecondaryColor,
@@ -412,14 +412,14 @@ class AppThemes {
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
           animationDuration: const Duration(milliseconds: 2000),
-          backgroundColor: MaterialStateProperty.all(Colors.lightBlue),
-          textStyle: MaterialStateProperty.all(_darkTextTheme.labelLarge),
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          textStyle: MaterialStateProperty.all(_darkTextTheme.titleMedium),
         )),
     textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           animationDuration: const Duration(milliseconds: 2000),
-          backgroundColor: MaterialStateProperty.all(Colors.lightBlue),
-          textStyle: MaterialStateProperty.all(_darkTextTheme.labelLarge),
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+          textStyle: MaterialStateProperty.all(_darkTextTheme.titleMedium),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14.0),

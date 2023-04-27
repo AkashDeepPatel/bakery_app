@@ -25,11 +25,11 @@ class BottomNavigationBarWidget extends StatelessWidget {
           ]),
           child: ClipRRect(
             child: BottomNavigationBar(
-              backgroundColor: AppThemes.white,
+              // backgroundColor: AppThemes.white,
               selectedLabelStyle: Theme.of(context).textTheme.labelSmall,
               unselectedLabelStyle: Theme.of(context).textTheme.labelSmall,
               unselectedItemColor: AppThemes.subtleDark,
-              selectedItemColor: AppThemes.black,
+              selectedItemColor: AppThemes.primary,
               elevation: 5.0,
               currentIndex: dashboardController.currentIndex.value,
               onTap: (index) {
@@ -40,8 +40,8 @@ class BottomNavigationBarWidget extends StatelessWidget {
                     DashboardAssets.selectedHomeIcon, Localization.buttonHome.tr, context),
                 bottomNavItem(DashboardAssets.unselectedOrdersIcon,
                     DashboardAssets.selectedOrdersIcon, Localization.dashboadOrders.tr, context),
-                bottomNavItem(DashboardAssets.unselectedCategoryIcon,
-                    DashboardAssets.selectedCategoryIcon, Localization.dashboadMenu.tr, context),
+                // bottomNavItem(DashboardAssets.unselectedCategoryIcon,
+                //     DashboardAssets.selectedCategoryIcon, Localization.dashboadMenu.tr, context),
                 bottomNavItem(DashboardAssets.unselectedCartIcon,
                     DashboardAssets.selectedCartIcon, Localization.dashboadCart.tr, context),
                 bottomNavItem(DashboardAssets.unselectedProfileIcon,
@@ -62,7 +62,7 @@ BottomNavigationBarItem bottomNavItem(String unselectedIcon,
       padding: const EdgeInsets.only(top: 8.0, bottom: 2),
       child: SvgPicture.asset(
         selectedIcon,
-        color: AppThemes.black,
+        color: AppThemes.primary,
       ),
     ),
     icon: Padding(

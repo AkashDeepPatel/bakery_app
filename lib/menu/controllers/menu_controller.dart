@@ -7,7 +7,7 @@ class ItemMenuController extends BaseController {
   void onInit() {
     super.onInit();
     // getMenuItems();
-    debugPrint("menuCtr");
+    // debugPrint("menuCtr");
   }
 
   RxList menuItems = [].obs;

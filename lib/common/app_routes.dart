@@ -39,7 +39,7 @@ class AppRoutes {
     GetPage(
       name: '/orders',
       binding: OrdersBindings(),
-      page: () => const OrdersScreen(),
+      page: () => OrdersScreen(),
       children: OrdersRoutes.routes,
     ),
     GetPage(

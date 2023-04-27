@@ -1,11 +1,13 @@
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
 import 'package:bakery_app/dashboard/screens/language_screen.dart';
+import 'package:bakery_app/profile/controllers/profile_controller.dart';
 import 'package:bakery_app/profile/screens/edit_profile.dart';
 import 'package:bakery_app/profile/screens/your_address_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../common/controllers/base_controller.dart';
 import '../../common/controllers/theme_controller.dart';
 import '../../common/localization/localization.g.dart';
 import '../../common/styles/app_themes.dart';
@@ -19,7 +21,7 @@ import '../widgets/profile_tile_item.dart';
 import '../widgets/send_feedback_dialog_widget.dart';
 import 'chat_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends GetView<ProfileController> {
   ProfileScreen({Key? key}) : super(key: key);
   Ctr ctr = Get.put(Ctr());
   @override
@@ -30,6 +32,22 @@ class ProfileScreen extends StatelessWidget {
       isProfileScreen: true,
       child: ListView(
         children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Obx(()=>Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  child: BaseController.getIcon(controller.profilePicUrl.value,"name", height: 90, width: 90, radius: 64))),
+              const VSpace(4),
+              Text(
+                controller.username.value.text,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const VSpace(16),
+            ],
+          ),
           AppCard(
             child: Column(
               children: [

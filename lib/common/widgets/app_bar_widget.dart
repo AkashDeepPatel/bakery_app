@@ -17,12 +17,12 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   AddressController addressController = Get.put(AddressController());
   ProfileController controller = Get.find();
 
+
   AppBarWidget({
     Key? key,
     this.showBackIcon,
     this.pageTitle,
     this.showSearchBar,
-    this.isOrdersScreen,
     this.isProfileScreen,
     this.showlocation,
     this.showActionButtons,
@@ -30,7 +30,6 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   bool? showBackIcon;
   String? pageTitle;
   bool? showSearchBar;
-  bool? isOrdersScreen;
   bool? isProfileScreen;
   bool? showlocation;
   bool? showActionButtons;
@@ -46,84 +45,104 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         padding:
             const EdgeInsets.only(left: 16.0, right: 16.0, top: 40, bottom: 8),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
+
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 if (showlocation == true)
-                  Obx(() => Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: AppThemes.primary,
-                            radius: 17,
-                            child:
-                                SvgPicture.asset(CommonAssets.locationPinIcon),
-                          ),
-                          const HSpace(12),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                  Obx(() => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          "Welcome, ${controller.username.value.text}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium,
+                        ),
+                      ),
+                      SizedBox(height: 5,),
+                      Row(
                             children: [
-                              baseController.placemark.isNotEmpty
-                                  ? Text(
-                                      "${baseController.placemark[0].locality}, ${baseController.placemark[0].postalCode}",
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
-                                    )
-                                  : Text(
-                                  // "Loading"
-                                  Localization.appBarLoading.tr
+                              CircleAvatar(
+                                backgroundColor: AppThemes.primary,
+                                radius: 12,
+                                child:
+                                    SvgPicture.asset(CommonAssets.locationPinIcon),
                               ),
-                              InkWell(
-                                onTap: () {
-                                  Get.bottomSheet(const AppBottomSheet());
-                                },
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      // "Select Location",
-                                      Localization.appBarSelectLocation.tr,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelLarge,
-                                    ),
-                                    const HSpace(5),
-                                    SvgPicture.asset(
-                                        CommonAssets.downArrowIcon),
-                                  ],
-                                ),
+                              const HSpace(12),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  baseController.placemark.isNotEmpty
+                                      ? Text(
+                                          "${baseController.placemark[0].locality}, ${baseController.placemark[0].postalCode}",
+                                          style:
+                                              Theme.of(context).textTheme.bodySmall,
+                                        )
+                                      : Text(
+                                      // "Loading"
+                                      Localization.appBarLoading.tr
+                                  ),
+                                  // InkWell(
+                                  //   onTap: () {
+                                  //     Get.bottomSheet(const AppBottomSheet());
+                                  //   },
+                                  //   child: Row(
+                                  //     children: [
+                                  //       Text(
+                                  //         // "Select Location",
+                                  //         Localization.appBarSelectLocation.tr,
+                                  //         style: Theme.of(context)
+                                  //             .textTheme
+                                  //             .labelLarge,
+                                  //       ),
+                                  //       const HSpace(5),
+                                  //       SvgPicture.asset(
+                                  //           CommonAssets.downArrowIcon),
+                                  //     ],
+                                  //   ),
+                                  // )
+                                ],
                               )
                             ],
-                          )
-                        ],
-                      ))
+                          ),
+                    ],
+                  ))
                 else
                   InkWell(
                       onTap: () {
                         Get.back();
                       },
-                      child: const Icon(Icons.arrow_back_ios_outlined)),
-                const Spacer(),
+                      child: Icon(Icons.arrow_back_ios_outlined, color: Theme.of(context).textTheme.titleMedium!.color,)),
+                // const Spacer(),
                 if (pageTitle != "")
-                  Text(
-                    pageTitle!,
-                    style: Theme.of(context).textTheme.titleLarge,
+                  Center(
+                    child: Text(
+                      pageTitle!,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
                   ),
-                const Spacer(),
-                showActionButtons!?
-                Row(
-                  children: [
+                // const Spacer(),
+                // showActionButtons!?
+                // Row(
+                //   children: [
                     InkWell(
                         onTap: () {
                           Get.to(() => WishlistScreen());
                         },
                         child: SvgPicture.asset(CommonAssets.favouritesIcon)),
-                    const HSpace(15),
-                    InkWell(
-                        onTap: () {},
-                        child: SvgPicture.asset(CommonAssets.notificationIcon)),
-
-                  ],
-                ):SizedBox(),
+                //     const HSpace(15),
+                //     // InkWell(
+                //     //     onTap: () {},
+                //     //     child: SvgPicture.asset(CommonAssets.notificationIcon)),
+                //
+                //   ],
+                // ):SizedBox(),
               ],
             ),
             // showSearchBar==true?const VSpace(10):SizedBox(),
@@ -153,40 +172,40 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               //   ],
               // ),
             const VSpace(10),
-            if (isOrdersScreen == true)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const VSpace(40),
-                  Text(
-                    // "Current Order",
-                    Localization.appBarCurrentOrder.tr,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const HSpace(30),
-                  Text(
-                    // "Past Order",
-                    Localization.appBarPastOrder.tr,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  )
-                ],
-              ),
-            if (isProfileScreen == true)
-              Column(
-                children: [
-                  Obx(()=>Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      child: BaseController.getIcon(controller.profilePicUrl.value,"name", height: 90, width: 90, radius: 64))),
-                  const VSpace(4),
-                  Text(
-                    controller.username.value.text,
-                    style: Theme.of(context).textTheme.labelLarge,
-                  ),
-                  const VSpace(16),
-                ],
-              )
+            // if (isOrdersScreen == true)
+            //   Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       const VSpace(40),
+            //       Text(
+            //         // "Current Order",
+            //         Localization.appBarCurrentOrder.tr,
+            //         style: Theme.of(context).textTheme.titleMedium,
+            //       ),
+            //       const HSpace(30),
+            //       Text(
+            //         // "Past Order",
+            //         Localization.appBarPastOrder.tr,
+            //         style: Theme.of(context).textTheme.titleMedium,
+            //       )
+            //     ],
+            //   ),
+            // if (isProfileScreen == true)
+            //   Column(
+            //     children: [
+            //       Obx(()=>Container(
+            //           decoration: BoxDecoration(
+            //             shape: BoxShape.circle,
+            //           ),
+            //           child: BaseController.getIcon(controller.profilePicUrl.value,"name", height: 90, width: 90, radius: 64))),
+            //       const VSpace(4),
+            //       Text(
+            //         controller.username.value.text,
+            //         style: Theme.of(context).textTheme.labelLarge,
+            //       ),
+            //       const VSpace(16),
+            //     ],
+            //   )
           ],
         ),
       ),

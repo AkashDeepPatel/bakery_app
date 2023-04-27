@@ -2,6 +2,7 @@ import 'package:bakery_app/cart/model.dart';
 import 'package:bakery_app/common/controllers/base_controller.dart';
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
+import 'package:bakery_app/dashboard/controllers/dashboard_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -49,6 +50,7 @@ class ProductDetailScreen extends GetView<HomeController> {
                       child: SvgPicture.asset(
                         wishlistCtr.wishlistItems.contains(model)
                             ?CommonAssets.favouritesFilledIcon: CommonAssets.favouritesIcon,
+                        color: Theme.of(context).textTheme.titleMedium!.color,
                         // color: isFav.value == false ? AppThemes.background : null,
                       ),
                     ),
@@ -57,18 +59,20 @@ class ProductDetailScreen extends GetView<HomeController> {
                   child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: AppTextButton(
-                  text: cartController.cartItemList.contains(CartProductModel(product: model))?"Add to Cart":"Product Already in Cart",
+                  text: "Add to Cart",
+                  textColor: Theme.of(context).iconTheme.color,
                   onTap: () {
-                    debugPrint("added");
+                    // debugPrint("added");
                     cartController.addProductToCart(
 CartProductModel(product: model, itemQty: detailsCtr.qty)
                     );
                     // cartController.cartItemList
                     //     .add(model);
                     // cartController.addItemInCart();
+                    Get.back();
                     Get.snackbar("Product Added to Cart", "",
                         backgroundColor: AppThemes.black);
-                  },
+Get.find<DashboardController>().changeBottomNavigation(2);                },
                 ),
               )),
             ],
@@ -211,10 +215,10 @@ CartProductModel(product: model, itemQty: detailsCtr.qty)
                       Text("Description",
                           style: Theme.of(context).textTheme.headlineSmall),
                       ExpansionTile(
-                        iconColor: AppThemes.black,
-                        textColor: AppThemes.black,
-                        collapsedTextColor: AppThemes.black,
-                        collapsedIconColor: AppThemes.black,
+                        // iconColor: AppThemes.black,
+                        // textColor: AppThemes.black,
+                        // collapsedTextColor: AppThemes.black,
+                        // collapsedIconColor: AppThemes.black,
                         title: Text('About'),
                         expandedAlignment: Alignment.centerLeft,
                         children: <Widget>[
@@ -230,10 +234,10 @@ CartProductModel(product: model, itemQty: detailsCtr.qty)
                         ],
                       ),
                       ExpansionTile(
-                        iconColor: AppThemes.black,
-                        textColor: AppThemes.black,
-                        collapsedTextColor: AppThemes.black,
-                        collapsedIconColor: AppThemes.black,
+                        // iconColor: AppThemes.black,
+                        // textColor: AppThemes.black,
+                        // collapsedTextColor: AppThemes.black,
+                        // collapsedIconColor: AppThemes.black,
                         title: Text('Ingredient'),
                         expandedAlignment: Alignment.centerLeft,
                         children: <Widget>[
@@ -246,10 +250,10 @@ CartProductModel(product: model, itemQty: detailsCtr.qty)
                         ],
                       ),
                       ExpansionTile(
-                        iconColor: AppThemes.black,
-                        textColor: AppThemes.black,
-                        collapsedTextColor: AppThemes.black,
-                        collapsedIconColor: AppThemes.black,
+                        // iconColor: AppThemes.black,
+                        // textColor: AppThemes.black,
+                        // collapsedTextColor: AppThemes.black,
+                        // collapsedIconColor: AppThemes.black,
                         title: Text('Nutritional Facts'),
                         expandedAlignment: Alignment.centerLeft,
                         children: <Widget>[

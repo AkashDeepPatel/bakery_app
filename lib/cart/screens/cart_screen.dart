@@ -1,4 +1,3 @@
-import 'package:bakery_app/cart/model.dart';
 import 'package:bakery_app/common/localization/localization.g.dart';
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
@@ -6,11 +5,11 @@ import 'package:bakery_app/orders/screens/schedule_order.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../common/controllers/base_controller.dart';
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
 import '../controllers/cart_controller.dart';
+import '../widgets/cart_item_widget.dart';
 
 class CartScreen extends GetView<CartController> {
   CartScreen({Key? key}) : super(key: key);
@@ -20,6 +19,8 @@ class CartScreen extends GetView<CartController> {
     return CommonBaseClass(
       showAppBar: true,
       showlocation: true,
+      bottomWidgetBottomPadding: 0.0,
+      bottomWidgetHPadding: 0.0,
       showBottomWidget: true,
       bottomWidget: Obx(
         () => Container(
@@ -132,14 +133,14 @@ class CartScreen extends GetView<CartController> {
                             Localization.cartGrandTotal.tr,
                             style: Theme.of(context)
                                 .textTheme
-                                .headlineSmall!
+                                .titleMedium!
                                 .copyWith(fontWeight: FontWeight.w700),
                           ),
                           Text(
                             "\$ ${controller.getGrandTotal()}",
                             style: Theme.of(context)
                                 .textTheme
-                                .headlineSmall!
+                                .titleMedium!
                                 .copyWith(
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -164,7 +165,7 @@ class CartScreen extends GetView<CartController> {
           ),
         ),
       ),
-      child: Column(
+      child: Obx(()=>Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -210,120 +211,20 @@ class CartScreen extends GetView<CartController> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: controller.cartItemList.isNotEmpty
                   ? ListView.separated(itemBuilder: (context, index){
-                    return CartItemTile(
-                      model: controller.cartItemList[index],
-                    );
+                return CartItemTile(
+                  model: controller.cartItemList[index],
+                );
               }, separatorBuilder: (context, index){
-                    return SizedBox();
+                return SizedBox();
               }, itemCount: controller.cartItemList.length)
                   :  Center(child: Text(
-                  // "No Products in Cart"
+                // "No Products in Cart"
                   Localization.cartNoProduct.tr)),
             ),
           ),
         ],
-      ),
+      )),
     );
   }
 }
 
-class CartItemTile extends GetView<CartController> {
-  CartItemTile({
-    Key? key,
-   required this.model,
-  }) : super(key: key);
-  CartProductModel model;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 170,
-            height: 150,
-            child: Stack(
-              children: [
-                Positioned(
-                    child: Align(
-                        alignment: Alignment.center,
-                        child: BaseController.getIcon(model.product.imgUrl,"name",
-                            height: 125, width: 175))),
-                Positioned(
-                  bottom: 0,
-                  left: 30,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        color: AppThemes.primary,
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(20.0))),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 6.0),
-                      child: Row(
-                        children: [
-                          InkWell(
-                              onTap: (){
-                                model.itemQty!.value=(model.itemQty!.value-1);
-                              },
-                              child: const Icon(Icons.remove, color: AppThemes.black)),
-                          const HSpace(10),
-                          Obx(()=>Text(model.itemQty!.value.toString(),
-                              style: Theme.of(context).textTheme.labelLarge),),
-                          const HSpace(10),
-                          InkWell(
-                              onTap: (){
-                                model.itemQty!.value=(model.itemQty!.value+1);
-                              },
-                              child: const Icon(Icons.add, color: AppThemes.black)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const HSpace(16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  model.product.title,
-                  textAlign: TextAlign.start,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                const VSpace(40.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "\$ ${model.product.price}",
-                          style: Theme.of(context).textTheme.labelLarge,
-                        ),
-                        Text(
-                          "\$ ${(model.product.price * 1.17).toDouble().round()}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(
-                                  decoration: TextDecoration.lineThrough),
-                        ),
-                      ],
-                    ),
-                  ],
-                )
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}

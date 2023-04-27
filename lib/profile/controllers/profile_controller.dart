@@ -43,7 +43,7 @@ class ProfileController extends BaseController {
     RxStatus.loading();
       profilePicUrl.value = firebaseStorage.ref().child('profilePictures/${firebaseAuth.currentUser!.uid}').fullPath;
       // debugPrint("---$url");
-    debugPrint("<->${profilePicUrl.value}");
+    // debugPrint("<->${profilePicUrl.value}");
     RxStatus.success();
   }
 

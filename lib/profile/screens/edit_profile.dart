@@ -21,8 +21,8 @@ class EditProfile extends StatelessWidget {
     return CommonBaseClass(
         showAppBar: true,
         pageTitle: 'Profile Settings',
-        showBottomWidget: true,
-        bottomWidget: AppTextButton(text: 'Save'),
+        // showBottomWidget: true,
+        // bottomWidget: AppTextButton(text: 'Save', tit),
         child: Obx(() => ListView(
               children: [
                 AppCard(

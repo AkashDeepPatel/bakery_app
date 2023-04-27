@@ -63,30 +63,30 @@ class ListItemTileWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    left: 30,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          color: AppThemes.primary,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20.0))),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 6.0),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.remove, color: AppThemes.black),
-                            const HSpace(10),
-                            Text("1",
-                                style: Theme.of(context).textTheme.labelLarge),
-                            const HSpace(10),
-                            const Icon(Icons.add, color: AppThemes.black),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Positioned(
+                  //   bottom: 0,
+                  //   left: 30,
+                  //   child: Container(
+                  //     decoration: const BoxDecoration(
+                  //         color: AppThemes.primary,
+                  //         borderRadius:
+                  //             BorderRadius.all(Radius.circular(20.0))),
+                  //     child: Padding(
+                  //       padding: const EdgeInsets.symmetric(
+                  //           horizontal: 16.0, vertical: 6.0),
+                  //       child: Row(
+                  //         children: [
+                  //           const Icon(Icons.remove, color: AppThemes.black),
+                  //           const HSpace(10),
+                  //           Text("1",
+                  //               style: Theme.of(context).textTheme.labelLarge),
+                  //           const HSpace(10),
+                  //           const Icon(Icons.add, color: AppThemes.black),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -150,32 +150,32 @@ class ListItemTileWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      InkWell(
-                        onTap: () {
-                          debugPrint("added");
-                          // controller.cartItemList
-                          //     .add(homeConrtoller.popularProductList[index]);
-                          Get.snackbar("Product Added to Cart", "",
-                              backgroundColor: AppThemes.black);
-                        },
-                        child: Container(
-                          decoration: const BoxDecoration(
-                              color: AppThemes.black,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8.0))),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 8.0),
-                            child: Text(
-                              "Add to cart",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(color: AppThemes.background),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     // debugPrint("added");
+                      //     // controller.cartItemList
+                      //     //     .add(homeConrtoller.popularProductList[index]);
+                      //     Get.snackbar("Product Added to Cart", "",
+                      //         backgroundColor: AppThemes.black);
+                      //   },
+                      //   child: Container(
+                      //     decoration: const BoxDecoration(
+                      //         color: AppThemes.black,
+                      //         borderRadius:
+                      //             BorderRadius.all(Radius.circular(8.0))),
+                      //     child: Padding(
+                      //       padding: const EdgeInsets.symmetric(
+                      //           horizontal: 12.0, vertical: 8.0),
+                      //       child: Text(
+                      //         "Add to cart",
+                      //         style: Theme.of(context)
+                      //             .textTheme
+                      //             .bodySmall!
+                      //             .copyWith(color: AppThemes.background),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   )
                 ],

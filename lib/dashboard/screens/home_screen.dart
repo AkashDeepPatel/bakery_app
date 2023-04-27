@@ -72,7 +72,7 @@ class HomeScreen extends GetView<HomeController> {
                   child: Text(
                     // "| For you",
                     Localization.homeForYou.tr,
-                    style: Theme.of(context).textTheme.labelLarge,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
                 Obx(
@@ -103,7 +103,7 @@ class HomeScreen extends GetView<HomeController> {
                           Text(
                             // "| Popular",
                             Localization.homePopular.tr,
-                            style: Theme.of(context).textTheme.labelLarge,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                           const HSpace(5),
                           SvgPicture.asset(CommonAssets.downArrowIcon)
@@ -172,8 +172,8 @@ class DashboardItemTile extends GetView<WishlistController> {
         Get.to(() => ProductDetailScreen(model: model));
       },
       child: Container(
-        decoration: const BoxDecoration(
-            color: AppThemes.white,
+        decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.all(
               Radius.circular(12),
             )),

@@ -26,7 +26,7 @@ class ProfileItemTile extends StatelessWidget {
       onTap: onTap,
       child: Row(
         children: [
-          SvgPicture.asset(icon),
+          SvgPicture.asset(icon, color: Theme.of(context).textTheme.titleMedium!.color,),
           const HSpace(24),
           Text(
             title,
