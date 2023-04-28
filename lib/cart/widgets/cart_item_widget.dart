@@ -99,7 +99,7 @@ class CartItemTile extends GetView<CartController> {
                       children: [
                         Text(
                           "\$ ${model.product.price}",
-                          style: Theme.of(context).textTheme.labelLarge,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         Text(
                           "\$ ${(model.product.price * 1.17).toDouble().round()}",

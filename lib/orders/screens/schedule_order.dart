@@ -33,7 +33,8 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: AppTextButton(
           text: "Continue",
-          color: AppThemes.black,
+          // color: AppThemes.black,
+          textColor: Theme.of(context).iconTheme.color,
           onTap: () {
             paymentCtr.options.addAll({
               'prefill': {
@@ -53,10 +54,10 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
             child: ListView(
               children: [
                 Text("| Schedule Your Order! ",
-                    style: Theme.of(context).textTheme.headlineSmall),
+                    style: Theme.of(context).textTheme.titleMedium),
                 SizedBox(height: 16,),
                 Text("Deliver to",
-                    style: Theme.of(context).textTheme.labelLarge),
+                    style: Theme.of(context).textTheme.titleMedium),
                 const VSpace(16),
                 TextField(
                   readOnly: true,
@@ -108,7 +109,7 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Preferred Delivery Time",
-                        style: Theme.of(context).textTheme.labelLarge),
+                        style: Theme.of(context).textTheme.titleMedium),
                     SvgPicture.asset(
                       CommonAssets.downArrowIcon,
                     ),
@@ -131,7 +132,9 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                           child: Center(
                               child: Text(
                             "Now",
-                            style: Theme.of(context).textTheme.labelMedium,
+                            style: TextStyle(
+                              color: Theme.of(context).iconTheme.color,
+                            ),
                           )),
                         ),
                       ),
@@ -168,11 +171,15 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                             children: [
                               Text(
                                 "Choose Date and Time",
-                                style: Theme.of(context).textTheme.labelMedium,
+                                style: TextStyle(
+                                  color: Theme.of(context).iconTheme.color,
+                                ),
                               ),
                               Text(
                                 DateFormat('dd-MMM-yy').format(controller.deliveryDateTime.value),
-                                style: Theme.of(context).textTheme.labelMedium,
+                                style: TextStyle(
+                                  color: Theme.of(context).iconTheme.color,
+                                ),
                               ),
                             ],
                           )),
@@ -186,7 +193,7 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Delivery Type",
-                        style: Theme.of(context).textTheme.labelLarge),
+                        style: Theme.of(context).textTheme.titleSmall),
                     SvgPicture.asset(
                       CommonAssets.downArrowIcon,
                     ),
@@ -209,8 +216,9 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                           child: Center(
                               child: Text(
                             "Deliver Me",
-                            style: Theme.of(context).textTheme.labelMedium,
-                          )),
+                                style: TextStyle(
+                                  color: Theme.of(context).iconTheme.color,
+                                ),                          )),
                         ),
                       ),
                     ),
@@ -228,8 +236,9 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                           child: Center(
                               child: Text(
                             "I Will Pick Up",
-                            style: Theme.of(context).textTheme.labelMedium,
-                          )),
+                                style: TextStyle(
+                                  color: Theme.of(context).iconTheme.color,
+                                ),                          )),
                         ),
                       ),
                     ),
