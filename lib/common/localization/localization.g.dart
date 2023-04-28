@@ -67,6 +67,18 @@ class Localization extends Translations {
 'addAddress.DefaultAddress': 'Make this my default address.',
 'addAddress.Save': 'Save',
 'otpVerification.OTPsent': 'An Otp has been sent to the number ',
+'scheduleOrder.Cart': 'Cart',
+'scheduleOrder.Continue': 'Continue ',
+'scheduleOrder.ScheduleOrder': '| Schedule Your Order!',
+'scheduleOrder.Deliver': 'Deliver to',
+'scheduleOrder.Location': 'Location',
+'scheduleOrder.Delivery Time': 'Preferred Delivery Time',
+'scheduleOrder.Now': 'Now',
+'scheduleOrder.ChooseDateAndTime': 'Choose Date and Time',
+'scheduleOrder.DeliveryType': 'Delivery Type',
+'scheduleOrder.DeliverMe': 'Deliver Me',
+'scheduleOrder.PickUp': 'I Will Pick Up',
+'languageScreen.ChooseLanguage': 'Choose Language',
 },
 'fr_fr': {
 'app_name': 'Boulangerie de couronne',
@@ -133,6 +145,18 @@ class Localization extends Translations {
 'addAddress.DefaultAddress': 'Faites-en mon adresse par défaut.',
 'addAddress.Save': 'Sauvegarder',
 'otpVerification.OTPsent': 'Un OTP a été envoyé au numéro',
+'scheduleOrder.Cart': 'Chariot',
+'scheduleOrder.Continue': 'Continuer',
+'scheduleOrder.ScheduleOrder': '| Planifiez votre commande!',
+'scheduleOrder.Deliver': 'Livrer à',
+'scheduleOrder.Location': 'Emplacement',
+'scheduleOrder.Delivery Time': 'Délai de livraison préféré',
+'scheduleOrder.Now': 'Maintenant',
+'scheduleOrder.ChooseDateAndTime': 'Choisissez la date et l\'heure',
+'scheduleOrder.DeliveryType': 'type de livraison',
+'scheduleOrder.DeliverMe': 'Délivre-moi',
+'scheduleOrder.PickUp': 'Je vais ramasser',
+'languageScreen.ChooseLanguage': 'Choisissez la langue',
 },
 'zh-hans_cn': {
 'app_name': '皇冠面包店',
@@ -165,14 +189,14 @@ class Localization extends Translations {
 'welcome.subTitle': '每天享受美味的蛋糕等等！',
 'welcome.createAccount': '创建账户',
 'welcome.logIn': '登录',
-'createAccount.Title': '欢迎，请输入详细信息以与我们创建一个帐户。',
+'createAccount.Title': '欢迎，请输入详细信息以与我们创建帐户。',
 'createAccount.fullName': '全名',
 'createAccount.fullNameHint': '橄榄紫色',
 'createAccount.PhoneNum': '电话号码',
 'createAccount.PhoneNumHint': '911234657890',
 'createAccount.Email': '电子邮件',
 'createAccount.EmailHint': '示例@gmail.com',
-'createAccount.OTP': '继续获得OTP',
+'createAccount.OTP': '继续获取OTP',
 'createAccount.Member': '已经是会员？',
 'login.Title': '欢迎回来！',
 'login.SignUp': '报名',
@@ -196,9 +220,21 @@ class Localization extends Translations {
 'addAddress.Area': '区域/街道/部门',
 'addAddress.City': '城市/城镇',
 'addAddress.Pincode': 'PIN码',
-'addAddress.DefaultAddress': '将此作为我的默认地址。',
+'addAddress.DefaultAddress': '将其作为我的默认地址。',
 'addAddress.Save': '节省',
 'otpVerification.OTPsent': 'OTP已发送到该号码',
+'scheduleOrder.Cart': '大车',
+'scheduleOrder.Continue': '继续',
+'scheduleOrder.ScheduleOrder': '|安排您的订单！',
+'scheduleOrder.Deliver': '交付给',
+'scheduleOrder.Location': '地点',
+'scheduleOrder.Delivery Time': '首选的交货时间',
+'scheduleOrder.Now': '现在',
+'scheduleOrder.ChooseDateAndTime': '选择日期和时间',
+'scheduleOrder.DeliveryType': '送货类型',
+'scheduleOrder.DeliverMe': '送我',
+'scheduleOrder.PickUp': '我会捡起',
+'languageScreen.ChooseLanguage': '选择语言',
 },
 'hi_in': {
 'app_name': 'क्राउन बेकरी',
@@ -265,6 +301,18 @@ class Localization extends Translations {
 'addAddress.DefaultAddress': 'इसे मेरा डिफ़ॉल्ट पता बनाएं।',
 'addAddress.Save': 'बचाना',
 'otpVerification.OTPsent': 'एक ओटीपी को नंबर पर भेजा गया है',
+'scheduleOrder.Cart': 'कार्ट',
+'scheduleOrder.Continue': 'जारी रखना',
+'scheduleOrder.ScheduleOrder': '| अपने आदेश को शेड्यूल करें!',
+'scheduleOrder.Deliver': 'करने के लिए वितरित',
+'scheduleOrder.Location': 'जगह',
+'scheduleOrder.Delivery Time': 'पसंदीदा डिलीवरी का समय',
+'scheduleOrder.Now': 'अब',
+'scheduleOrder.ChooseDateAndTime': 'दिनांक और समय चुनें',
+'scheduleOrder.DeliveryType': 'वितरण के प्रकार',
+'scheduleOrder.DeliverMe': 'मुझे सौंप दो',
+'scheduleOrder.PickUp': 'मुझे उठाना होगा',
+'languageScreen.ChooseLanguage': 'भाषा चुनें',
 },
         };
          static const appName = 'app_name'; 
@@ -331,6 +379,18 @@ class Localization extends Translations {
  static const addAddressDefaultAddress = 'addAddress.DefaultAddress'; 
  static const addAddressSave = 'addAddress.Save'; 
  static const otpVerificationOTPsent = 'otpVerification.OTPsent'; 
+ static const scheduleOrderCart = 'scheduleOrder.Cart'; 
+ static const scheduleOrderContinue = 'scheduleOrder.Continue'; 
+ static const scheduleOrderScheduleOrder = 'scheduleOrder.ScheduleOrder'; 
+ static const scheduleOrderDeliver = 'scheduleOrder.Deliver'; 
+ static const scheduleOrderLocation = 'scheduleOrder.Location'; 
+ static const scheduleOrderDeliveryTime = 'scheduleOrder.Delivery Time'; 
+ static const scheduleOrderNow = 'scheduleOrder.Now'; 
+ static const scheduleOrderChooseDateAndTime = 'scheduleOrder.ChooseDateAndTime'; 
+ static const scheduleOrderDeliveryType = 'scheduleOrder.DeliveryType'; 
+ static const scheduleOrderDeliverMe = 'scheduleOrder.DeliverMe'; 
+ static const scheduleOrderPickUp = 'scheduleOrder.PickUp'; 
+ static const languageScreenChooseLanguage = 'languageScreen.ChooseLanguage'; 
 
       }
       
