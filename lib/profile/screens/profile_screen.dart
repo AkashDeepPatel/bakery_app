@@ -204,6 +204,7 @@ class ProfileScreen extends GetView<ProfileController> {
                             child: AppTextButton(
                           // text: "Cancel",
                           text: Localization.profileCancle.tr,
+                          textColor: Theme.of(context).iconTheme.color,
                           onTap: () {
                             Get.back();
                           },

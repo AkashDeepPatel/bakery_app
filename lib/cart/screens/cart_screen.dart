@@ -133,14 +133,14 @@ class CartScreen extends GetView<CartController> {
                             Localization.cartGrandTotal.tr,
                             style: Theme.of(context)
                                 .textTheme
-                                .titleMedium!
+                                .labelLarge!
                                 .copyWith(fontWeight: FontWeight.w700),
                           ),
                           Text(
                             "\$ ${controller.getGrandTotal()}",
                             style: Theme.of(context)
                                 .textTheme
-                                .titleMedium!
+                                .labelLarge!
                                 .copyWith(
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -202,7 +202,7 @@ class CartScreen extends GetView<CartController> {
             child: Text(
               // "Your Cart",
               Localization.cartYourCart.tr,
-              style: Theme.of(context).textTheme.labelLarge,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
           const VSpace(16),

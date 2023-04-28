@@ -135,7 +135,9 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                         onTap: () {
                           Get.to(() => WishlistScreen());
                         },
-                        child: SvgPicture.asset(CommonAssets.favouritesIcon)),
+                        child: SvgPicture.asset(CommonAssets.favouritesIcon,
+                        color: Theme.of(context).textTheme.titleMedium!.color,
+                        )),
                 //     const HSpace(15),
                 //     // InkWell(
                 //     //     onTap: () {},
