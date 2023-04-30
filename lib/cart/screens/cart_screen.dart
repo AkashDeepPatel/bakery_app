@@ -73,7 +73,7 @@ class CartScreen extends GetView<CartController> {
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           Text(
-                            "\$ ${controller.getTotalMRP()}",
+                            "${controller.getTotalMRP()}",
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                         ],
@@ -88,7 +88,7 @@ class CartScreen extends GetView<CartController> {
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           Text(
-                            "- \$ ${controller.getDiscountOnMRP()}",
+                            "- ${controller.getDiscountOnMRP()}",
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                         ],
@@ -137,7 +137,7 @@ class CartScreen extends GetView<CartController> {
                                 .copyWith(fontWeight: FontWeight.w700),
                           ),
                           Text(
-                            "\$ ${controller.getGrandTotal()}",
+                            "${controller.getGrandTotal()}",
                             style: Theme.of(context)
                                 .textTheme
                                 .labelLarge!

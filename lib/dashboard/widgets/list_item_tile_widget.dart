@@ -137,11 +137,11 @@ class ListItemTileWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "\$ ${model.price}",
+                            "${model.price}",
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           Text(
-                            "\$ ${(model.price * 1.17).round()}",
+                            "${(model.price * 1.17).round()}",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall!

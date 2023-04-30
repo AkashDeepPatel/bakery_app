@@ -30,7 +30,7 @@ class ImagePickDialog extends GetView<ProfileController> {
                   onPressed: () {
                     Get.back();
                   },
-                  icon: const Icon(Icons.clear))
+                  icon: Icon(Icons.clear, color: Theme.of(context).textTheme.titleMedium!.color))
             ],
           ),
           const Divider(
@@ -51,7 +51,7 @@ class ImagePickDialog extends GetView<ProfileController> {
                 },
                 child: Column(
                   children: <Widget>[
-                    Icon(Icons.camera),
+                    Icon(Icons.camera, color: Theme.of(context).textTheme.titleMedium!.color),
                     // SvgPicture.asset(UserProfileAssets.camera),
                     Text("Camera"),
                   ],
@@ -65,7 +65,7 @@ class ImagePickDialog extends GetView<ProfileController> {
                 child: Column(
                   children: <Widget>[
                     // SvgPicture.asset(UserProfileAssets.gallery),
-                    Icon(Icons.image_outlined),
+                    Icon(Icons.image_outlined, color: Theme.of(context).textTheme.titleMedium!.color),
                     Text("Gallery"),
                   ],
                 ),

@@ -147,7 +147,7 @@ Get.find<DashboardController>().changeBottomNavigation(2);                },
                         children: [
                           Text(model.title,
                               style: Theme.of(context).textTheme.headlineSmall),
-                          Text("\$${model.price}",
+                          Text("${model.price}",
                               style: Theme.of(context).textTheme.headlineSmall)
                         ],
                       ),
