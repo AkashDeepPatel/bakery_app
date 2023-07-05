@@ -1,5 +1,4 @@
 import 'package:bakery_app/splash/splash_screen.dart';
-import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,15 +12,7 @@ void main() async {
   await Firebase.initializeApp();
   AppBindings().dependencies();
   // await GetStorage.init();
-  runApp(
-    DevicePreview(
-      enabled: false,
-      tools: const [
-        ...DevicePreview.defaultTools,
-      ],
-      builder: (context) => const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -39,7 +30,7 @@ class MyApp extends StatelessWidget {
       initialRoute: SplashScreen.routeName,
       getPages: AppRoutes.routes,
       useInheritedMediaQuery: true,
-      builder: DevicePreview.appBuilder,
+      // builder: DevicePreview.appBuilder,
       scrollBehavior: ScrollBehavior(
         androidOverscrollIndicator: AndroidOverscrollIndicator.stretch
       ),
