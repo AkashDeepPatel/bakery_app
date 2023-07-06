@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../common/localization/localization.g.dart';
 import '../../common/screens/common_base_class.dart';
 import '../../common/styles/app_themes.dart';
 import '../controllers/user_preferences_controller.dart';
@@ -12,7 +13,8 @@ class LanguageScreen extends GetView<UserPreferencesController> {
   Widget build(BuildContext context) {
     return CommonBaseClass(
       showAppBar: true,
-      pageTitle: "Choose Language",
+      // pageTitle: "Choose Language",
+      pageTitle: Localization.languageScreenChooseLanguage.tr,
       showActionButtons: false,
       child: ListView.separated(
         itemCount: controller.languageList.length,

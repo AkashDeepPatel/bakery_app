@@ -1,6 +1,8 @@
+import 'package:bakery_app/cart/model.dart';
 import 'package:bakery_app/common/controllers/base_controller.dart';
 import 'package:bakery_app/common/screens/common_base_class.dart';
 import 'package:bakery_app/common/widgets/app_text_button.dart';
+import 'package:bakery_app/dashboard/controllers/dashboard_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -9,15 +11,17 @@ import '../../common/models/product_model.dart';
 import '../../common/styles/app_themes.dart';
 import '../../common/utils/arch_utils/widgets/spacing_widgets.dart';
 import '../../common/utils/common_assets.dart';
-import '../../common/widgets/app_card.dart';
-import '../../orders/screens/payment_method_screen.dart';
 import '../controllers/home_controller.dart';
+import '../controllers/product_details_controller.dart';
+import '../controllers/wishlist_controller.dart';
 
 class ProductDetailScreen extends GetView<HomeController> {
   ProductDetailScreen({Key? key, required this.model}) : super(key: key);
   @override
-  RxBool isFav = false.obs;
+
+  ProductDetailsController detailsCtr = Get.find();
   CartController cartController = Get.find();
+  WishlistController wishlistCtr = Get.find();
 
   Product model;
 
@@ -26,8 +30,9 @@ class ProductDetailScreen extends GetView<HomeController> {
     return CommonBaseClass(
       showAppBar: true,
       showBottomWidget: true,
-      bottomWidgetBottomPadding: 20.0,
-      bottomWidgetTopPadding: 10.0,
+      bottomWidgetBottomPadding: 24.0,
+      // bottomWidgetTopPadding: 10.0,
+      topPadding: 0.0,
       bottomWidget: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -38,12 +43,14 @@ class ProductDetailScreen extends GetView<HomeController> {
                   child: Obx(
                     () => InkWell(
                       onTap: () {
-                        isFav(!isFav.value);
+                        wishlistCtr.wishlistItems.contains(model)
+                            ?wishlistCtr.removeItemFromWishlist(model)
+                            :wishlistCtr.addItemsToWishlist(model);
                       },
                       child: SvgPicture.asset(
-                        isFav.value == false
-                            ? CommonAssets.favouritesIcon
-                            : CommonAssets.favouritesFilledIcon,
+                        wishlistCtr.wishlistItems.contains(model)
+                            ?CommonAssets.favouritesFilledIcon: CommonAssets.favouritesIcon,
+                        color: Theme.of(context).textTheme.titleMedium!.color,
                         // color: isFav.value == false ? AppThemes.background : null,
                       ),
                     ),
@@ -53,14 +60,19 @@ class ProductDetailScreen extends GetView<HomeController> {
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: AppTextButton(
                   text: "Add to Cart",
+                  textColor: Theme.of(context).iconTheme.color,
                   onTap: () {
-                    debugPrint("added");
+                    // debugPrint("added");
+                    cartController.addProductToCart(
+CartProductModel(product: model, itemQty: detailsCtr.qty)
+                    );
                     // cartController.cartItemList
-                    //     .add(controller.popularProductList[index]);
-                    cartController.addItemInCart();
+                    //     .add(model);
+                    // cartController.addItemInCart();
+                    Get.back();
                     Get.snackbar("Product Added to Cart", "",
                         backgroundColor: AppThemes.black);
-                  },
+Get.find<DashboardController>().changeBottomNavigation(2);                },
                 ),
               )),
             ],
@@ -69,45 +81,57 @@ class ProductDetailScreen extends GetView<HomeController> {
       ),
       child: Column(
         children: [
-          SizedBox(
-            width: double.infinity,
-            height: 240,
-            child: Stack(
-              children: [
-                Positioned(
-                    child: Align(
-                  alignment: Alignment.topCenter,
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.vertical(
-                        bottom: Radius.circular(20)),
-                    child: BaseController.getIcon(model.imgUrl, "name",
-                        height: 220, width: double.infinity),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SizedBox(
+              width: double.infinity,
+              height: 240,
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: ClipRRect(
+                  borderRadius: const BorderRadius.vertical(
+                      bottom: Radius.circular(20)),
+                  child: BaseController.getIcon(model.imgUrl, "name",
+                      height: 220, width: double.infinity),
+                    ),
                   ),
-                )),
-                Positioned(
-                  bottom: 0,
-                  left: 140,
-                  child: Container(
+                  Obx(()=>Container(
                     decoration: const BoxDecoration(
                         color: AppThemes.primary,
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)
+                        )
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 6.0),
                       child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.remove, color: AppThemes.black),
+                          InkWell(
+                              onTap: (){
+                                detailsCtr.removeQty();
+                              },
+                              child: const Icon(Icons.remove, color: AppThemes.black)),
                           const HSpace(10),
-                          Text("1",
+                          Text(detailsCtr.qty.value.toString(),
                               style: Theme.of(context).textTheme.labelLarge),
                           const HSpace(10),
-                          const Icon(Icons.add, color: AppThemes.black),
+                          InkWell(
+                            onTap: (){
+                              detailsCtr.addQty();
+                            },
+                            child: const Icon(Icons.add, color: AppThemes.black,
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                  ),
-                ),
-              ],
+                  ),)
+                ],
+              ),
             ),
           ),
           Flexible(
@@ -123,7 +147,7 @@ class ProductDetailScreen extends GetView<HomeController> {
                         children: [
                           Text(model.title,
                               style: Theme.of(context).textTheme.headlineSmall),
-                          Text("\$${model.price}",
+                          Text("${model.price}",
                               style: Theme.of(context).textTheme.headlineSmall)
                         ],
                       ),
@@ -146,57 +170,57 @@ class ProductDetailScreen extends GetView<HomeController> {
                               ),
                             ],
                           ),
-                          const HSpace(40),
-                          Text(
-                            "33 left",
-                            style: Theme.of(context).textTheme.bodySmall,
-                          )
+                          // const HSpace(40),
+                          // Text(
+                          //   "33 left",
+                          //   style: Theme.of(context).textTheme.bodySmall,
+                          // )
                         ],
                       ),
                       const VSpace(28),
                       Text("Choose Size",
                           style: Theme.of(context).textTheme.headlineSmall),
                       const VSpace(16),
-                      // Obx(
-                      //   () => Container(
-                      //     decoration: BoxDecoration(
-                      //         border: Border.all(
-                      //             width: 2.0, color: AppThemes.subtleLight),
-                      //         borderRadius:
-                      //             const BorderRadius.all(Radius.circular(4.0))),
-                      //     child: DropdownButtonHideUnderline(
-                      //       child: Padding(
-                      //         padding:
-                      //             const EdgeInsets.symmetric(horizontal: 16.0),
-                      //         child: DropdownButton<String>(
-                      //           icon: SvgPicture.asset(
-                      //             CommonAssets.downArrowIcon,
-                      //           ),
-                      //           isExpanded: true,
-                      //           itemHeight: 50,
-                      //           items: controller.popularProductList[index]
-                      //                   ['size']
-                      //               .map((e) => DropdownMenuItem<String>(
-                      //                   value: e, child: Text(e)))
-                      //               .toList(),
-                      //           value: selectedItem.value,
-                      //           onChanged: (w) {
-                      //             selectedItem(w);
-                      //           },
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+                      Obx(
+                        () => Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 2.0, color: AppThemes.subtleLight),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(4.0))),
+                          child: DropdownButtonHideUnderline(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: DropdownButton<String>(
+                                icon: SvgPicture.asset(
+                                  CommonAssets.downArrowIcon,
+                                ),
+                                isExpanded: true,
+                                itemHeight: 50,
+                                items: model.size
+                                    .map((e) => DropdownMenuItem<String>(
+                                        value: e, child: Text(e)))
+                                    .toList(),
+                                value: selectedItem.value,
+                                onChanged: (w) {
+                                  selectedItem(w);
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                       const VSpace(28),
                       Text("Description",
                           style: Theme.of(context).textTheme.headlineSmall),
-                      const ExpansionTile(
-                        iconColor: AppThemes.black,
-                        textColor: AppThemes.black,
-                        collapsedTextColor: AppThemes.black,
-                        collapsedIconColor: AppThemes.black,
+                      ExpansionTile(
+                        // iconColor: AppThemes.black,
+                        // textColor: AppThemes.black,
+                        // collapsedTextColor: AppThemes.black,
+                        // collapsedIconColor: AppThemes.black,
                         title: Text('About'),
+                        expandedAlignment: Alignment.centerLeft,
                         children: <Widget>[
                           Padding(
                             padding: EdgeInsets.all(8.0),
@@ -204,38 +228,40 @@ class ProductDetailScreen extends GetView<HomeController> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 16.0, vertical: 8.0),
                               child: Text(
-                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non nunc maecenas tempor aliquam nunc amet morbi vitae.'),
+                                  model.about),
                             ),
                           ),
                         ],
                       ),
-                      const ExpansionTile(
-                        iconColor: AppThemes.black,
-                        textColor: AppThemes.black,
-                        collapsedTextColor: AppThemes.black,
-                        collapsedIconColor: AppThemes.black,
+                      ExpansionTile(
+                        // iconColor: AppThemes.black,
+                        // textColor: AppThemes.black,
+                        // collapsedTextColor: AppThemes.black,
+                        // collapsedIconColor: AppThemes.black,
                         title: Text('Ingredient'),
+                        expandedAlignment: Alignment.centerLeft,
                         children: <Widget>[
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 16.0, vertical: 8.0),
                             child: Text(
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non nunc maecenas tempor aliquam nunc amet morbi vitae.'),
+                                model.ingredients),
                           ),
                         ],
                       ),
-                      const ExpansionTile(
-                        iconColor: AppThemes.black,
-                        textColor: AppThemes.black,
-                        collapsedTextColor: AppThemes.black,
-                        collapsedIconColor: AppThemes.black,
+                      ExpansionTile(
+                        // iconColor: AppThemes.black,
+                        // textColor: AppThemes.black,
+                        // collapsedTextColor: AppThemes.black,
+                        // collapsedIconColor: AppThemes.black,
                         title: Text('Nutritional Facts'),
+                        expandedAlignment: Alignment.centerLeft,
                         children: <Widget>[
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 16.0, vertical: 8.0),
                             child: Text(
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non nunc maecenas tempor aliquam nunc amet morbi vitae.'),
+                                model.nutritionalFacts),
                           ),
                         ],
                       ),

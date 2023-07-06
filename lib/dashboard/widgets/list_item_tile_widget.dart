@@ -1,9 +1,7 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../cart/controllers/cart_controller.dart';
 import '../../common/controllers/base_controller.dart';
 import '../../common/models/product_model.dart';
 import '../../common/styles/app_themes.dart';
@@ -65,30 +63,30 @@ class ListItemTileWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    left: 30,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          color: AppThemes.primary,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20.0))),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 6.0),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.remove, color: AppThemes.black),
-                            const HSpace(10),
-                            Text("1",
-                                style: Theme.of(context).textTheme.labelLarge),
-                            const HSpace(10),
-                            const Icon(Icons.add, color: AppThemes.black),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Positioned(
+                  //   bottom: 0,
+                  //   left: 30,
+                  //   child: Container(
+                  //     decoration: const BoxDecoration(
+                  //         color: AppThemes.primary,
+                  //         borderRadius:
+                  //             BorderRadius.all(Radius.circular(20.0))),
+                  //     child: Padding(
+                  //       padding: const EdgeInsets.symmetric(
+                  //           horizontal: 16.0, vertical: 6.0),
+                  //       child: Row(
+                  //         children: [
+                  //           const Icon(Icons.remove, color: AppThemes.black),
+                  //           const HSpace(10),
+                  //           Text("1",
+                  //               style: Theme.of(context).textTheme.labelLarge),
+                  //           const HSpace(10),
+                  //           const Icon(Icons.add, color: AppThemes.black),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -110,6 +108,11 @@ class ListItemTileWidget extends StatelessWidget {
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          const Icon(
+                            Icons.star,
+                            color: AppThemes.primary,
+                          ),
+                          const HSpace(6),
                           Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: Text(
@@ -117,17 +120,12 @@ class ListItemTileWidget extends StatelessWidget {
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ),
-                          const HSpace(6),
-                          const Icon(
-                            Icons.star,
-                            color: AppThemes.primary,
-                          ),
                         ],
                       ),
-                      Text(
-                        "${Random().nextInt(30)} left",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      )
+                      // Text(
+                      //   "${Random().nextInt(30)} left",
+                      //   style: Theme.of(context).textTheme.bodySmall,
+                      // )
                     ],
                   ),
                   const VSpace(10.0),
@@ -139,11 +137,11 @@ class ListItemTileWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "\$ ${model.price}",
+                            "${model.price}",
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           Text(
-                            "\$ ${(model.price * 1.17).round()}",
+                            "${(model.price * 1.17).round()}",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall!
@@ -152,32 +150,32 @@ class ListItemTileWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      InkWell(
-                        onTap: () {
-                          debugPrint("added");
-                          // controller.cartItemList
-                          //     .add(homeConrtoller.popularProductList[index]);
-                          Get.snackbar("Product Added to Cart", "",
-                              backgroundColor: AppThemes.black);
-                        },
-                        child: Container(
-                          decoration: const BoxDecoration(
-                              color: AppThemes.black,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8.0))),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 8.0),
-                            child: Text(
-                              "Add to cart",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(color: AppThemes.background),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     // debugPrint("added");
+                      //     // controller.cartItemList
+                      //     //     .add(homeConrtoller.popularProductList[index]);
+                      //     Get.snackbar("Product Added to Cart", "",
+                      //         backgroundColor: AppThemes.black);
+                      //   },
+                      //   child: Container(
+                      //     decoration: const BoxDecoration(
+                      //         color: AppThemes.black,
+                      //         borderRadius:
+                      //             BorderRadius.all(Radius.circular(8.0))),
+                      //     child: Padding(
+                      //       padding: const EdgeInsets.symmetric(
+                      //           horizontal: 12.0, vertical: 8.0),
+                      //       child: Text(
+                      //         "Add to cart",
+                      //         style: Theme.of(context)
+                      //             .textTheme
+                      //             .bodySmall!
+                      //             .copyWith(color: AppThemes.background),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   )
                 ],

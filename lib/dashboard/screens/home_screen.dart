@@ -1,4 +1,5 @@
 import 'package:bakery_app/common/controllers/base_controller.dart';
+import 'package:bakery_app/common/localization/localization.g.dart';
 import 'package:bakery_app/dashboard/controllers/dashboard_controller.dart';
 import 'package:bakery_app/dashboard/screens/list_view_screen.dart';
 import 'package:bakery_app/dashboard/screens/product_detail_screen.dart';
@@ -40,7 +41,7 @@ class HomeScreen extends GetView<HomeController> {
           //     ),
           //   ),
           // ),
-          const VSpace(24),
+          // const VSpace(24),
           // Image.network(FirebaseStorageService().getImage("common/logo.svg")),
           CarouselSlider(
             items: _dashboardController.carouselSliderItems,
@@ -69,8 +70,9 @@ class HomeScreen extends GetView<HomeController> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 24.0),
                   child: Text(
-                    "| For you",
-                    style: Theme.of(context).textTheme.labelLarge,
+                    // "| For you",
+                    Localization.homeForYou.tr,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
                 Obx(
@@ -99,8 +101,9 @@ class HomeScreen extends GetView<HomeController> {
                       Row(
                         children: [
                           Text(
-                            "| Popular",
-                            style: Theme.of(context).textTheme.labelLarge,
+                            // "| Popular",
+                            Localization.homePopular.tr,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                           const HSpace(5),
                           SvgPicture.asset(CommonAssets.downArrowIcon)
@@ -117,7 +120,8 @@ class HomeScreen extends GetView<HomeController> {
                             );
                           },
                           child: Text(
-                            "View all",
+                            // "View all",
+                            Localization.homeViewAll.tr,
                             style: Theme.of(context).textTheme.labelMedium,
                           ),
                         ),
@@ -151,24 +155,25 @@ class HomeScreen extends GetView<HomeController> {
   }
 }
 
-class DashboardItemTile extends StatelessWidget {
+class DashboardItemTile extends GetView<WishlistController> {
   DashboardItemTile({
     Key? key,
     required this.model,
   }) : super(key: key);
   Product model;
-  final WishlistController _wishlistController = Get.find();
-
-  // RxBool isFav = _wishlistController.isFav;
+  // RxBool isFav = controller.isFav;
   @override
   Widget build(BuildContext context) {
+    // controller.checkIfLikedOrNot(model.id.toString());
+    // debugPrint("<>${controller.wishlistList[0].toString()}");
+    // // debugPrint("<>${controller.wishlistList.contains(model)}");
     return InkWell(
       onTap: () {
         Get.to(() => ProductDetailScreen(model: model));
       },
       child: Container(
-        decoration: const BoxDecoration(
-            color: AppThemes.white,
+        decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.all(
               Radius.circular(12),
             )),
@@ -201,33 +206,26 @@ class DashboardItemTile extends StatelessWidget {
                 Positioned(
                   top: 8,
                   right: 8,
-                  child: Obx(
-                    () => InkWell(
-                      onTap: () {
-                        // _wishlistController
-                        //     .isFav(!_wishlistController.isFav.value);
-                        // !_wishlistController.checkIfLikedOrNot("${model.id}")
-                        //     ? _wishlistController.addToWishlist(model)
-                        //     : _wishlistController.deleteFromWishlist(model);
-                      },
-                      child: Container(
+                  child:  Obx(()=>InkWell(
+                    onTap: () {
+                      controller.wishlistItems.contains(model)
+                          ?controller.removeItemFromWishlist(model)
+                          :controller.addItemsToWishlist(model);
+                    },
+                    child: Container(
                         decoration: const BoxDecoration(
                             color: AppThemes.black,
                             borderRadius:
-                                BorderRadius.all(Radius.circular(8.0))),
+                            BorderRadius.all(Radius.circular(8.0))),
                         child: Padding(
                             padding: const EdgeInsets.all(7.0),
                             child: SvgPicture.asset(
-                              _wishlistController.isFav.value == false
-                                  ? CommonAssets.favouritesIcon
-                                  : CommonAssets.favouritesFilledIcon,
-                              color: _wishlistController.isFav.value == false
-                                  ? AppThemes.background
-                                  : null,
-                            )),
-                      ),
+                              controller.wishlistItems.contains(model)
+                                  ?CommonAssets.favouritesFilledIcon: CommonAssets.favouritesIcon,
+                              color: !controller.wishlistItems.contains(model)?AppThemes.white:null,
+                            ))
                     ),
-                  ),
+                  )),
                 )
               ],
             ),

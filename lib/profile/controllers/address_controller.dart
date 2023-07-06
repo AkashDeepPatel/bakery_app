@@ -58,3 +58,14 @@ class AddressController extends BaseController {
     }
   }
 }
+
+class AddRessModel{
+  AddRessModel({required this.name, required this.flatNo, required this.landmark, required this.area, required this.city, required this.pincode, required this.phoneNo});
+  String name;
+  String flatNo;
+  String landmark;
+  String area;
+  String city;
+  String pincode;
+  String phoneNo;
+}

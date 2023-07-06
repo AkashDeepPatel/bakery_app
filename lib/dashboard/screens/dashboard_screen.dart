@@ -22,7 +22,7 @@ class DashboardScreen extends StatelessWidget {
             children: [
               HomeScreen(),
               OrdersScreen(),
-              MenuScreen(),
+              // MenuScreen(),
               CartScreen(),
               ProfileScreen(),
             ],

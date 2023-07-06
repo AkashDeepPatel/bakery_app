@@ -33,7 +33,7 @@ class OrderSummaryScreen extends StatelessWidget {
                 text: "Checkout",
                 color: AppThemes.black,
                 onTap: () {
-                  Get.to(() => const OrdersScreen());
+                  Get.to(() => OrdersScreen());
                 },
               ),
             ),

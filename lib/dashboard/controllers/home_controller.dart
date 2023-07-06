@@ -70,7 +70,7 @@ class HomeController extends BaseController {
           .collection('popularProducts')
           .get();
       for (var item in querySnapshot.docs) {
-        debugPrint("--->>>${item.get('title')}");
+        // debugPrint("--->>>${item.get('title')}");
         popularProductList.add(Product(
           id: item.get('id'),
           title: item.get('title'),
@@ -83,7 +83,7 @@ class HomeController extends BaseController {
           size: item.get('size'),
         ));
       }
-      debugPrint("got for you products");
+      // debugPrint("got for you products");
     } catch (e) {
       debugPrint("->error$e");
     }

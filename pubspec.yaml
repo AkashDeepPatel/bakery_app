@@ -13,32 +13,41 @@ dependencies:
     sdk: flutter
 
 
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.5
   get: ^4.6.5
-  get_storage: ^2.0.3
-  flutterfire_ui: ^0.4.2
-  device_preview: ^1.1.0
-  flutter_svg: ^1.1.4
-  carousel_slider: ^4.1.1
-  bottom_sheet_bar: ^2.3.1
-  firebase_auth: ^3.3.20
-  firebase_core:
-  firebase_storage:
-  cloud_firestore:
+  get_storage: ^2.1.1
+  #flutterfire_ui: ^0.4.3+20
+  # device_preview: ^1.1.0
+  flutter_svg: ^2.0.7
+  carousel_slider: ^4.2.1
+  bottom_sheet_bar: ^2.3.9
+  firebase_auth: ^4.6.3
+  firebase_core: ^2.14.0
+  firebase_storage: ^11.2.4
+  cloud_firestore: ^4.8.2
   geolocator: ^9.0.2
-  geocoding: ^2.0.5
-  dio: ^4.0.6
-  dio_logger: ^4.0.8+8
-  url_launcher: ^6.1.7
-  firebase_core_platform_interface: 4.5.1
-  csv: 5.0.1
-  flutter_sheet_localization:
+  geocoding: ^2.1.0
+  dio: ^5.2.1+1
+  #dio_logger: ^4.0.8+8
+  url_launcher: ^6.1.11
+  #firebase_core_platform_interface: ^4.5.1
+  csv: ^5.0.2
+  flutter_sheet_localization: ^5.1.1
+  intl: ^0.17.0
+  pin_input_text_field: ^4.5.0
+  otp_autofill: ^2.1.0
+  cached_network_image: ^3.2.3
+  razorpay_flutter: ^1.3.4
+  image_picker: ^0.8.6
+
+
+
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.10.0
+#  build_runner: ^1.10.0
   flutter_sheet_localization_generator:
 
 

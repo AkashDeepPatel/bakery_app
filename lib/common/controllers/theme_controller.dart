@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../styles/app_themes.dart';
+
 class ThemeController extends GetxController {
   static ThemeController get to => Get.find();
   final theme = "system".obs;
   final store = GetStorage();
   late ThemeMode _themeMode;
+  final RxBool blackTheme = false.obs;
 
   ThemeMode get themeMode => _themeMode;
+
   String get currentTheme => theme.value;
 
   Future<void> setThemeMode(String value) async {
@@ -30,8 +34,26 @@ class ThemeController extends GetxController {
     return setThemeMode;
   }
 
+  @override
+  void onInit() {
+    getThemeMode();
+    super.onInit();
+  }
+
+  // Gets current currency stored
+  RxBool get getThemeMode {
+    blackTheme.value = store.read('themeMode') ?? false;
+    return blackTheme;
+  }
+
+  updateTheme(bool value) async {
+    blackTheme.value = value;
+    await store.write('themeMode', value);
+    Get.changeTheme(value ? AppThemes.darkTheme : AppThemes.lightTheme);
+  }
+
   getThemeModeFromStore() async {
-    String themeString = store.read('theme') ?? 'system';
+    String themeString = store.read('theme') ?? 'light';
     setThemeMode(themeString);
   }
 
