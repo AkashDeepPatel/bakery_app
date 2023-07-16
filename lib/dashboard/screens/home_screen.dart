@@ -172,6 +172,7 @@ class DashboardItemTile extends GetView<WishlistController> {
         Get.to(() => ProductDetailScreen(model: model));
       },
       child: Container(
+        width: 150,
         decoration: BoxDecoration(
             color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.all(
