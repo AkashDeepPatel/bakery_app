@@ -194,7 +194,7 @@ class DashboardItemTile extends GetView<WishlistController> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8.0, vertical: 4.0),
                       child: Text(
-                        model.price.toString(),
+                        "Rs. ${model.price.toString()}",
                         style: Theme.of(context)
                             .textTheme
                             .labelSmall!

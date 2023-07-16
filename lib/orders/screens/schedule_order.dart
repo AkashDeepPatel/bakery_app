@@ -132,9 +132,7 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                           child: Center(
                               child: Text(
                             "Now",
-                            style: TextStyle(
-                              color: Theme.of(context).iconTheme.color,
-                            ),
+                            style: Theme.of(context).textTheme.titleSmall,
                           )),
                         ),
                       ),
@@ -171,15 +169,11 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                             children: [
                               Text(
                                 "Choose Date and Time",
-                                style: TextStyle(
-                                  color: Theme.of(context).iconTheme.color,
-                                ),
+                                style: Theme.of(context).textTheme.titleSmall,
                               ),
                               Text(
                                 DateFormat('dd-MMM-yy').format(controller.deliveryDateTime.value),
-                                style: TextStyle(
-                                  color: Theme.of(context).iconTheme.color,
-                                ),
+                                style: Theme.of(context).textTheme.titleSmall,
                               ),
                             ],
                           )),
@@ -216,9 +210,8 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                           child: Center(
                               child: Text(
                             "Deliver Me",
-                                style: TextStyle(
-                                  color: Theme.of(context).iconTheme.color,
-                                ),                          )),
+                                style: Theme.of(context).textTheme.titleSmall,
+                              )),
                         ),
                       ),
                     ),
@@ -236,9 +229,8 @@ class ScheduleOrderScreen extends GetView<OrdersController> {
                           child: Center(
                               child: Text(
                             "I Will Pick Up",
-                                style: TextStyle(
-                                  color: Theme.of(context).iconTheme.color,
-                                ),                          )),
+                                style: Theme.of(context).textTheme.titleSmall,
+                              )),
                         ),
                       ),
                     ),

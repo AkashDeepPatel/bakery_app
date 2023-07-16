@@ -312,7 +312,6 @@ class AppThemes {
   );
 
   static final ThemeData darkTheme = ThemeData(
-    useMaterial3: true,
     brightness: Brightness.dark,
     //prefix icon color form input on focus
     fontFamily: font,

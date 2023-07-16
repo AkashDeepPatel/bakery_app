@@ -57,7 +57,7 @@ class BaseController extends GetxController with StateMixin {
           forceAndroidLocationManager: true);
       placemark.value =
           await placemarkFromCoordinates(response.latitude, response.longitude);
-      debugPrint("<>$placemark");
+      // debugPrint("<>$placemark");
     } catch (e) {
       debugPrint(e.toString());
     }

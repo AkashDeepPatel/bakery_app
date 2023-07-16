@@ -24,7 +24,7 @@ class AuthenticationController extends BaseController {
 
   void setSelectedCountryCode(String value) {
     selectedCountryCode.value = value;
-    debugPrint(selectedCountryCode.value);
+    // debugPrint(selectedCountryCode.value);
   }
 
   updateVerificationId(String id) {

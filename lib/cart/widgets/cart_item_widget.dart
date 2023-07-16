@@ -98,7 +98,7 @@ class CartItemTile extends GetView<CartController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${model.product.price}",
+                          "Rs. ${model.product.price}",
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         Text(

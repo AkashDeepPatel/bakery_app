@@ -93,8 +93,9 @@ class ProfileScreen extends GetView<ProfileController> {
                     onTap: (){
                   Get.to(()=>LanguageScreen());
                 }),
-                const VSpace(16),
-                Obx(()=>ProfileItemTile(icon: CommonAssets.exploreIcon,
+                const VSpace(4),
+                Obx(()=>ProfileItemTile(
+                  icon: Get.find<ThemeController>().blackTheme.value?"assets/common/icons/dark.svg":"assets/common/icons/light.svg",
                   // title: "Change Theme",
                   title: Localization.profileTheme.tr,
                   onTap: (){

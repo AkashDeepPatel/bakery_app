@@ -52,16 +52,10 @@ class DashboardController extends BaseController {
   RxInt currentSliderIndex = 0.obs;
   List<Image> carouselSliderItems = [
     Image.asset(
-      DashboardAssets.corousalPlaceholder,
+      DashboardAssets.corousalPlaceholder1,
     ),
     Image.asset(
-      DashboardAssets.corousalPlaceholder,
-    ),
-    Image.asset(
-      DashboardAssets.corousalPlaceholder,
-    ),
-    Image.asset(
-      DashboardAssets.corousalPlaceholder,
+      DashboardAssets.corousalPlaceholder2,
     ),
   ];
 }

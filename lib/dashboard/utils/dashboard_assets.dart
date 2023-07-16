@@ -20,7 +20,8 @@ class DashboardAssets {
       "assets/dashboard/icons/selectedBuy.svg";
   static const String selectedProfileIcon =
       "assets/dashboard/icons/selectedProfile.svg";
-  static const String corousalPlaceholder = "assets/home/titleImage0.png";
+  static const String corousalPlaceholder1 = "assets/home/titleImage0.png";
+  static const String corousalPlaceholder2 = "assets/home/titleImage1.png";
   static const String itemImagePlaceholder =
       "assets/dashboard/icons/ItemImagePlaceholder.svg";
 

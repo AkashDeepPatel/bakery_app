@@ -146,9 +146,10 @@ Get.find<DashboardController>().changeBottomNavigation(2);                },
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(model.title,
-                              style: Theme.of(context).textTheme.headlineSmall),
-                          Text("${model.price}",
-                              style: Theme.of(context).textTheme.headlineSmall)
+                              style: Theme.of(context).textTheme.titleLarge           ),
+                          Text("Rs. ${model.price}",
+                              textAlign: TextAlign.right,
+                              style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w700))
                         ],
                       ),
                       Row(
@@ -168,6 +169,8 @@ Get.find<DashboardController>().changeBottomNavigation(2);                },
                                 Icons.star,
                                 color: AppThemes.primary,
                               ),
+                              const HSpace(12),
+                              SvgPicture.asset("assets/common/icons/veg.svg", color: model.isVeg?null:Colors.red.shade900,),
                             ],
                           ),
                           // const HSpace(40),

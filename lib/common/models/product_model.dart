@@ -2,6 +2,7 @@ class Product {
   int id;
   String title, imgUrl, about, ingredients, nutritionalFacts;
   double price, rating;
+  bool isVeg;
   List<dynamic> size;
   Product(
       {required this.id,
@@ -12,6 +13,7 @@ class Product {
       required this.price,
       required this.ingredients,
       required this.about,
+      required this.isVeg,
       required this.nutritionalFacts});
 }
 
